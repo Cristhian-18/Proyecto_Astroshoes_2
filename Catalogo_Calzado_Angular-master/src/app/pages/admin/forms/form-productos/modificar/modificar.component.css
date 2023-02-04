@@ -1,0 +1,10 @@
+.card-body .card-body .form-group > label{
+    font-weight: bold;
+}
+.modal-header{
+    background: rgb(53, 115, 231);
+}
+
+.modal-header > h3{
+ color: rgb(255, 255, 255);
+}

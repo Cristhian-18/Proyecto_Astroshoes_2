@@ -1,0 +1,232 @@
+
+/*******************************************************
+******************** TEXTOS STYLES *********************
+********************************************************/
+
+/******* Titulos y subtemas de paginas ******/
+body{
+  background-color: rgb(rgb(255, 255, 255));
+}
+
+.bg-2{
+  background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
+  height: 100px;
+}
+
+.t-stroke-shadow {
+  color: black;
+  text-shadow: -3px 3px #ffffff, -3px -3px #ffffff, 3px -3px #ffffff, 3px 3px #f3f3f2, 6px 6px #6ac7c2;
+}
+
+
+/******* Titulos y subtemas de Cartas ******/
+.bg-1{
+  background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
+  height: 15vh;
+  padding-top: 10px;
+  font: bold;
+  text-align: center;
+}
+
+.t-stroke {
+ color: transparent;
+ -moz-text-stroke-width: 2px;
+ -webkit-text-stroke-width: 0.5px;
+ -moz-text-stroke-color: #000000;
+ -webkit-text-stroke-color: #ffffff;
+}
+
+.t-shadow {
+ text-shadow: 7px 7px #c5c5c5;
+}
+
+/********** Textos generales ******/
+p{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h4{
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+
+/********** animacion de caracteres 2.0 ******/
+.animacion-caracter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #f5f5f5 29%,
+    #ffffff 67%,
+    #030303 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+      font-size: 14px;
+}
+
+.texto{
+  background-image: linear-gradient(
+    -225deg,
+    #ffffff 67%,
+    #f5f5f5 29%,
+    #ffffff 67%,
+    #ffffff 100%
+  );
+  text-transform: uppercase;
+  color: white;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/******* Animacion sombras del texto de titulos del body ******/
+.bg-5 {
+  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, white 100%);
+  
+}
+
+.animated-shadow {
+  color: #161616;
+  font: normal 140px Varela Round, sans-serif;
+  height: 120px;
+  left: 0;
+  letter-spacing: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+  animation: move linear 2000ms infinite;
+  z-index: 2
+}
+
+/**** Animación para rotar las sombras *****/
+@keyframes move {
+  0% {
+    text-shadow:
+      4px -4px 0 #da0641,
+      3px -3px 0 #da0641,
+      2px -2px 0 #da0641,
+      1px -1px 0 #da0641,
+      -4px 4px 0 #13f1fc,
+      -3px 3px 0 #13f1fc,
+      -2px 2px 0 #13f1fc,
+      -1px 1px 0 #13f1fc;
+  }
+
+  25% {
+    text-shadow:
+      -4px -4px 0 #13f1fc,
+      -3px -3px 0 #13f1fc,
+      -2px -2px 0 #13f1fc,
+      -1px -1px 0 #13f1fc,
+      4px 4px 0 #da0641,
+      3px 3px 0 #da0641,
+      2px 2px 0 #da0641,
+      1px 1px 0 #da0641;
+  }
+
+  50% {
+    text-shadow:
+      -4px 4px 0 #da0641,
+      -3px 3px 0 #da0641,
+      -2px 2px 0 #da0641,
+      -1px 1px 0 #da0641,
+      4px -4px 0 #13f1fc,
+      3px -3px 0 #13f1fc,
+      2px -2px 0 #13f1fc,
+      1px -1px 0 #13f1fc;
+  }
+
+  75% {
+    text-shadow:
+      4px 4px 0 #13f1fc,
+      3px 3px 0 #13f1fc,
+      2px 2px 0 #13f1fc,
+      1px 1px 0 #13f1fc,
+      -4px -4px 0 #da0641,
+      -3px -3px 0 #da0641,
+      -2px -2px 0 #da0641,
+      -1px -1px 0 #da0641;
+  }
+
+  100% {
+    text-shadow:
+      4px -4px 0 #da0641,
+      3px -3px 0 #da0641,
+      2px -2px 0 #da0641,
+      1px -1px 0 #da0641,
+      -4px 4px 0 #13f1fc,
+      -3px 3px 0 #13f1fc,
+      -2px 2px 0 #13f1fc,
+      -1px 1px 0 #13f1fc;
+  }
+}
+
+/* estilo de iconos */
+
+ul.top_icons {
+  position: absolute;
+  padding-top: 450px;
+  flex: auto;
+}
+
+ul.top_icons li{
+display:inline-block;
+margin-right:16px;
+
+}
+ul.top_icons li a {
+  color: #fff;
+  font-size:14px;
+}
+ul.top_icons li a:hover {
+  color: #fb383b;
+}
+
+
+/*Animacion de transiciones sobre paginas, textos*/
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  animation-name: fadeIn;
+}

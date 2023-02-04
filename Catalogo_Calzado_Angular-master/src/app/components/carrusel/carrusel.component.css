@@ -1,0 +1,27 @@
+:root {
+  --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: "Amatic SC", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+}
+
+.c-item {
+  height: 90vh;
+}
+
+.c-img {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.c-item .carousel-caption> h1 {
+  font-size: 8vw;
+  padding: 20px;
+  padding-top: 90px;
+  font-family: 'Fira Sans', sans-serif;
+}
+.c-item .carousel-caption> p {
+  padding: auto;
+  font-size: 6vw;
+  font-family: 'Fira Sans', sans-serif;
+}

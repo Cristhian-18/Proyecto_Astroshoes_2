@@ -1,0 +1,24 @@
+{
+    
+    "/administracion/*":{
+        "target":"http://34.27.188.160",
+        "secure":"false",
+        "logLevel":"debug"
+    },
+    "/marca/*":{
+        "target":"http://34.27.188.160",
+        "secure":"false",
+        "logLevel":"debug"
+    },
+    "/producto/*":{
+        "target":"http://34.27.188.160",
+        "secure":"false",
+        "logLevel":"debug"
+    },
+    "/categoria/*":{
+        "target":"http://34.27.188.160",
+        "secure":"false",
+        "logLevel":"debug"
+    }    
+}
+

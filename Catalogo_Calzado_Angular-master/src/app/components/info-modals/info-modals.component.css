@@ -1,0 +1,16 @@
+.btn-favoritos {
+  background-color: rgb(255, 255, 255);
+  color: rgb(255, 0, 0);
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 4px;
+  border-color: black;
+  transition: transform 0.2s ease-in-out;
+  }
+
+  .btn-favoritos:hover {
+  background-color: rgb(240, 85, 98);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transform: scale(1.1);
+  }

@@ -1,0 +1,57 @@
+<div class="btn-group p-4" role="group">
+    <button (click)="enviar()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registro"><i
+            class="fa-solid fa-square-up-right"></i> Insertar</button>
+</div>
+
+<div class="card ">
+    <div class="card" alt="contenedor de carta">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Lista de Categorias</h3>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <div class="container">
+                        <div class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-----Cuerpo de la tabla -->
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead alt="encabezados">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre de categoría</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+
+                <tbody alt="registros" *ngFor="let ListaCategoria of ListaCategoria; let i= index">
+                    <tr>
+                        <td alt="codigo"> {{ListaCategoria.id_categoria}} </td>
+                        <td alt="nombre de categoria"> {{ListaCategoria.pk_nombre_cat}}</td>
+                        <td alt="descripcion"> {{ListaCategoria.descripcion}}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button (click)="getNombres(ListaCategoria.pk_nombre_cat)" class="btn btn-primary"
+                                    data-bs-toggle="modal" data-bs-target="#modificar">
+                                    <i class="fas fa-pencil-alt"> </i> Modificar</button>
+                            </div>
+                            <button (click)="eliminar(ListaCategoria.pk_nombre_cat)" class="btn btn-danger"><i
+                                    class="fas fa-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <app-modificar-categoria></app-modificar-categoria>
+            </table>
+        </div>
+    </div>
+</div>

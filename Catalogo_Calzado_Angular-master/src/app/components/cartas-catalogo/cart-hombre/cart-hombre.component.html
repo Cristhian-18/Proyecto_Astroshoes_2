@@ -1,0 +1,74 @@
+<div class="category-page">
+    <!-- Productos de hombres-->
+    <section class="products p-t-small">
+        <div class="container">
+            <header>
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-6">
+                        <h1 class=" animated fadeIn t-stroke-shadow
+                            heading-line">Catálogo de hombre</h1>
+                    </div>
+                    <div class="col-md-6 filters d-flex justify-content-end">
+                        <div class="select-container">
+                            <select (change)="getSelectedMarca($event)" title="Brandd" name="brand" class="form-control custom-select">
+                            <option *ngFor="let ListaMarca of ListaMarca; let i=
+                                index" value="{{ListaMarca.id_Marca}}">Marca:
+                                {{ListaMarca.nombre}}</option>
+                        </select>
+                            <select (change)="getSelectedTalla($event)" title="Brandd" name="brand" class="form-control custom-select">
+                            <option *ngFor="let talla of tallas" [value]="talla">Talla: {{talla}}</option>
+                          </select>
+                            <button (click)="listarProductos()">Limpiar Filtros</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="my-5 animated fadeIn ">
+                <div class="row">
+                    <ng-container *ngIf="ListaHombe.length; else noResults">
+                        <div class="col-lg-3 col-md-4 col-6" *ngFor="let
+                            ListaProducto of ListaHombe | paginate: {
+                            itemsPerPage: 8, currentPage: p }">
+                            <div class="item text-center">
+                                <div class="card shadow-sm bg-image">
+                                    <img src="{{ListaProducto.img}}" class="img-fluid">
+                                    <div class="card-body">
+                                        <div class="overlay p-0 d-flex
+                                            align-items-center
+                                            justify-content-center">
+                                            <ul class="list-unstyled mb-0">
+                                                <button (click)="abrirmodal()" type="button" class="btn
+                                                    btn-lg" data-toggle="modal" data-target="#modal1" (click)="getNombres(ListaProducto.pk_id_producto)">Detalles</button>
+                                            </ul>
+                                        </div>
+                                        <div class="card-title">
+                                            <p class="generoproducto">{{ListaProducto.genero}}</p>
+                                            <h4 class="nombreproducto">{{ListaProducto.nombre_producto}}</h4>
+                                            <ul class="price list-inline">
+                                                <li class="list-inline-item">
+                                                    <span class="price">$
+                                                        {{ListaProducto.costo}}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #noResults>
+                        <p>No hay resultados</p>
+                    </ng-template>
+                </div>
+                <pagination-controls (pageChange)="p= $event"></pagination-controls>
+            </div>
+            <!-- <app-paginacion-catalogo></app-paginacion-catalogo> -->
+        </div>
+    </section>
+</div>
+
+<!--Logica de abrir modal de informacion del producto-->
+
+<div *ngIf="info_modal==true">
+    <app-info-modals></app-info-modals>
+</div>

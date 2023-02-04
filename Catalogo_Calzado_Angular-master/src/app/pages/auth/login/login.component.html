@@ -1,0 +1,55 @@
+<div class="form-shape-wrapper">
+    <div class="form-shape"></div>
+</div>
+<div class="form-wrapper">
+    <div class="container">
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col d-none d-lg-flex">
+                    <div>
+                        <h3 class="font-weight-bold">Bienvenidos a ASTROSHOES!</h3>
+                    </div>
+                    <div class="logo">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="logo d-block d-lg-none text-center text-lg-left">
+                                <img src="../../dist/images/logo-colorful.png" alt="logo">
+                            </div>
+                            <div class="my-5 text-center text-lg-left">
+                                <h3 class="font-weight-bold">Inicia Sesión</h3>
+                                <p class="text-muted">Inicia sesión para continuar</p>
+                            </div>
+                            <form>
+                                <div class="form-group">
+                                    <div class="form-icon-wrapper">
+                                        <input type="email" class="form-control" placeholder="Ingrese Email" autofocus required #correo>
+                                        <i class="form-icon-left fa-solid fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-icon-wrapper">
+                                        <input type="password" class="form-control" placeholder="Ingrese Contraseña" required #password>
+                                        <i class="form-icon-left fa-solid fa-lock"></i>
+                                        <a class="form-icon-right password-show-hide" title="Hide or show password" (click)="togglePassword()">
+                                            <!-- <i class="fa fa-eye"></i> -->
+                                            <i [ngClass]="[isShowingPassword ? 'fa fa-eye' : 'fa fa-eye-slash']"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="segundosRestantes > 0">{{segundosRestantes}} segundos restantes</div>
+                                <p class="text-center mb-4">
+                                    No tienes una cuenta?<br><a [routerLink]="['/register']">Crea una cuenta aquí</a>.
+                                </p>
+                                <button class="btn btn-primary btn-block mb-4" type="button" id="btnLogin" (click)="loginClick(correo.value,password.value)">Iniciar Sesión</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

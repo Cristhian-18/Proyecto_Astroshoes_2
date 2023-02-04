@@ -1,0 +1,9 @@
+
+<div *ngIf="!load">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="load">
+    <router-outlet></router-outlet>
+</div>
+

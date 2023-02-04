@@ -1,0 +1,35 @@
+<!--Formulario de registro de marcas-->
+<div class="modal fade" id="registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Registro de Marcas</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--Formulario para registrar : marcas--->
+            <div class="modal-body">
+                <form>
+                    <div class="card-body" >
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="from-label">Nombre de la marca</label>
+                                <input [(ngModel)]="marca.nombre" type="text" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Ingrese nombre de marca" name="Nombre de la marca" >
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción de la marca</label>
+                            <textarea [(ngModel)]="marca.descripcion" type="text" class="form-control" rows="3" placeholder="Ingrese la descripcion" name="Nombre de la marca"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button  (click)="agregarMarcas()" type="button" class="btn btn-success" data-bs-dismiss="modal" >Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

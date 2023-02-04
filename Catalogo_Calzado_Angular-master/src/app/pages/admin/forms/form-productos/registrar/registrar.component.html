@@ -1,0 +1,139 @@
+<!--Formulario de registro de producto-->
+<div class="modal fade" id="registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Registro de producto</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--Formulario para registrar : producto--->
+            <div class="modal-body">
+                <form>
+                    <div class="card-body font-weight-bold">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="codigodelproducto">Código del producto</label>
+                                            <input [(ngModel)]="Producto.codigo_producto" type="text" class="form-control"
+                                                name="Código del producto" placeholder="Ingrese el Código del producto">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="nombredelproducto">Nombre del producto</label>
+                                        <input [(ngModel)]="Producto.nombre_producto" type="text" class="form-control"
+                                            name="Nombre del producto" placeholder="Ingrese el nombre del producto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="modelo">Modelo</label>
+                                        <input [(ngModel)]="Producto.modelo" type="text" class="form-control" name="Modelo" placeholder="Ingrese el modelo del producto">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-------Marca de producto----->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="marcasproducto" class="font-weight-bold">Marcas</label>
+                                        <select #comboBox1 class="custom-select form-control-border"
+                                            (change)="obtenerMarca(comboBox1.value)">
+                                            <option >Seleccione una Marca</option>
+                                            <option *ngFor="let ListaMarca of ListaMarca"
+                                                value="{{ListaMarca.id_Marca}}">{{ListaMarca.nombre}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Tipo de persona</label>
+                                        <select #comboBox2 class="custom-select form-control-border"
+                                            (change)="obtenercGenero(comboBox2.value)">
+                                            <option >Seleccione Genero</option>
+                                            <option *ngFor="let ListaGenero of ListaGenero" value="{{ListaGenero.genero}}">{{ListaGenero.genero}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Talla</label>
+                                    <input [(ngModel)]="Producto.talla" type="text" class="form-control" name="Talla"
+                                        placeholder="Ingrese la talla del zapato">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select #comboBox3 class="custom-select form-control-border"
+                                (change)="obtenercategoria(comboBox3.value)">
+                                <option >Seleccione una Categoria</option>
+                                <option alt="cargarcategoria" *ngFor="let ListaCategoria of ListaCategoria"
+                                    value="{{ListaCategoria.pk_nombre_cat}}">{{ListaCategoria.pk_nombre_cat}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción del producto</label>
+                            <textarea [(ngModel)]="Producto.descripcion" type="text" class="form-control" rows="3"
+                                placeholder="Descripción del producto" name="Descripción del producto"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <i class="fa-solid fa-dollar-sign"></i><label>_Costo Unitario</label>
+                                        <input [(ngModel)]="Producto.costo" type="text" class="form-control" rows="1"
+                                            placeholder="Ingrese el Costo $" name="Costo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Seleccionar</label>
+                                    <div
+                                        class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input #checkbox type="checkbox" class="custom-control-input" id="switchoferta"
+                                            (change)="obtenerOferta(checkbox.checked)">
+                                        <label class="custom-control-label" for="switchoferta">Oferta</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cargar Imagen</label>
+                            <textarea [(ngModel)]="Producto.img" type="text" class="form-control" rows="3"
+                                placeholder="Ingrese URL para cargar imagen" name="Cargar imagen"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button (click)="agregarProducto()" type="button" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

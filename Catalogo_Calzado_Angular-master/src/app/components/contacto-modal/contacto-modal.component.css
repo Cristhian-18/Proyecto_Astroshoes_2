@@ -1,0 +1,22 @@
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-body img {
+  max-width: 50%;
+}
+
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}

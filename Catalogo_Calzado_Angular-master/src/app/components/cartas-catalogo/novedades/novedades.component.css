@@ -1,0 +1,41 @@
+p {
+  font-size: 15px;
+}
+
+/****Estilo de botones*****/
+.btn{
+  background-color: black;
+}
+
+.btn:hover{
+  background-color: rgb(32, 107, 126);
+  color: rgb(255, 253, 253);   
+}
+
+/***** CSS de cartas ****/
+.card {
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-body .onsale .badge {
+  background: #000;
+  font-size: 12px;
+  padding: 5px 14px;
+  top: 0px;
+  position: absolute;
+  left: 0px;
+}
+
+/* Hace que la imagen del slide se ponga de color original en cierto
+  pixeles de la pantalla */
+@media (max-width: 740px) {
+  .bg-2 {
+    padding-bottom: 500px;
+    padding: -20px;
+  }
+}
+

@@ -1,0 +1,209 @@
+.btn {
+    font-size: 15px;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 30px;
+    line-height: 14px;
+    border-radius: .5rem
+}
+
+.btn.btn-sm {
+    padding: 12px 20px;
+    font-size: 12px
+}
+
+.btn.btn-lg {
+    padding: 20px 40px;
+    font-size: 16px
+}
+
+.btn.btn-block {
+    width: 100%;
+    justify-content: center
+}
+
+
+.form-control {
+    font-size: 14px;
+    transition: all .3s
+}
+
+
+.form-wrapper {
+    padding: 80px 10px
+}
+
+.form-wrapper,
+.form-wrapper .container,
+.form-wrapper .container-fluid {
+    min-height: 100%
+}
+
+@media (max-width:990px) {
+    .form-wrapper {
+        display: block !important;
+        padding: 80px 10px !important
+    }
+    .logo{
+        visibility: hidden;
+    }
+}
+
+@media (max-width:500px) {
+    .form-wrapper {
+        display: block !important;
+        padding: 80px 10px !important
+
+    }
+    .logo{
+        visibility: hidden;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #ff4955, #673ab7) !important;
+    border: none;
+    border-radius: 10px !important
+}
+
+.btn-outline-primary {
+    border-color: #673ab7;
+    color: #673ab7
+}
+
+.btn-outline-primary:active,
+.btn-outline-primary:focus,
+.btn-outline-primary:hover {
+    border-color: transparent !important;
+    color: #fff;
+    background: linear-gradient(90deg, #ff4955, #673ab7) !important
+}
+
+.form-wrapper {
+    display: flex;
+    align-items: center
+}
+
+
+/**CSS de la Carta**/
+.card {
+    border: none;
+    margin: auto;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .16);
+    overflow: hidden
+}
+
+.card .row .col {
+    padding: 30px;
+    min-height: 500px
+}
+
+.card .row .col:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+    background-size: cover !important;
+    background-position: 50% !important;
+    position: relative
+}
+
+.card .row .col:first-child>* {
+    position: relative;
+    z-index: 1
+}
+
+.card .row .col:first-child:before {
+    content: "";
+    display: block;
+    background: hsla(0, 0%, 100%, .9);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0
+}
+
+
+/*****Textbox CSS*****/
+.form-group {
+    margin-bottom: 20px
+}
+
+.form-group .form-icon-wrapper {
+    position: relative
+}
+
+.form-group .form-icon-wrapper .form-icon-left,
+.form-group .form-icon-wrapper .form-icon-right {
+    padding: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    font-size: 16px;
+    border: none;
+    position: absolute;
+    z-index: 4;
+    background: none;
+    transition: opacity .3s;
+    color: #b3b3b3
+}
+
+.form-group .form-icon-wrapper .form-icon-left {
+    left: 15px
+}
+
+.form-group .form-icon-wrapper .form-icon-right {
+    right: 15px;
+    left: auto
+}
+
+.form-control {
+    height: auto;
+    padding: 13px 20px 13px 45px;
+    border: none;
+    background: #f2f2f2;
+    border-radius: 10px !important
+}
+
+.form-control:focus {
+    box-shadow: none;
+    color: #000;
+    background: #ebebeb
+}
+
+/******Formulario de fondo******/
+
+.form-shape-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column
+}
+
+.form-shape-wrapper .form-shape {
+    height: 50%;
+    position: relative
+}
+
+.form-shape-wrapper .form-shape:first-child {
+    background: linear-gradient(90deg, #ff4955, #3e5ce0);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end
+}
+
+.form-shape-wrapper .form-shape:first-child svg path {
+    fill: #fff
+}
+
+@media (max-width:992px) {
+    .card .row .col {
+        min-height: 90px;
+    }
+}

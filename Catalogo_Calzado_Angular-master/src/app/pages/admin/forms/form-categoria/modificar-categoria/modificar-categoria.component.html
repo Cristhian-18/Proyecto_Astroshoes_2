@@ -1,0 +1,34 @@
+<!--Formulario de modificacion de marcas-->
+<div class="modal fade" id="modificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Modificar Categoría</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--Formulario para modificar : marcas--->
+            <div class="modal-body">
+                <form *ngFor="let detalle of cargar" >
+                    <div class="card-body" >
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label alt="codigo">Nombre de la Categoría</label>
+                                <!--Entrada de los datos y carga de datos para el modificar-->
+                                <input [(ngModel)]="detalle.pk_nombre_cat" type="text" class="form-control" name="Nombre de la marca" placeholder={{detalle.pk_nombre_cat}}> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label >Descripción de la Categoría</label>
+                            <textarea [(ngModel)]="detalle.descripcion" type="text" class="form-control" rows="3" placeholder="Ingrese la descripcion" name="Descripción de la marca"> {{detalle.descripcion}} </textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button (click)="modificar(detalle.id_categoria,detalle.pk_nombre_cat,detalle.descripcion)" type="button" class="btn btn-success" data-bs-dismiss="modal"> Modificar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

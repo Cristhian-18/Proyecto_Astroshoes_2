@@ -1,0 +1,107 @@
+/* Fonts */
+:root {
+    --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-primary: "Amatic SC", sans-serif;
+    --font-secondary: "Inter", sans-serif;
+  }
+  
+  /* Colors */
+  :root {
+    --color-default: #212529;
+    --color-primary: #ce1212;
+    --color-secondary: #37373f;
+  }
+  
+  /* Smooth scroll behavior */
+  :root {
+    scroll-behavior: smooth;
+  }
+  
+  
+  /***********************************
+  # Clientes o marcas
+  ************************************/
+  .clients {
+      padding-top: 20px;
+      align-items: center;  
+  }
+ 
+  .clients .swiper-slide img {
+      opacity: 0.7;
+      transition: 0.3s;
+      filter: grayscale(100);
+      padding: 10px;
+      width: 100%;     
+  }
+  
+  .clients .swiper-slide img:hover {
+      filter: none;
+      opacity: 1;
+  }
+  
+  .clients .swiper-pagination {
+      margin-top: 20px;
+      position: relative;
+  }
+  
+  .clients .swiper-pagination .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background-color: #fff;
+      opacity: 1;
+      background-color: #ddd;
+  }
+  
+  .clients .swiper-pagination .swiper-pagination-bullet-active {
+      background-color: #ffc451;
+  }
+  
+  /* Hace que la imagen del slide se ponga de color original en cierto
+  pixeles de la pantalla */
+  @media (max-width: 740px) { 
+    .clients .swiper-slide img {
+      opacity: 1;
+      width: 220px;
+      padding-right: 70px;   
+    }
+  }
+
+  
+  /*--------------------------------------------------------------
+  # Sections & Section Header
+  --------------------------------------------------------------*/
+  section {
+    overflow: hidden;
+    padding: 8px 0;
+  }
+  
+  .section-bg {
+    background-color: #eee;
+  }
+  
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  
+  .section-header h2 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    color: #7f7f90;
+    text-transform: uppercase;
+    font-family: var(--font-default);
+  }
+  
+  .section-header p {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 400;
+    font-family: var(--font-primary);
+  }
+  .section-header p span {
+    color: var(--color-primary);
+  }
+  

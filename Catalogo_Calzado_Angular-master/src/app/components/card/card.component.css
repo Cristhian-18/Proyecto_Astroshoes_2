@@ -1,0 +1,25 @@
+
+h1{
+    float: left;
+    color: black;
+    position: relative;
+}
+
+h1 span{
+    position: absolute;
+    right: 0;
+    width: 0;
+    background: white;
+    border-left: 1px solid #000;
+    animation: typing 3s infinite alternate steps(15);
+
+}
+
+@keyframes typing {
+
+    from {
+        width: 100%;
+    }to{
+        width: 0;
+    }
+}

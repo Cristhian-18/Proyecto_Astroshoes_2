@@ -1,0 +1,22 @@
+
+
+<div class="filters d-flex justify-content-end">
+    <select title="Brandd" name="brand" class="form-control">
+        <option *ngFor="let ListaMarca of ListaMarca; let i= index" value="{{ListaMarca.id_Marca}}">Marca: {{ListaMarca.nombre}}</option>
+        
+    </select>
+    <select title="Tallas" name="tallas" class="form-control">
+        <option value="">Talla: 37</option>
+        <option value="">Talla: 38</option>
+        <option value="">Talla: 39</option>
+        <option value="">Talla: 40</option>
+        <option value="">Talla: 41</option>
+        <option value="">Talla: 42</option>
+        <option value="">Talla: 43</option>
+    </select>
+    <select title="Genero" name="generos" class="form-control">
+        <option value="">Genero: Hombres</option>
+        <option value="">Genero: Mujeres</option>
+        <option value="">Genero: Niños</option>
+    </select>
+</div>

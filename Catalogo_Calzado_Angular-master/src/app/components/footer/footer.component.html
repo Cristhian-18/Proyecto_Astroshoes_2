@@ -1,0 +1,62 @@
+<footer class="footer-48201">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 pr-md-5">
+                <a href="#" class="footer-site-logo d-block mb-4">Sobre Nosotros</a>
+                <p>Empresa de zapatos, dedicada para dar el mejor servicio y calidad de calzado del mercado, con las
+                    marcas reconocidas.
+                </p>
+            </div>
+            <div class="col-md">
+                <ul class="list-unstyled nav-links">
+                    <li>
+                        <h2 href="#">Navegación</h2>
+                    </li>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Ultimos Modelos</a></li>
+                    <li><a href="#">Hombres</a></li>
+                    <li><a href="#">Mujeres</a></li>
+                    <li><a href="#">Niños</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md">
+                <ul class="list-unstyled nav-links">
+                    <li>
+                        <h2 href="#">Informacion</h2>
+                    </li>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Politicas</a></li>
+                    <li><a href="#">Marcas</a></li>
+                    <li><a href="#">Whatsapp</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md text-md-center">
+                <ul class="social list-unstyled">
+                    <h2 href="#">Redes Sociales</h2>
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                </ul>
+                <p class=""><button (click)="abrirmodal()" class="btn btn-tertiary" type="submit" data-toggle="modal" data-target="#modal2">Contactos</button></p>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-12 text-center">
+                <div class="copyright mt-5 pt-5">
+
+                    <p><small>&copy; 2022-2023 Todos los derechos reservados.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="modal-container" *ngIf="info_modal==true">
+  <app-contacto-modal></app-contacto-modal>
+</div>

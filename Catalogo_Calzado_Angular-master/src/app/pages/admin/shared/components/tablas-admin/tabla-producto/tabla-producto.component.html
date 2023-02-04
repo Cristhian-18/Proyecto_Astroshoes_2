@@ -1,0 +1,67 @@
+<div class="btn-group p-4" role="group">
+    <button (click)="enviar()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registro"><i
+            class="fa-solid fa-square-up-right"></i> Insertar</button>
+</div>
+
+<div class="card-fluid">
+    <div class="card" alt="contenedor de carta">
+        <div class="card card-primary">
+            <div class="card-header" id="titulo">
+                <h3 class="card-title">Lista de zapatos o productos</h3>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <div class="container">
+                        <div class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-----Cuerpo de la tabla -->
+
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead alt="encabezados">
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre del producto</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>talla</th>
+                        <th>Costo</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <!-- Registros de productos -->
+                <tbody alt="registros" *ngFor="let ListaProducto of ListaProducto">
+                    <tr>
+                        <td alt="codigo">{{ListaProducto.pk_id_producto}}</td>
+                        <td alt="nombre">{{ListaProducto.nombre_producto}}</td>
+                        <td alt="marca">{{ListaProducto.fk_marca}}</td>
+                        <td alt="modelo">{{ListaProducto.modelo}}</td>
+                        <td alt="talla">{{ListaProducto.talla}}</td>
+                        <td alt="costo">{{ListaProducto.costo}}</td>
+                        <td alt="descripcion">{{ListaProducto.descripcion}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button (click)="getNombres(ListaProducto.pk_id_producto)" class="btn btn-primary"
+                                    data-bs-toggle="modal" data-bs-target="#modificar">
+                                    <i class="fas fa-pencil-alt"></i> Modificar</button>
+                            </div>
+
+                            <app-modificar></app-modificar>
+                            <button (click)="eliminar(ListaProducto.pk_id_producto)" class="btn btn-danger"><i
+                                    class="fas fa-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

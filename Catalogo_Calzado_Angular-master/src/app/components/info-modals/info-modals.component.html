@@ -1,0 +1,53 @@
+<!--Detalles del producto-->
+<!-- Inicio de Modal-->
+<div class="modal" id="modal1">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" *ngFor="let detalle of cargar">
+            <div class="modal-header">
+                <h4 class="modal-title" alt="nombreproducto">{{detalle.nombre_producto}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Cuerpo del Modal-->
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <span class="fa fa-info-circle"></span> Producto en stock!
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <img src="{{detalle.img}}" alt="imagenproducto" class="img-thumbnail">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <p alt="precioproducto">Precio: <strong> {{detalle.costo}} </strong></p>
+                        <p>
+                            <span class="badge badge-warning" alt="Categoria"> {{detalle.fk_nombre_categoria}} </span>
+                            <span class="badge badge-secondary" alt="Marca"> {{detalle.fk_marca}} </span>
+                        </p>
+                        <a class="btn btn-favoritos" (click)="addToFavorites(detalle.pk_id_producto)">
+                          <i class="fas fa-heart"></i> Agregar a los deseos
+                        </a>
+
+                    </div>
+                </div><br>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab"> Descripción </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane container active" alt="descripcionproducto"><br>
+                        <p>{{detalle.descripcion}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- pie del modal-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+        <!--Fin de contenido del Modal -->
+    </div>
+    <!--Fin Modal dialog-->
+</div>
+<!--Fin Modal-->

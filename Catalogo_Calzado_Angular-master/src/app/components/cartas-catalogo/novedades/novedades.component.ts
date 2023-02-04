@@ -6,7 +6,7 @@ import { ConexProductosService,Producto } from 'src/app/services/conexiones/cone
   styleUrls: ['./novedades.component.css']
 })
 export class NovedadesComponent implements OnInit {
-  p = 1;
+  p = 2;
   @Input() dataEntrante:any;
 
   info_modal:boolean=false;

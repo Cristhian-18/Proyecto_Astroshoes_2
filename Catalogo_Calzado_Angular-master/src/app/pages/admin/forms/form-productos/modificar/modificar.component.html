@@ -85,7 +85,7 @@
                                 (change)="obtenercategoria(comboBox3.value)">
                                
                                 <option alt="cargarcategoria" *ngFor="let ListaCategoria of LlenarcomboCategorias"
-                                value="{{ListaCategoria.pk_nombre_cat}}">{{ListaCategoria.pk_nombre_cat}}</option>
+                                value="{{ListaCategoria.pk_id_categoria}}">{{ListaCategoria.nombre_cat}}</option>
                             </select>
                         </div>
 
@@ -129,7 +129,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                         <button (click)="modificar(detalle.pk_id_producto,detalle.codigo_producto,detalle.img,detalle.nombre_producto,detalle.descripcion,detalle.fk_marca,detalle.modelo,detalle.genero,
-                        detalle.talla,detalle.costo,detalle.oferta,detalle.fk_nombre_categoria)" type="button" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
+                        detalle.talla,detalle.costo,detalle.oferta,detalle.fk_id_categoria)" type="button" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
                     </div>
 
                 </form>

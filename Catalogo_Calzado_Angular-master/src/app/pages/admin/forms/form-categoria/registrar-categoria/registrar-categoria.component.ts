@@ -13,8 +13,8 @@ export class RegistrarCategoriaComponent implements OnInit {
   
   categoria:categoria={
 
-    pk_nombre_cat:'',
-    id_categoria:0,
+    pk_id_categoria:0,
+    nombre_cat:'',
     descripcion:''
   };
   
@@ -36,10 +36,10 @@ export class RegistrarCategoriaComponent implements OnInit {
 
     try {
       
-      this.categoria.id_categoria= (this.detalle)
+      this.categoria.pk_id_categoria= (this.detalle)
       console.log(this.categoria);
       
-      if(this.categoria.id_categoria !=0 && this.categoria.pk_nombre_cat !='' && this.categoria.descripcion!=''){
+      if(this.categoria.pk_id_categoria !=0 && this.categoria.nombre_cat !='' && this.categoria.descripcion!=''){
         this.conexion.addCategoria(this.categoria).subscribe();  
         swal.fire({
           icon: 'success',

@@ -62,7 +62,7 @@ export class TablaCategoriaComponent implements OnInit {
     })   
   }
   
-  getNombres(id:string){
+  getNombres(id:number){
     this.dataEntrante = id;
     console.log("ID: ",id);
     this.Conexcategoria.disparadorDetalle.emit(this.dataEntrante)
@@ -76,7 +76,7 @@ export class TablaCategoriaComponent implements OnInit {
   enviar(){
     
     for(let i=0;i<this.ListaCategoria.length;i++){
-      this.index2 = this.ListaCategoria[i].id_categoria+1;
+      this.index2 = this.ListaCategoria[i].pk_id_categoria+1;
     }
     console.log(this.index2);
     this.getIndex(this.index2);

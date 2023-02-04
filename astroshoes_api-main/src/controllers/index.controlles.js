@@ -139,12 +139,12 @@ const getProdcutoById = async (req, res) => {
 const createProducto = async (req, res) => {
 
     try {
-        const { pk_id_producto, codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_nombre_categoria } = req.body;
-        const response = await pool.query('insert into "Producto"(pk_id_producto,codigo_producto,img,nombre_producto,descripcion,fk_marca,modelo, genero, talla, costo,oferta, fk_nombre_categoria)values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12);', [pk_id_producto, codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_nombre_categoria]);
+        const { pk_id_producto, codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_id_categoria } = req.body;
+        const response = await pool.query('insert into "Producto"(pk_id_producto,codigo_producto,img,nombre_producto,descripcion,fk_marca,modelo, genero, talla, costo,oferta, fk_id_categoria)values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12);', [pk_id_producto, codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_id_categoria]);
         res.json({
             message: 'Ingreso Exitoso!!',
             body: {
-                producto: { pk_id_producto, codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_nombre_categoria }
+                producto: { pk_id_producto, codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_id_categoria }
             }
         });
 
@@ -159,9 +159,9 @@ const updateProducto = async (req, res) => {
 
     try {
         const pk_id_producto = parseInt(req.params.id);
-        const { codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_nombre_categoria } = req.body;
+        const { codigo_producto, img, nombre_producto, descripcion, fk_marca, modelo, genero, talla, costo, oferta, fk_id_categoria } = req.body;
 
-        const response = await pool.query('UPDATE "Producto" SET codigo_producto=$1,img=$2,nombre_producto=$3,descripcion=$4,fk_marca=$5,modelo=$6, genero=$7, talla=$8, costo=$9,oferta=$10,fk_nombre_categoria=$11 WHERE "pk_id_producto" =$12', [
+        const response = await pool.query('UPDATE "Producto" SET codigo_producto=$1,img=$2,nombre_producto=$3,descripcion=$4,fk_marca=$5,modelo=$6, genero=$7, talla=$8, costo=$9,oferta=$10,fk_id_categoria=$11 WHERE "pk_id_producto" =$12', [
             codigo_producto,
             img, nombre_producto,
             descripcion,
@@ -171,7 +171,7 @@ const updateProducto = async (req, res) => {
             talla,
             costo,
             oferta,
-            fk_nombre_categoria,
+            fk_id_categoria,
             pk_id_producto
         ]);
         res.json('User Updated Successfully');
@@ -287,7 +287,7 @@ const deleteMarca = async (req, res) => {
 //-------------------------SELECCIONAR CATEGORIA----------------------------//
 const getCategoria = async (req, res) => {
     try {
-        const response = await pool.query('SELECT * FROM "Categoria" ORDER BY "id_categoria" ASC;');
+        const response = await pool.query('SELECT * FROM "Categoria" ORDER BY "pk_id_categoria" ASC;');
         res.status(200).json(response.rows);
 
     } catch (error) {
@@ -299,8 +299,8 @@ const getCategoria = async (req, res) => {
 //------------------------SELECCIONAR POR NOMBRE DE CATEGORIA----------------------------//
 const getCategoriaById = async (req, res) => {
     try {
-        const pk_nombre_cat = req.params.id;
-        const response = await pool.query('select *from "Categoria" WHERE "pk_nombre_cat" = $1;', [pk_nombre_cat]);
+        const pk_id_categoria = parseInt(req.params.id);
+        const response = await pool.query('select *from "Categoria" WHERE "pk_id_categoria" = $1;', [pk_id_categoria]);
         res.json(response.rows);
 
     } catch (error) {
@@ -312,12 +312,12 @@ const getCategoriaById = async (req, res) => {
 //----------------------------CREAR CATEGORIAS----------------------------//
 const createCategoria = async (req, res) => {
     try {
-        const { pk_nombre_cat, id_categoria, descripcion } = req.body;
-        const response = await pool.query('INSERT INTO "Categoria" ("pk_nombre_cat","id_categoria","descripcion") VALUES ($1, $2, $3);', [pk_nombre_cat, id_categoria, descripcion]);
+        const { pk_id_categoria, nombre_cat,  descripcion } = req.body;
+        const response = await pool.query('INSERT INTO "Categoria" ("pk_id_categoria","nombre_cat","descripcion") VALUES ($1, $2, $3);', [pk_id_categoria, nombre_cat,  descripcion]);
         res.json({
             message: 'Ingreso Exitoso!!',
             body: {
-                producto: { pk_nombre_cat, id_categoria, descripcion }
+                producto: { pk_id_categoria, nombre_cat,  descripcion }
             }
         });
 
@@ -330,13 +330,13 @@ const createCategoria = async (req, res) => {
 //----------------------------MODIFICAR CATEGORIAS----------------------------//
 const updateCategoria = async (req, res) => {
     try {
-        const pk_nombre_cat = req.params.id;
-        const { id_categoria, descripcion } = req.body;
+        const pk_id_categoria = parseInt(req.params.id);
+        const { nombre_cat, descripcion } = req.body;
 
-        const response = await pool.query('UPDATE "Categoria" SET "id_categoria"= $1 ,"descripcion" = $2  WHERE "pk_nombre_cat" = $3;', [
-            id_categoria,
+        const response = await pool.query('UPDATE "Categoria" SET "nombre_cat"= $1 ,"descripcion" = $2  WHERE "pk_id_categoria" = $3;', [
+            nombre_cat,
             descripcion,
-            pk_nombre_cat
+            pk_id_categoria
         ]);
         res.json('Categoria Updated Exitosa');
 
@@ -351,11 +351,11 @@ const updateCategoria = async (req, res) => {
 const deleteCategoria = async (req, res) => {
 
     try {
-        const pk_nombre_cat = req.params.id;
-        await pool.query('DELETE FROM "Categoria" where "pk_nombre_cat" = $1', [
-            pk_nombre_cat
+        const pk_id_categoria = parseInt(req.params.id);
+        await pool.query('DELETE FROM "Categoria" where "pk_id_categoria" = $1', [
+            pk_id_categoria
         ]);
-        res.json(`User ${pk_nombre_cat} deleted Successfully`);
+        res.json(`User ${pk_id_categoria} deleted Successfully`);
 
     } catch (error) {
         return res.status(500).json({

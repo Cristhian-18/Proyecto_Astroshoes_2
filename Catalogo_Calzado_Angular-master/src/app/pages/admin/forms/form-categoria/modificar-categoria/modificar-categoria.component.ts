@@ -7,20 +7,11 @@ import { ConexCategoriaService,categoria } from 'src/app/services/conexiones/con
 })
 export class ModificarCategoriaComponent implements OnInit {
   detalle:any={};
-/*
-  cargar:any={
 
-    pk_nombre_cat:'',
-    id_categoria:0,
-    descripcion:''
-  };
-  */
   cargar:any=[];
-  id_entrada:string='';
   categoria:categoria={
-
-    pk_nombre_cat:'',
-    id_categoria:0,
+    pk_id_categoria:0,
+    nombre_cat:'',
     descripcion:''
   };
 
@@ -45,13 +36,12 @@ export class ModificarCategoriaComponent implements OnInit {
   
   modificar(id:number,nombre:string,descripcion:string){
     //Extrae text//
-    this.categoria.id_categoria = id;
-    this.id_entrada =nombre;
-    this.categoria.pk_nombre_cat = nombre;
+    this.categoria.pk_id_categoria = id;
+    this.categoria.nombre_cat= nombre;
     this.categoria.descripcion = descripcion;
   
     //Envia a la base de datos
-    this.conexion.editCategoria(this.id_entrada,this.categoria).subscribe(
+    this.conexion.editCategoria(this.categoria.pk_id_categoria,this.categoria).subscribe(
        res=>{
          console.log(res);       
        },

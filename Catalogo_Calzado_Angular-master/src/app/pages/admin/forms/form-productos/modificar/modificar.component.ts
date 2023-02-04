@@ -20,7 +20,7 @@ export class ModificarComponent implements OnInit {
   LlenarcomboGenero:any=[];//LLenar Combobox de Categorias
   aux:Producto[]=[];//auxiliar
   idm:number=0;//Index de Marcas
-  idc:string='';//Index de Categoria
+  idc:number=0;//Index de Categoria
   idg:string='';//Index de Genero
   modal_admin:boolean  = false;//bandera de Modal
   isChecked: boolean = false//bandera de oferta;
@@ -38,7 +38,7 @@ export class ModificarComponent implements OnInit {
     talla:'',
     costo:'',
     oferta:'',
-    fk_nombre_categoria:''
+    fk_id_categoria:0
   };
 
   constructor(private ConexProdcutoService:ConexProductosService, private ConexMarca:ConexMarcaService,private ConexCategoria:ConexCategoriaService) {
@@ -52,7 +52,7 @@ export class ModificarComponent implements OnInit {
          for(let marca of this.aux) {
           
           this.idm=marca.fk_marca;
-          this.idc=marca.fk_nombre_categoria;
+          this.idc=marca.fk_id_categoria;
           this.idg=marca.genero;
           this.listarMarcas(this.idm);
           this.listarCategorias(this.idc);
@@ -86,15 +86,15 @@ export class ModificarComponent implements OnInit {
    } 
 
    //METODO PARA LLENAR EL COMBOBOX DE CATEGORIAS PARA EL OBJETO A MODIFICAR
-   listarCategorias(id:string)
+   listarCategorias(id:number)
    {
     
    this.ConexCategoria.getCategoria().subscribe(
      res=>{     
        this.ListaCateforias=<any>res;
-       this.LlenarcomboCategorias = this.ListaCateforias.filter(item =>item.pk_nombre_cat == id)
+       this.LlenarcomboCategorias = this.ListaCateforias.filter(item =>item.pk_id_categoria == id)
        for (let i = 0; i < this.ListaCateforias.length; i++) {
-          if(this.ListaCateforias[i].pk_nombre_cat !=id){
+          if(this.ListaCateforias[i].pk_id_categoria !=id){
             this.LlenarcomboCategorias.push(this.ListaCateforias[i]);
           } 
         }      
@@ -128,7 +128,7 @@ export class ModificarComponent implements OnInit {
   }
 
   obtenercategoria(valor: string) {
-    this.Producto.fk_nombre_categoria = valor; 
+    this.Producto.fk_id_categoria= parseInt(valor); 
     console.log(valor);
   }
   obtenerMarca(valor: string) {
@@ -142,7 +142,7 @@ export class ModificarComponent implements OnInit {
   }
 
   modificar(ind:number,codigo_producto:string,img:string,nombre_producto:string,descripcion:string,fk_marca:number,modelo:string,genero:string,
-    talla:string,costo:string,oferta:string,fk_nombre_categoria:string){
+    talla:string,costo:string,oferta:string,fk_id_categoria:number){
     //Extrae text//
     this.Producto.pk_id_producto = ind;
     this.Producto.codigo_producto =codigo_producto;
@@ -160,8 +160,8 @@ export class ModificarComponent implements OnInit {
     this.Producto.talla = talla;
     this.Producto.costo =costo;
     this.Producto.oferta =oferta;
-    if(this.Producto.fk_nombre_categoria== ''){
-      this.Producto.fk_nombre_categoria =fk_nombre_categoria;
+    if(this.Producto.fk_id_categoria== 0){
+      this.Producto.fk_id_categoria =fk_id_categoria;
     }
     
   

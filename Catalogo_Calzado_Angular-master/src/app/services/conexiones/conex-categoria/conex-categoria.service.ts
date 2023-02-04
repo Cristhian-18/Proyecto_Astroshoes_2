@@ -16,13 +16,13 @@ export class ConexCategoriaService {
   };
 
   //get un Producto
-  getUnCategoria(id:string){
+  getUnCategoria(id:number){
     return this.http.get(this.url+id)
   };
 
   ///Agregar
-  addCategoria(producto:categoria){
-    return this.http.post(this.url,producto);
+  addCategoria(categoria:categoria){
+    return this.http.post(this.url,categoria);
   };
 
   //eliminar
@@ -31,14 +31,14 @@ export class ConexCategoriaService {
 
   };
   //modificar
-  editCategoria(id:string, producto:categoria){
-    return this.http.put(this.url+id,producto);
+  editCategoria(id:number, categoria:categoria){
+    return this.http.put(this.url+id,categoria);
 
   };
 }
-console.log("Servicio en Uso PRODUCTO");
+console.log("Servicio en Categoria");
 export interface categoria{
-  pk_nombre_cat:string;
-  id_categoria:number;
+  pk_id_categoria:number;
+  nombre_cat:string;
   descripcion:string;
 };

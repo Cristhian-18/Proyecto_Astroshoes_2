@@ -28,7 +28,7 @@ export class RegistrarComponent implements OnInit {
     talla:'',
     costo:'',
     oferta:'',
-    fk_nombre_categoria:''
+    fk_id_categoria:0
   };
   detalle:any={};
  
@@ -79,7 +79,7 @@ export class RegistrarComponent implements OnInit {
    
   } 
   obtenercategoria(valor: string) {
-    this.Producto.fk_nombre_categoria = valor; 
+    this.Producto.fk_id_categoria = parseInt(valor); 
     console.log(valor);
   }
   obtenerMarca(valor: string) {

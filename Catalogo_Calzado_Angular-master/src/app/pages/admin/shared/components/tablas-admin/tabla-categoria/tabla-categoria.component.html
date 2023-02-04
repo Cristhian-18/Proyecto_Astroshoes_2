@@ -36,16 +36,16 @@
 
                 <tbody alt="registros" *ngFor="let ListaCategoria of ListaCategoria; let i= index">
                     <tr>
-                        <td alt="codigo"> {{ListaCategoria.id_categoria}} </td>
-                        <td alt="nombre de categoria"> {{ListaCategoria.pk_nombre_cat}}</td>
+                        <td alt="codigo"> {{ListaCategoria.pk_id_categoria}} </td>
+                        <td alt="nombre de categoria"> {{ListaCategoria.nombre_cat}}</td>
                         <td alt="descripcion"> {{ListaCategoria.descripcion}}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button (click)="getNombres(ListaCategoria.pk_nombre_cat)" class="btn btn-primary"
+                                <button (click)="getNombres(ListaCategoria.pk_id_categoria)" class="btn btn-primary"
                                     data-bs-toggle="modal" data-bs-target="#modificar">
                                     <i class="fas fa-pencil-alt"> </i> Modificar</button>
                             </div>
-                            <button (click)="eliminar(ListaCategoria.pk_nombre_cat)" class="btn btn-danger"><i
+                            <button (click)="eliminar(ListaCategoria.pk_id_categoria)" class="btn btn-danger"><i
                                     class="fas fa-trash"></i> Eliminar</button>
                         </td>
                     </tr>

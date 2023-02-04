@@ -62,7 +62,7 @@ export interface Producto{
   talla:string; 
   costo:string;
   oferta:string;
-  fk_nombre_categoria:string;
+  fk_id_categoria:number;
 };
 export interface Genero{
   

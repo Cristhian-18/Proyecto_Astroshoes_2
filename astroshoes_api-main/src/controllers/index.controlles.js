@@ -487,6 +487,21 @@ const getFavoritosById = async (req, res) => {
         })
     }
 };
+
+const getFavoritos = async (req, res) => {
+    try
+    {
+        const response = await pool.query('select *from favoritos;');
+        res.status(200).json(response.rows);
+
+    } catch (error)
+    {
+        return res.status(500).json({
+            message:"Lo sentimos!!! :'v "
+        })
+    }   
+};
+
 //----------------------------CREAR FAVORITOS----------------------------//
 const createFavorito = async (req, res) => {
     try {
@@ -670,6 +685,7 @@ module.exports = {
     updateUsuario,
     deleteUsuario,
     listarFavoritos,
+    getFavoritos,
     getFavoritosById,
     createFavorito,
     updateFavoritos,

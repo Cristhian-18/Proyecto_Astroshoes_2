@@ -52,4 +52,14 @@ export class ConexFavService {
 
   };
 
+  getFavoritos(){
+    return this.http.get(this.url);
+  };
 }
+export interface Favoritos{
+  
+  id_favorito:number;
+  fk_id_producto:number;
+  fk_id_usuario:number;
+  
+};

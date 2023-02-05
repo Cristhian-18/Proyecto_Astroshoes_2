@@ -23,8 +23,6 @@ interface TokenPayload {
   styleUrls: ['./navbar.component.css']
 })
 
-
-
 export class NavbarComponent {
 
   keyword = 'nombre_producto';
@@ -80,15 +78,15 @@ export class NavbarComponent {
       res => {
         console.log(res)
         this.data = <any>res;
-
       },
       err => console.log(err)
-
     );
   }
+
   ngOnInit(): void {
     this.listarProductos();
   }
+
   logout() {
     this.cookieService.delete('token');
     this.isLoggedIn = false;
@@ -100,9 +98,9 @@ export class NavbarComponent {
     });
     this.router.navigate(['/home']);
   }
+
   abrirmodal() {
     this.info_modal = true;
     this.getNombres(this.informacionGuardada);
   }
-
 }

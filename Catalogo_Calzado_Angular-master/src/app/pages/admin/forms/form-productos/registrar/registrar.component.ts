@@ -13,7 +13,7 @@ export class RegistrarComponent implements OnInit {
   ListaMarca:Marca[]=[];
   ListaCategoria:categoria[]=[];
   ListaGenero: Genero[]=[];//LISTA DE Genero
-
+  detalle:any={};
   modal_admin:boolean  = false;
 
   Producto:Producto={
@@ -30,16 +30,14 @@ export class RegistrarComponent implements OnInit {
     oferta:'',
     fk_id_categoria:0
   };
-  detalle:any={};
+  
  
-  constructor(private ConexProdcutoService:ConexProductosService, private ConexMarca:ConexMarcaService, private ConexCategoria:ConexCategoriaService) {
-
-    this.ConexProdcutoService.disparadorDetalle.subscribe(data=>{
+  constructor(private ConexProductoService:ConexProductosService, private ConexMarca:ConexMarcaService, private ConexCategoria:ConexCategoriaService) {
+    this.ConexProductoService.disparadorDetalle.subscribe(data=>{
       this.detalle = data;
       this.Producto.oferta = 'No Oferta';
-  })
-
-   }
+    });
+  }
 
   ngOnInit(): void {
     this.listarMarcas();
@@ -47,53 +45,51 @@ export class RegistrarComponent implements OnInit {
     this.listarGenero();
   }
   
-  listaCategoria()
-  {
-  console.log("Servicio ULTIMA NOVEDAD");
-  this.ConexCategoria.getCategoria().subscribe(
-    res=>{
-     // console.log(res)
-      this.ListaCategoria=<any>res;         
-    },
-    err => console.log(err)   
-  );
+  //Lista u obtiene las CATEGORIAS del servicio//
+  listaCategoria(){
+    console.log("--- Listar Categoria de productos --");
+    this.ConexCategoria.getCategoria().subscribe(
+      res=>{
+      // console.log(res)
+        this.ListaCategoria=<any>res;         
+      },
+      err => console.log(err)   
+    );
   } 
 
-  listarMarcas()
-  {
-  console.log("Servicio ULTIMA NOVEDAD");
-  this.ConexMarca.getMarcas().subscribe(
-    res=>{
-     // console.log(res)
-      this.ListaMarca=<any>res;
-           
-    },
-    err => console.log(err)
-    
-  );
+  //Lista u obtiene las MARCAS del servicio//
+  listarMarcas(){
+    console.log("----Listar Marcas de productos----");
+    this.ConexMarca.getMarcas().subscribe(
+      res=>{
+      // console.log(res)
+        this.ListaMarca=<any>res;       
+      },
+      err => console.log(err) 
+    );
   } 
-  listarGenero()
-  {
-  this.ListaGenero= this.ConexProdcutoService.getGenero();
-    
-   
+
+
+  listarGenero(){
+  this.ListaGenero= this.ConexProductoService.getGenero();
   } 
+
   obtenercategoria(valor: string) {
     this.Producto.fk_id_categoria = parseInt(valor); 
     console.log(valor);
   }
+
   obtenerMarca(valor: string) {
     this.Producto.fk_marca = parseInt(valor); 
     console.log(valor);
   }
+
   obtenercGenero(valor: string) {
     this.Producto.genero = valor;
-    
     console.log(valor);
   }
   
   obtenerOferta(valor: boolean) {
-    
     if(valor == true){
       this.Producto.oferta = 'Oferta';
       console.log('Oferta');
@@ -106,9 +102,22 @@ export class RegistrarComponent implements OnInit {
   agregarProducto(){
     this.Producto.pk_id_producto = (this.detalle)
     console.log(this.Producto);
-    this.ConexProdcutoService.addProdcuto(this.Producto).subscribe();  
+    this.ConexProductoService.addProdcuto(this.Producto).subscribe();  
+    this.Limpiar(); 
   }
 
-
-
+  Limpiar(){
+    this.Producto.pk_id_producto= 0,
+    this.Producto.codigo_producto='', 
+    this.Producto.img='', 
+    this.Producto.nombre_producto='',
+    this.Producto.descripcion='',
+    this.Producto.fk_marca=0, 
+    this.Producto.modelo='',
+    this.Producto.genero='',
+    this.Producto.talla='',
+    this.Producto.costo='',
+    this.Producto.oferta='',
+    this.Producto.fk_id_categoria=0
+  }
 }

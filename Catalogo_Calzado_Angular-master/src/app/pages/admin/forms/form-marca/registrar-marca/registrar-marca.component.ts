@@ -9,35 +9,35 @@ import swal from 'sweetalert2';
 })
 export class RegistrarMarcaComponent implements OnInit {
 
-
   detalle:any={};
+  ListaMarca:Marca[]=[];
+  id:number=0;
 
   marca:Marca={
       id_Marca:0,
       nombre:'',
       descripcion:''
   } 
-  ListaMarca:Marca[]=[];
-  id:number=0;
+ 
   constructor( private conexion:ConexMarcaService) {     
     this.ListaMarca =<any>  conexion.getMarcas();    
-
     this.conexion.disparadorMODIFICARMARCA.subscribe(data=>{
         this.detalle = data;
     })
   }
+
+
   ngOnInit(): void {
   }
   
   agregarMarcas(){
-
-    try {
-      
+    try {  
       this.marca.id_Marca = (this.detalle)
       console.log(this.marca);
       
       if(this.marca.id_Marca !=0 && this.marca.nombre !='' && this.marca.descripcion!=''){
         this.conexion.addMarca(this.marca).subscribe();  
+        
         swal.fire({
           icon: 'success',
           title: 'Registro de Marca Exitoso',
@@ -57,7 +57,12 @@ export class RegistrarMarcaComponent implements OnInit {
         text: 'Ingrese todos los parametros Por favor'
       });
     }
+    this.Limpiar();
+  }
 
-   
+  Limpiar(){
+    this.marca.id_Marca=0,
+    this.marca.nombre='',
+    this.marca.descripcion='';
   }
 }

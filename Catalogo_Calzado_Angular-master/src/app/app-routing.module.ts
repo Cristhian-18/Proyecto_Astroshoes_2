@@ -23,9 +23,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 
 // Importe del Guard
 import { AuthGuard } from './guards/auth/auth.guard';
-
-
-
+import { FormUsuariosComponent } from './pages/admin/forms/form-usuarios/form-usuarios.component';
 
 
 const routes: Routes = [
@@ -46,6 +44,7 @@ const routes: Routes = [
   {path:'admin/form-listarproductos', component:FormListarproductosComponent, canActivate: [AuthGuard]},
   {path:'admin/form-marca', component:FormMarcaComponent, canActivate: [AuthGuard]},
   {path:'admin/form-productos', component:FormProductosComponent, canActivate: [AuthGuard]},
+  {path:'admin/form-usuarios', component:FormUsuariosComponent, canActivate: [AuthGuard]},
 
   {path:'**',pathMatch:'full',redirectTo:'home'}
 ];

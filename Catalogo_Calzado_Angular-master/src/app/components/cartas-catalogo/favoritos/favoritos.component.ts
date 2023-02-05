@@ -35,10 +35,10 @@ export class FavoritosComponent implements OnInit {
           Swal.fire('Error!', 'Hubo un problema al obtener los favoritos!', 'error');
         });
   }
+
   abrirmodal() {
     this.info_modal = true;
   }
-
 
   deleteFavorito(id: number) {
     Swal.fire({

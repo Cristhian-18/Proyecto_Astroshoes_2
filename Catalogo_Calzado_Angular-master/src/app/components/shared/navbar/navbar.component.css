@@ -54,3 +54,17 @@ a {
     padding: 30px;
   }
 }
+
+.ng-autocomplete{
+  font-size: 18px !important;
+  width: 60px !important;
+  transition: all .5s !important;
+  border-radius: 25px;
+  
+}
+.ng-autocomplete:hover{
+  width: 180px !important;
+  background-color: #fff !important;
+  border-color: #fc012b !important;
+  
+}

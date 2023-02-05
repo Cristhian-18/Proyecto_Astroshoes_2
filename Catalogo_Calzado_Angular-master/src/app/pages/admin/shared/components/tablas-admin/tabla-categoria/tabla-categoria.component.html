@@ -31,27 +31,30 @@
                         <th>Código</th>
                         <th>Nombre de categoría</th>
                         <th>Descripción</th>
+                        <th>Operaciones</th>
                     </tr>
                 </thead>
 
-                <tbody alt="registros" *ngFor="let ListaCategoria of ListaCategoria; let i= index">
+                <tbody alt="registros"
+                    *ngFor="let ListaCategoria of ListaCategoria | paginate: { itemsPerPage: 6, currentPage: p }; let i= index">
                     <tr>
                         <td alt="codigo"> {{ListaCategoria.pk_id_categoria}} </td>
                         <td alt="nombre de categoria"> {{ListaCategoria.nombre_cat}}</td>
                         <td alt="descripcion"> {{ListaCategoria.descripcion}}</td>
                         <td>
-                            <div class="btn-group" role="group">
+                            <div class="btn-group p-2" role="group">
                                 <button (click)="getNombres(ListaCategoria.pk_id_categoria)" class="btn btn-primary"
                                     data-bs-toggle="modal" data-bs-target="#modificar">
-                                    <i class="fas fa-pencil-alt"> </i> Modificar</button>
+                                    <i class="fas fa-pencil-alt"></i></button>
                             </div>
                             <button (click)="eliminar(ListaCategoria.pk_id_categoria)" class="btn btn-danger"><i
-                                    class="fas fa-trash"></i> Eliminar</button>
+                                    class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
                 <app-modificar-categoria></app-modificar-categoria>
             </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

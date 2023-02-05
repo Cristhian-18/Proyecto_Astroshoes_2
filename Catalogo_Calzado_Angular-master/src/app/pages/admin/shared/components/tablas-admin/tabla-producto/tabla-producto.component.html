@@ -7,7 +7,7 @@
     <div class="card" alt="contenedor de carta">
         <div class="card card-primary">
             <div class="card-header" id="titulo">
-                <h3 class="card-title">Lista de zapatos o productos</h3>
+                <h3 class="card-title">Lista de Zapatos</h3>
             </div>
         </div>
         <div class="card-header">
@@ -30,38 +30,40 @@
                 <thead alt="encabezados">
                     <tr>
                         <th>Codigo</th>
-                        <th>Nombre del producto</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>talla</th>
+                        <th>Nombre Zapato</th>
+                        <th>Modelo</th>                       
+                        <th>Talla</th>
+                        <th>Género</th>
                         <th>Costo</th>
-                        <th>Descripcion</th>
+                        <th>Estado de Oferta</th>
+                        <th>Operaciones</th>
                     </tr>
                 </thead>
                 <!-- Registros de productos -->
-                <tbody alt="registros" *ngFor="let ListaProducto of ListaProducto">
+                <tbody alt="registros" *ngFor="let ListaProducto of ListaProducto | paginate: { itemsPerPage: 6, currentPage: p }">
                     <tr>
                         <td alt="codigo">{{ListaProducto.pk_id_producto}}</td>
                         <td alt="nombre">{{ListaProducto.nombre_producto}}</td>
-                        <td alt="marca">{{ListaProducto.fk_marca}}</td>
                         <td alt="modelo">{{ListaProducto.modelo}}</td>
                         <td alt="talla">{{ListaProducto.talla}}</td>
-                        <td alt="costo">{{ListaProducto.costo}}</td>
-                        <td alt="descripcion">{{ListaProducto.descripcion}}</td>
+                        <td alt="genero">{{ListaProducto.genero}}</td>
+                        <td alt="costo">$ {{ListaProducto.costo}}</td>
+                        <td alt="oferta">{{ListaProducto.oferta}}</td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group p-2">
                                 <button (click)="getNombres(ListaProducto.pk_id_producto)" class="btn btn-primary"
                                     data-bs-toggle="modal" data-bs-target="#modificar">
-                                    <i class="fas fa-pencil-alt"></i> Modificar</button>
+                                    <i class="fas fa-pencil-alt"></i></button>
                             </div>
 
                             <app-modificar></app-modificar>
                             <button (click)="eliminar(ListaProducto.pk_id_producto)" class="btn btn-danger"><i
-                                    class="fas fa-trash"></i> Eliminar</button>
+                                    class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

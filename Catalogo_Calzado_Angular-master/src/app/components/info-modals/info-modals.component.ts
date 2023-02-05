@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ConexFavService } from 'src/app/services/conexiones/conex-fav/conex-fav.service'
-import { ConexProductosService, Producto } from 'src/app/services/conexiones/conex-productos/conex-productos.service';
+import { ConexProductosService} from 'src/app/services/conexiones/conex-productos/conex-productos.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -10,45 +11,34 @@ import swal from 'sweetalert2';
 })
 export class InfoModalsComponent implements OnInit {
 
-  /*
-  cargar: any = {
-
-    pk_id_producto: 0,
-    codigo_producto: '',
-    img: '',
-    nombre_producto: '',
-    descripcion: '',
-    fk_marca: '',
-    modelo: '',
-    genero: '',
-    talla: '',
-    costo: '',
-    oferta: '',
-    fk_nombre_categoria: ''
-  };
-
-
-*/
   cargar: any = [];
+  subcription: Subscription = new Subscription();
+  
+  constructor(private ConexProductoService: ConexProductosService, private ConexFavsService: ConexFavService) {
+    this.subcription.add(
+      this.ConexProductoService.disparadorDetalle.subscribe(data => {
+        this.ConexProductoService.getUnProducto(data).subscribe(
+          res => {
+            console.log(res)
+            this.cargar = res;
+          },
+          err => console.log(this.cargar)
+        );
+      })
+    );
+  }
 
 
-  constructor(private ConexProdcutoService: ConexProductosService, private ConexFavsService: ConexFavService) {
+  ngOnInit(): void {
+  }
 
-    this.ConexProdcutoService.disparadorDetalle.subscribe(data => {
-      this.ConexProdcutoService.getUnProducto(data).subscribe(
-        res => {
-          console.log(res)
-          this.cargar = res;
-        },
-        err => console.log(this.cargar)
-      );
-    })
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
   }
 
   addToFavorites(producid: number) {
     // Obtener el email del token
     let email: string | null = null;
-
     // Lógica para obtener el email del token
     email = this.ConexFavsService.getEmailFromToken();
     if (email !== null) {
@@ -78,12 +68,9 @@ export class InfoModalsComponent implements OnInit {
       swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Primero inicie sesion para usar esta funcion.'
+        text: 'Primero inicie sesión para usar esta funcion.'
       });
       //console.log("No se pudo obtener el email del token");
     }
-  }
-
-  ngOnInit(): void {
   }
 }

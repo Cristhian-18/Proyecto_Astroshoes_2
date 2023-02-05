@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ConexCategoriaService,categoria } from 'src/app/services/conexiones/conex-categoria/conex-categoria.service';
 @Component({
   selector: 'app-modificar-categoria',
@@ -7,7 +8,7 @@ import { ConexCategoriaService,categoria } from 'src/app/services/conexiones/con
 })
 export class ModificarCategoriaComponent implements OnInit {
   detalle:any={};
-
+  subcription: Subscription = new Subscription();
   cargar:any=[];
   categoria:categoria={
     pk_id_categoria:0,
@@ -17,21 +18,28 @@ export class ModificarCategoriaComponent implements OnInit {
 
 
   constructor(private conexion:ConexCategoriaService) { 
-  
-    this.conexion.disparadorDetalle.subscribe(data=>{
-      this.conexion.getUnCategoria(data).subscribe(
-       res=>{
-         console.log(res)         
-         this.cargar=res;               
-       },
-       err => console.log('Hola')
-      );
- 
-    })
-
-
+    this.ListarCarga();
   }
 
+  ListarCarga(){
+    this.subcription.add(
+      this.conexion.disparadorDetalle.subscribe(data=>{
+        this.conexion.getUnCategoria(data).subscribe(
+        res=>{
+          console.log(res)         
+          this.cargar=res;               
+        },
+        err => console.log('Hola')
+        );
+      })
+    );
+  }
+
+
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+    console.log('Observable cerrado')
+  }
 
   
   modificar(id:number,nombre:string,descripcion:string){
@@ -46,13 +54,10 @@ export class ModificarCategoriaComponent implements OnInit {
          console.log(res);       
        },
        err=>console.log(err)
-     ); 
-     
+     );   
   } 
+
+
   ngOnInit(): void {
-  
-  
   }
-
-
 }

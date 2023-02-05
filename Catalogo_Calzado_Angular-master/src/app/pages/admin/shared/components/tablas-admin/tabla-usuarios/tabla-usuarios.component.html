@@ -1,1 +1,52 @@
-<p>tabla-usuarios works!</p>
+<div class="card">
+    <div class="card" alt="contenedor de carta">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Lista de Usuarios</h3>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <div class="container">
+                        <div class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-----Cuerpo de la tabla -->
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead alt="encabezados">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Fecha de creación</th>
+                        <th>Operacion</th>
+                    </tr>
+                </thead>
+                <tbody alt="registros" *ngFor="let ListaUsuario of ListaUsuario | paginate: { itemsPerPage: 6, currentPage: p }; let i= index ">
+                    <tr>
+                        <td alt="codigo">{{ListaUsuario.id_usuario}}</td>
+                        <td alt="nombres">{{ListaUsuario.nombres}}</td>
+                        <td alt="apellidos">{{ListaUsuario.apellidos}}</td>
+                        <td alt="email">{{ListaUsuario.email}}</td>
+                        <td alt="email">{{ListaUsuario.created_at}}</td>
+                        <td>
+                            <button (click)="eliminar(ListaUsuario.id_usuario)" class="btn btn-danger"><i
+                                    class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

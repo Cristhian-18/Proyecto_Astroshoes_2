@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 /********** RUTAS ***********/
 import { AppRoutingModule } from './app-routing.module';
@@ -22,9 +23,8 @@ import { CardComponent } from './components/card/card.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { SeccMarcasComponent } from './components/secc-marcas/secc-marcas.component';
 import { FiltroComponent } from './components/filtro/filtro.component';
-import { PaginacionCatalogoComponent } from './components/paginacion-catalogo/paginacion-catalogo.component';
 import { InfoModalsComponent } from './components/info-modals/info-modals.component';
-import { GaleriaComponent } from './components/galeria/galeria.component';
+
 // Componentes de Cartas para mostrar productos//
 import { CartHombreComponent } from './components/cartas-catalogo/cart-hombre/cart-hombre.component';
 import { CartMujeresComponent } from './components/cartas-catalogo/cart-mujeres/cart-mujeres.component';
@@ -63,6 +63,7 @@ import { ConexMarcaService } from './services/conexiones/conex-marca/conex-marca
 import { ConexProductosService } from './services/conexiones/conex-productos/conex-productos.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ConexCategoriaService } from './services/conexiones/conex-categoria/conex-categoria.service';
+import { ConexUsuariosService } from './services/conexiones/conex-usuarios/conex-usuarios.service';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 
@@ -85,7 +86,6 @@ import { ContactoModalComponent } from './components/contacto-modal/contacto-mod
     AdminComponent,
     SeccMarcasComponent,
     FiltroComponent,
-    PaginacionCatalogoComponent,
     InfoModalsComponent,
     NovedadesComponent,
     CartHombreComponent,
@@ -109,7 +109,6 @@ import { ContactoModalComponent } from './components/contacto-modal/contacto-mod
     TablaCategoriaComponent,
     TablaUsuariosComponent,
     FormUsuariosComponent,
-    GaleriaComponent,
     SpinnerComponent,
     LoginComponent,
     RegisterComponent,
@@ -128,9 +127,11 @@ import { ContactoModalComponent } from './components/contacto-modal/contacto-mod
   providers: [
     [AuthGuard],
     ConexMarcaService,
-    [CookieService],
     ConexProductosService,
-    ConexCategoriaService
+    ConexCategoriaService,
+    ConexUsuariosService,
+    [CookieService],
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

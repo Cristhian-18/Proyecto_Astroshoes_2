@@ -2,14 +2,11 @@
 <div class="superNav border-bottom py-2 bg-black navbar-dark">
     <div class="container">
         <div class="row ">
-            <div *ngIf="isLoggedIn" class="col-lg-2 col-md-6 col-sm-12 col-xs-12
-                centerOnMobile">
+            <div *ngIf="isLoggedIn" class="col-lg-2 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
                 <span class="me-3 texto"><strong>{{nombreUsuario}}</strong></span>
             </div>
-            <div *ngIf="!isLoggedIn" class="col-md-6 col-sm-12 col-xs-12
-                centerOnMobile">
-                <span class="me-3 animacion-caracter"><strong>Bienvenido a
-                        nuestro catálogo</strong></span>
+            <div *ngIf="!isLoggedIn" class="col-md-6 col-sm-12 col-xs-12 centerOnMobile">
+                <span class="me-3 animacion-caracter"><strong>Bienvenido a nuestro catálogo</strong></span>
             </div>
         </div>
     </div>
@@ -20,48 +17,38 @@
         <img [routerLink]="['/home']"
             src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea"
             width="80" height="70">
-        <a [routerLink]="['/home']" class="navbar-brand animacion-titulo-logo"
-            href="#">AstroShoes</a>
+        <a [routerLink]="['/home']" class="navbar-brand animacion-titulo-logo" href="#">AstroShoes</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class=" collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto ">
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page"
-                        routerLinkActive="active"
+                    <a class="nav-link " aria-current="page" routerLinkActive="active"
                         [routerLink]="['/home']">Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                        id="navbarDropdownMenuLink" role="button"
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Catálogo
                     </a>
-                    <ul class="dropdown-menu bg-dark"
-                        aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
                         <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active"
-                                [routerLink]="['/hombres']">Hombres</a>
+                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/hombres']">Hombres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active"
-                                [routerLink]="['/mujeres']">Mujeres</a>
+                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/mujeres']">Mujeres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active"
-                                [routerLink]="['/ninos']">Niños</a>
+                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/ninos']">Niños</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page"
-                        routerLinkActive="active"
+                    <a class="nav-link " aria-current="page" routerLinkActive="active"
                         [routerLink]="['/ultimas_novedades']">Ultimos Modelos</a>
                 </li>
                 <li class="nav-item">
@@ -75,52 +62,44 @@
                 </li>
             </ul>
 
-            <!---Buscador de zapatos--->
-            <div class="d-flex p-4" role="search">
-                <div class="ng-autocomplete" style="width: 300px;">
-                    <ng-autocomplete
-                        [data]="data"
-                        [searchKeyword]="keyword"
-                        placeholder="Buscar zapatos"
-                        (inputChanged)='onChangeSearch($event)'
-                        [itemTemplate]="itemTemplate"
-                        [notFoundTemplate]="notFoundTemplate">
-                    </ng-autocomplete>
-
-                    <ng-template #itemTemplate let-item>
-                        <a [innerHTML]="'Nombre: ' +item.nombre_producto + ' | Modelo: ' + item.modelo+ ' | Categoria: '+ item.fk_nombre_categoria" (click)="renderSelectedValue(item)"></a>
-
-                    </ng-template>
-
-                    <ng-template #notFoundTemplate let-notFound>
-                        <div [innerHTML]="notFound"></div>
-                    </ng-template>
-                </div>
-                <button class="btn btn-success" (click)="abrirmodal()" type="submit" data-toggle="modal" data-target="#modal1"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-            <!---/Fin-Buscador de zapatos--->
-
             <ul class="navbar-nav ms-auto navbar-right ">
-                <li *ngIf="!isLoggedIn"><a class="animacion-caracter mx-2"
-                        routerLinkActive="active"
+                <li *ngIf="!isLoggedIn"><a class="animacion-caracter mx-2" routerLinkActive="active"
                         [routerLink]="['/login']">Iniciar Sesion</a></li>
-                <li *ngIf="!isLoggedIn"><a class="animacion-caracter mx-2"
-                        routerLinkActive="active"
+                <li *ngIf="!isLoggedIn"><a class="animacion-caracter mx-2" routerLinkActive="active"
                         [routerLink]="['/register']">Registrarse</a></li>
-
             </ul>
             <ul class="admin navbar-nav ms-auto navbar-right">
                 <!----Identificar el boton si es administrador-->
-                <div class="p-2">
-                    <button *ngIf="isLoggedIn && admin" class="texto"
-                        routerLinkActive="active"
-                        [routerLink]="['/admin/form-marca']">Ir al Administrador</button>
+                <div class="p-2">   
+                    <button *ngIf="isLoggedIn && admin" class="texto" routerLinkActive="active"
+                [routerLink]="['/admin/form-marca']">Ir al Administrador</button>      
                 </div>
                 <div class="p-2">
-                    <button class="animacion-caracter mx-2" *ngIf="isLoggedIn"
-                        (click)="logout()">Cerrar Sesion</button>
-                </div>
+                    <button class="texto" *ngIf="isLoggedIn" (click)="logout()">Cerrar Sesion</button>
+                </div> 
             </ul>
+            <!---Buscador de zapatos--->
+            <div class="d-flex" role="search">
+                <div class="ng-autocomplete">
+                        <ng-autocomplete 
+                            [data]="data"
+                            [searchKeyword]="keyword"
+                            placeholder="Buscar zapatos"
+                            (inputChanged)='onChangeSearch($event)'
+                            [itemTemplate]="itemTemplate">
+                            [notFoundTemplate]="notFoundTemplate">
+                        </ng-autocomplete>                 
+                    <ng-template #itemTemplate let-item>
+                        <a [innerHTML]="'Nombre: ' +item.nombre_producto + ' | Modelo: ' + item.modelo + '| Genero: ' + item.genero" (click)="renderSelectedValue(item)"></a>
+                    </ng-template>
+                    
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div> 
+                <button class="btn btn-success" (click)="abrirmodal()" type="submit" data-toggle="modal" data-target="#modal1"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <!---/Fin-Buscador de zapatos--->
         </div>
     </div>
 </nav>

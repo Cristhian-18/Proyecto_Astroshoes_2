@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ConexMarcaService,Marca } from 'src/app/services/conexiones/conex-marca/conex-marca.service';
+import { Subscription } from 'rxjs';
+import { ConexMarcaService } from 'src/app/services/conexiones/conex-marca/conex-marca.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -11,26 +12,38 @@ export class TablaMarcaComponent implements OnInit {
 
   @Input() dataEntrante:any;
   @Input() dataEntrante2:any;
+  subcription: Subscription = new Subscription();
   ListaMarca:any=[];
+  p = 1;
   index:number=0;
   index2:number=0;
 
-  constructor(private ConexProdcutoService:ConexMarcaService) { this.listarMarcas();}
-  ngOnInit(): void {
-    
+  constructor(private ConexProductoService:ConexMarcaService) { }
+  
+  ngOnInit(): void { 
+    this.listarMarcas();
+    this.subcription = this.ConexProductoService.refresh$.subscribe(()=>{
+      this.listarMarcas();
+    });
   }
-  listarMarcas()
-  {
-    console.log("Servicio ULTIMA NOVEDAD");
-      this.ConexProdcutoService.getMarcas().subscribe(
-   
-          res => {
-            console.log(res)
-            this.ListaMarca = res;
-          },
+
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+    console.log('Observable cerrado')
+  }
+
+  listarMarcas(){
+    console.log("---Listar marcas----");
+    this.subcription.add(
+      this.ConexProductoService.getMarcas().subscribe(
+        res => {
+          console.log(res)
+          this.ListaMarca = res;
+        },
           err => console.log(this.ListaMarca)
-        );
-    } 
+      )
+    );
+  }
 
   eliminar(id:number){    
     swal.fire({
@@ -43,7 +56,7 @@ export class TablaMarcaComponent implements OnInit {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.value) {
-        this.ConexProdcutoService.deletemarca(id).subscribe(
+        this.ConexProductoService.deletemarca(id).subscribe(
           res => {
             swal.fire(
               'Eliminado!',
@@ -61,22 +74,23 @@ export class TablaMarcaComponent implements OnInit {
           }
         )
       }
-    })
-    
+    })  
   }
+
   getNombres(id:number){
     this.dataEntrante = id;
     console.log("ID: ",id);
-    this.ConexProdcutoService.disparadorMODIFICARMARCA.emit(this.dataEntrante)
+    this.ConexProductoService.disparadorMODIFICARMARCA.emit(this.dataEntrante)
   } 
+
   getIndex(id2:number){
     this.index=id2;
     this.dataEntrante2 = id2;
     console.log("ID: ",id2);
-    this.ConexProdcutoService.disparadorMODIFICARMARCA.emit(this.dataEntrante2)
+    this.ConexProductoService.disparadorMODIFICARMARCA.emit(this.dataEntrante2)
   }
+
   enviar(){
-    
     for(let i=0;i<this.ListaMarca.length;i++){
       this.index2 = this.ListaMarca[i].id_Marca+1;
     }

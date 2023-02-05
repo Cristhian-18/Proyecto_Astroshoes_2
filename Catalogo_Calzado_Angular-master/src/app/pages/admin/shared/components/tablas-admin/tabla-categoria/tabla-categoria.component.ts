@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ConexCategoriaService,categoria } from 'src/app/services/conexiones/conex-categoria/conex-categoria.service';
+import { Subscription } from 'rxjs';
+import { ConexCategoriaService} from 'src/app/services/conexiones/conex-categoria/conex-categoria.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -13,22 +14,36 @@ export class TablaCategoriaComponent implements OnInit {
   index:number=0;
   ListaCategoria:any=[];
   index2:number=0;
+  p = 1;
+  subcription: Subscription = new Subscription();
 
   constructor(private Conexcategoria:ConexCategoriaService) {
-     this.listarCategoria();
+  }
+
+  ngOnInit(): void {
+    this.listarCategoria();
+    this.subcription = this.Conexcategoria.refresh$.subscribe(()=>{
+      this.listarCategoria();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+    console.log('Observable cerrado')
   }
    
-  listarCategoria()
-  {
-    console.log("Servicio ULTIMA NOVEDAD");
-    this.Conexcategoria.getCategoria().subscribe(
-      res => {
-        console.log(res)
-        this.ListaCategoria = res;
-      },
-      err => console.log(this.ListaCategoria)
+  listarCategoria(){
+    console.log("---Listar Categoria----");
+    this.subcription.add(
+      this.Conexcategoria.getCategoria().subscribe(
+        res => {
+          console.log(res)
+          this.ListaCategoria = res;
+        },
+        err => console.log(this.ListaCategoria)
+      )
     );
-    }   
+  }   
   
   eliminar(id:string){
     swal.fire({
@@ -59,7 +74,7 @@ export class TablaCategoriaComponent implements OnInit {
           }
         )
       }
-    })   
+    })  
   }
   
   getNombres(id:number){
@@ -67,23 +82,19 @@ export class TablaCategoriaComponent implements OnInit {
     console.log("ID: ",id);
     this.Conexcategoria.disparadorDetalle.emit(this.dataEntrante)
   } 
+
   getIndex(id2:number){
     this.index=id2;
     this.dataEntrante2 = id2;
     console.log("ID: ",id2);
     this.Conexcategoria.disparadorDetalle.emit(this.dataEntrante2)
   }
+
   enviar(){
-    
     for(let i=0;i<this.ListaCategoria.length;i++){
       this.index2 = this.ListaCategoria[i].pk_id_categoria+1;
     }
     console.log(this.index2);
     this.getIndex(this.index2);
   }
-
-  ngOnInit(): void {
-  
-  }
-
 }

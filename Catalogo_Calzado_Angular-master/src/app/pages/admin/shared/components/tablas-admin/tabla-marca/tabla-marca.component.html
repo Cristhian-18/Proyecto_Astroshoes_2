@@ -7,7 +7,7 @@
     <div class="card" alt="contenedor de carta">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Lista de marcas</h3>
+                <h3 class="card-title">Lista de Marcas</h3>
             </div>
         </div>
         <div class="card-header">
@@ -31,26 +31,28 @@
                         <th>Código</th>
                         <th>Nombre de marca</th>
                         <th>Descripción</th>
+                        <th>Operaciones</th>
                     </tr>
                 </thead>
-                <tbody alt="registros" *ngFor="let ListaMarca of ListaMarca; let i= index">
+                <tbody alt="registros" *ngFor="let ListaMarca of ListaMarca | paginate: { itemsPerPage: 6, currentPage: p }; let i= index ">
                     <tr>
                         <td alt="codigo">{{ListaMarca.id_Marca}}</td>
                         <td alt="nombre de marca">{{ListaMarca.nombre}}</td>
                         <td alt="descripcion">{{ListaMarca.descripcion}}</td>
                         <td>
-                            <div class="btn-group" role="group">
+                            <div class="btn-group p-2" role="group">
                                 <button (click)="getNombres(ListaMarca.id_Marca)" class="btn btn-primary"
                                     data-bs-toggle="modal" data-bs-target="#modificar">
-                                    <i class="fas fa-pencil-alt"> </i> Modificar</button>
+                                    <i class="fas fa-pencil-alt"></i></button>
                             </div>
                             <button (click)="eliminar(ListaMarca.id_Marca)" class="btn btn-danger"><i
-                                    class="fas fa-trash"></i> Eliminar</button>
+                                    class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
                 <app-modificar-marca></app-modificar-marca>
             </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

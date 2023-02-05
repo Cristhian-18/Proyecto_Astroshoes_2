@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConexProductosService,Producto } from 'src/app/services/conexiones/conex-productos/conex-productos.service';
 import { ConexMarcaService, Marca } from 'src/app/services/conexiones/conex-marca/conex-marca.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart-ninos',
@@ -15,34 +16,42 @@ export class CartNinosComponent implements OnInit {
   @Input() dataEntrante:any;
   ListaProducto:Producto[]=[];
   ListaNino:Producto[]=[];
-
   info_modal:boolean=false;
   ListaMarca: Marca[] = [];
+  subcription: Subscription = new Subscription();
 
-  constructor(private canexproduc:ConexProductosService, private ConexMarca: ConexMarcaService) { this.listarMarcas()}
+  constructor(private conexproduc:ConexProductosService, private ConexMarca: ConexMarcaService) { this.listarMarcas()}
 
   ngOnInit(): void {
     this.listarProductos();
   }
   
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+  }
+
   getNombres(nombre:number){
     this.dataEntrante = nombre;
     console.log(this.dataEntrante);
-    this.canexproduc.disparadorDetalle.emit(this.dataEntrante)
+    this.conexproduc.disparadorDetalle.emit(this.dataEntrante)
   }
+
   listarMarcas() {
-    this.ConexMarca.getMarcas().subscribe(
-      (res: any) => {
-  
-        if (res.length === 0) {
-          this.ListaMarca = [];
-        } else {
-          this.ListaMarca = res;
-        }
-      },
-      err => console.log(err)
+    console.log("---Servicio Carta ninos---");
+    this.subcription.add(
+      this.ConexMarca.getMarcas().subscribe(
+        (res: any) => { 
+          if (res.length === 0) {
+            this.ListaMarca = [];
+          } else {
+            this.ListaMarca = res;
+          }
+        },
+        err => console.log(err)
+      )
     );
   }
+
   getSelectedTalla(event: any) {
     const selectTalla = event.target as HTMLSelectElement;
     this.tallaSeleccionada = String(selectTalla.value);
@@ -57,7 +66,7 @@ export class CartNinosComponent implements OnInit {
   }
   
   listarProductosFiltro() {
-    this.canexproduc.getProdcuto().subscribe(
+    this.conexproduc.getProdcuto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;
@@ -66,21 +75,22 @@ export class CartNinosComponent implements OnInit {
       err => console.log(err)
     );
   }
+
   listarProductos()
   {
-    console.log("Servicio ULTIMA NOVEDAD");
-    this.canexproduc.getProdcuto().subscribe(
-      res=>{
-        console.log(res)
-        this.ListaProducto=<any>res;
-        this.ListaNino = this.ListaProducto.filter(item =>item.genero=='Niños')          
-      },
-      err => console.log(err)
-      
+    this.subcription.add(
+      this.conexproduc.getProdcuto().subscribe(
+        res=>{
+          console.log(res)
+          this.ListaProducto=<any>res;
+          this.ListaNino = this.ListaProducto.filter(item =>item.genero=='Niños')          
+        },
+        err => console.log(err)  
+      )
     );
   }
+
   abrirmodal(){
   this.info_modal = true;
   }
-
 }

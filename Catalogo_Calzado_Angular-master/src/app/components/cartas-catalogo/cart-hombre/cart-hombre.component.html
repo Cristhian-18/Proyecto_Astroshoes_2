@@ -26,9 +26,9 @@
 
             <div class="my-5 animated fadeIn ">
                 <div class="row">
-                    <ng-container *ngIf="ListaHombe.length; else noResults">
+                    <ng-container *ngIf="ListaHombre.length; else noResults">
                         <div class="col-lg-3 col-md-4 col-6" *ngFor="let
-                            ListaProducto of ListaHombe | paginate: {
+                            ListaProducto of ListaHombre | paginate: {
                             itemsPerPage: 8, currentPage: p }">
                             <div class="item text-center">
                                 <div class="card shadow-sm bg-image">

@@ -10,47 +10,42 @@ import swal from 'sweetalert2';
 export class RegistrarCategoriaComponent implements OnInit {
 
   detalle:any={};
-  
-  categoria:categoria={
+  ListaCategoria:categoria[]=[];
+  id:string='';
 
+  categoria:categoria={
     pk_id_categoria:0,
     nombre_cat:'',
     descripcion:''
   };
   
-  ListaCategoria:categoria[]=[];
-  id:string='';
-
   constructor( private conexion:ConexCategoriaService) {     
-    this.ListaCategoria=<any>  conexion.getCategoria();    
-
+    this.ListaCategoria=<any>conexion.getCategoria();    
     this.conexion.disparadorDetalle.subscribe(data=>{
         this.detalle = data;
-    })
+    });
   }
 
   ngOnInit(): void {
   }
   
   agregarCategoria(){
-
     try {
-      
       this.categoria.pk_id_categoria= (this.detalle)
-      console.log(this.categoria);
-      
+      console.log(this.categoria);     
       if(this.categoria.pk_id_categoria !=0 && this.categoria.nombre_cat !='' && this.categoria.descripcion!=''){
-        this.conexion.addCategoria(this.categoria).subscribe();  
+        this.conexion.addCategoria(this.categoria).subscribe();
+        this.Limpiar();  
         swal.fire({
           icon: 'success',
-          title: 'Registro de Categoria Exitoso',
+          title: 'Registro de Categoría Exitoso',
           text: 'Continuar'
         });
       }else{
         swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Por Favor!! Ingrese todos los parametros'
+          text: 'Por Favor!! Ingrese todos los parámetros'
         });
       }
     } catch (error) {
@@ -59,11 +54,12 @@ export class RegistrarCategoriaComponent implements OnInit {
         title: 'Error',
         text: 'Ingrese todos los parametros Por favor'
       });
-    }
-
-   
+    } 
   }
 
-
-
+  Limpiar(){
+    this.categoria.pk_id_categoria=0,
+    this.categoria.nombre_cat='',
+    this.categoria.descripcion=''
+  }
 }

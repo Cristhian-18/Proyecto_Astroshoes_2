@@ -127,10 +127,10 @@ export class ModificarComponent implements OnInit {
   //OFERTA CHECK
   obtenerOferta(valor: boolean) {
     if(valor == true){
-      this.Producto.oferta = 'Oferta';
+      this.isChecked = valor;
       console.log('Oferta');
     }else{
-      this.Producto.oferta = 'No Oferta';
+      this.isChecked = valor;
       console.log('No Oferta');
     }
   }
@@ -168,9 +168,12 @@ export class ModificarComponent implements OnInit {
    
     this.Producto.talla = talla;
     this.Producto.costo =costo;
-    this.Producto.oferta = oferta;
-    console.log('aaaaaaaa')
-    console.log(oferta)
+
+    if(this.isChecked == true){
+      this.Producto.oferta ='Oferta';
+    }else{
+      this.Producto.oferta ='No Oferta';
+    }
 
     if(this.Producto.fk_id_categoria== 0){
       this.Producto.fk_id_categoria =fk_id_categoria;

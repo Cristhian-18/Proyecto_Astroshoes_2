@@ -57,14 +57,38 @@ a {
 
 .ng-autocomplete{
   font-size: 18px !important;
-  width: 60px !important;
+  width: 200px !important;
   transition: all .5s !important;
-  border-radius: 25px;
-  
+  background-color: #fc012b !important;
 }
+
 .ng-autocomplete:hover{
-  width: 180px !important;
+  width: 250px !important;
   background-color: #fff !important;
-  border-color: #fc012b !important;
-  
+  border-color: #fc012b !important; 
 }
+
+.btn{
+  color: #f80404;
+  background-color: #231557;
+  margin: none; 
+}
+
+.buscador{
+  padding-left: 90px;
+}
+
+@media screen and (max-width:540px){
+  .buscador {
+    padding: 30px;
+  }
+  .d-flex {
+    padding: 30px;
+  }
+}
+
+.e-ddl.e-input-group input.e-input::placeholder {
+  color: rgb(0, 0, 0);
+}
+
+

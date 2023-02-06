@@ -6,7 +6,7 @@
                 <div class="row d-flex align-items-center">
                     <div class="col-md-6">
                         <h1 class=" animated fadeIn t-stroke-shadow
-                            heading-line">Catálogo de mujeres</h1>
+                            heading-line">Catálogo de Mujer</h1>
                     </div>
                     <div class="col-md-6 filters d-flex justify-content-end">
                         <div class="select-container">
@@ -36,7 +36,7 @@
                             itemsPerPage: 8, currentPage: p }">
                             <div class="item text-center">
                                 <div class="card shadow-sm bg-image">
-                                    <img src="{{ListaProducto.img}}" class="img-fluid">
+                                    <img src="{{ListaProducto.img}}" class="card-img-top img-fluid">
                                     <div class="card-body">
                                         <div class="overlay p-0 d-flex
                                             align-items-center
@@ -64,7 +64,9 @@
                         <p>No hay resultados</p>
                     </ng-template>
                 </div>
-                <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                <div class="p-4 text-center">
+                    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                </div>
             </div>
             <!-- <app-paginacion-catalogo></app-paginacion-catalogo> -->
         </div>

@@ -7,6 +7,11 @@ p {
   transition: all 0.3s;
 }
 
+.card-img-top{
+  width:90% ;
+  padding-left: 20px;
+}
+
 .card:hover {
   transform: scale(1.02);
 }

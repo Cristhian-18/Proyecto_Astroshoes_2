@@ -2,6 +2,11 @@ p {
   font-size: 15px;
 }
 
+.card-img-top{
+  width:90% ;
+  padding-left: 20px;
+}
+
 /****Estilo de botones*****/
 .btn{
   background-color: black;

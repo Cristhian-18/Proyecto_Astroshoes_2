@@ -1,5 +1,5 @@
 <!----Navbar primario, aqui se visualiza el nombre del usuario--->
-<div class="superNav border-bottom py-2 bg-black navbar-dark sticky-top">
+<div class="superNav border-bottom py-2 bg-black navbar-dark">
     <div class="container">
         <div class="row ">
             <div *ngIf="isLoggedIn" class="col-lg-2 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
@@ -12,7 +12,7 @@
     </div>
 </div>
 <!----Navbar secundario, aqui se visualiza las secciones, la cuenta, buscador--->
-<nav class="navbar navbar-expand-lg bg-black navbar-dark">
+<nav class="navbar navbar-expand-lg bg-black navbar-dark sticky-top">
     <div class="container">
         <img [routerLink]="['/home']"
             src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea"

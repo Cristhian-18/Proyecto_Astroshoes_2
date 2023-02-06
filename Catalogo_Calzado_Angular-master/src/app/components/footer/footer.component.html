@@ -13,10 +13,11 @@
                         <h2 href="#">Navegación</h2>
                     </li>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Ultimos Modelos</a></li>
-                    <li><a href="#">Hombres</a></li>
-                    <li><a href="#">Mujeres</a></li>
-                    <li><a href="#">Niños</a></li>
+                    <li><a routerLinkActive="active"
+                        [routerLink]="['/ultimas_novedades']">Ultimos Modelos</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/hombres']">Hombres</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/mujeres']">Mujeres</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/ninos']">Niños</a></li>
                     <li><a href="#">Ofertas</a></li>
                 </ul>
             </div>

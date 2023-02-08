@@ -2,7 +2,7 @@
 import { ConexFavService } from 'src/app/services/conexiones/conex-fav/conex-fav.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-favoritos',
   templateUrl: './favoritos.component.html',
@@ -12,16 +12,24 @@ export class FavoritosComponent implements OnInit {
   p = 1;
   allfavoritos: any = []; // Array para guardar los favoritos
   info_modal: boolean = false;
-
-  constructor(private conexFavService: ConexFavService) {
-
-  }
+  subcription: Subscription = new Subscription();
+  constructor(private conexFavService: ConexFavService) { }
 
   ngOnInit() {
     this.favoritos();
+    /*
+    this.subcription = this.conexFavService.refresh$.subscribe(()=>{
+      this.favoritos();
+    });    
+    */
   }
-
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+    console.log('Observable cerrado');
+  }
+  
   favoritos(): void {
+    this.subcription.add(
     this.conexFavService
       .listarFavoritos()
       .subscribe((response: any) => {
@@ -33,7 +41,8 @@ export class FavoritosComponent implements OnInit {
       },
         error => {
           Swal.fire('Error!', 'Hubo un problema al obtener los favoritos!', 'error');
-        });
+        })
+    );
   }
 
   abrirmodal() {

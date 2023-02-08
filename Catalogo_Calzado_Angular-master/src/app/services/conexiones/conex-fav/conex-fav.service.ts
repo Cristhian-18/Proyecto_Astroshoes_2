@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import jwt_decode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { API_URL } from '../../api';
+import { Subject } from 'rxjs';
+import{tap} from 'rxjs/operators'
 
 interface TokenPayload {
   user: {
@@ -21,7 +23,7 @@ interface TokenPayload {
 export class ConexFavService {
 
   private url = API_URL+'favoritos/';
-
+  private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient, private cookieService: CookieService) { }
   addFavorito(idProducto: number, email: string) {
     const body = { id_producto: idProducto, email: email };
@@ -45,7 +47,12 @@ export class ConexFavService {
   }
   listarFavoritos() {
     const id = this.geIdFromToken();
-    return this.http.get(this.url+id);
+    return this.http.get(this.url+id)
+    .pipe(
+      tap(()=>{
+        this._refresh$.next();
+      })
+    );
   }
   deletFavorito(id:number){
     return this.http.delete(this.url+id);
@@ -55,6 +62,12 @@ export class ConexFavService {
   getFavoritos(){
     return this.http.get(this.url);
   };
+
+   //Refrescar tablas//
+   get refresh$(){
+    return this._refresh$;
+  }
+
 }
 export interface Favoritos{
   

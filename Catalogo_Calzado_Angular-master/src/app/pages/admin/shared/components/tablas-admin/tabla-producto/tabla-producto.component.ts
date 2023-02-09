@@ -1,5 +1,5 @@
 import { Component, OnInit,Input  } from '@angular/core';
-import { ConexProductosService} from 'src/app/services/conexiones/conex-productos/conex-productos.service';
+import { ConexProductosService,Producto} from 'src/app/services/conexiones/conex-productos/conex-productos.service';
 import { ConexFavService } from 'src/app/services/conexiones/conex-fav/conex-fav.service';
 import swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ export class TablaProductoComponent implements OnInit {
 
   @Input() dataEntrante:any;
   @Input() dataEntrante2:any;
-  ListaProducto:any=[];
+  ListaProducto:Producto[]=[];
   ListaFav:any=[];
   index:number=0;
   index2:number=0;
@@ -42,7 +42,7 @@ export class TablaProductoComponent implements OnInit {
       this.ConexProductoService.getProdcuto().subscribe(
         res=>{
           console.log(res)
-          this.ListaProducto=res;
+          this.ListaProducto= <any> res;
         },
           err => console.log(err) 
       )
@@ -124,5 +124,13 @@ export class TablaProductoComponent implements OnInit {
     }
     console.log(this.index2);
     this.getIndex(this.index2);
+  }
+  filtrar(busca:string){
+    if(busca!=''){
+      this.ListaProducto = this.ListaProducto.filter(item =>item.nombre_producto.includes(busca))
+    }else{
+      this.listarProductos();
+    }
+   
   }
 }

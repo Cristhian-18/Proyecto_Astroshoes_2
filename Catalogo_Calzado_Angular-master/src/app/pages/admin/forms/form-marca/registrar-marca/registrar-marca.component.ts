@@ -37,7 +37,7 @@ export class RegistrarMarcaComponent implements OnInit {
       
       if(this.marca.id_Marca !=0 && this.marca.nombre !='' && this.marca.descripcion!=''){
         this.conexion.addMarca(this.marca).subscribe();  
-        
+        this.Limpiar();
         swal.fire({
           icon: 'success',
           title: 'Registro de Marca Exitoso',
@@ -57,7 +57,7 @@ export class RegistrarMarcaComponent implements OnInit {
         text: 'Ingrese todos los parametros Por favor'
       });
     }
-    this.Limpiar();
+   
   }
 
   Limpiar(){

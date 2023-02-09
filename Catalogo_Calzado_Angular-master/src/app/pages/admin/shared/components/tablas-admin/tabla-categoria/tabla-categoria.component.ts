@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ConexCategoriaService} from 'src/app/services/conexiones/conex-categoria/conex-categoria.service';
+import { ConexCategoriaService,categoria} from 'src/app/services/conexiones/conex-categoria/conex-categoria.service';
 import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-tabla-categoria',
@@ -12,7 +13,7 @@ export class TablaCategoriaComponent implements OnInit {
   @Input() dataEntrante:any;
   @Input() dataEntrante2:any;
   index:number=0;
-  ListaCategoria:any=[];
+  ListaCategoria:categoria[]=[];
   index2:number=0;
   p = 1;
   subcription: Subscription = new Subscription();
@@ -38,14 +39,14 @@ export class TablaCategoriaComponent implements OnInit {
       this.Conexcategoria.getCategoria().subscribe(
         res => {
           console.log(res)
-          this.ListaCategoria = res;
+          this.ListaCategoria = <any> res;
         },
         err => console.log(this.ListaCategoria)
       )
     );
   }   
   
-  eliminar(id:string){
+  eliminar(id:number){
     swal.fire({
       title: 'Seguro que quieres borrarlo?',
       text: "Seguro que quieres hacer esto!",
@@ -97,4 +98,14 @@ export class TablaCategoriaComponent implements OnInit {
     console.log(this.index2);
     this.getIndex(this.index2);
   }
+
+  filtrar(busca:string){
+    if(busca!=''){
+      this.ListaCategoria = this.ListaCategoria.filter(item =>item.nombre_cat.includes(busca))
+    }else{
+      this.listarCategoria();
+    }
+  }
+
+
 }

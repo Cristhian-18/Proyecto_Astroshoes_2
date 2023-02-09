@@ -34,7 +34,7 @@ export class ConexCategoriaService {
   };
 
   //Eliminar///
-  deleteCategoria(id:string){
+  deleteCategoria(id:number){
     return this.http.delete(this.url+id);
 
   };

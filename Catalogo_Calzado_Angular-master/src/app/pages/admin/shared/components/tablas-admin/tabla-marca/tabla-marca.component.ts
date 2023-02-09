@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConexMarcaService } from 'src/app/services/conexiones/conex-marca/conex-marca.service';
 import swal from 'sweetalert2';
+import { Marca } from '../../../../../../services/conexiones/conex-marca/conex-marca.service';
 
 @Component({
   selector: 'app-tabla-marca',
@@ -13,7 +14,7 @@ export class TablaMarcaComponent implements OnInit {
   @Input() dataEntrante:any;
   @Input() dataEntrante2:any;
   subcription: Subscription = new Subscription();
-  ListaMarca:any=[];
+  ListaMarca:Marca[]=[];
   p = 1;
   index:number=0;
   index2:number=0;
@@ -38,7 +39,8 @@ export class TablaMarcaComponent implements OnInit {
       this.ConexProductoService.getMarcas().subscribe(
         res => {
           console.log(res)
-          this.ListaMarca = res;
+          this.ListaMarca = <any> res;
+          
         },
           err => console.log(this.ListaMarca)
       )
@@ -96,5 +98,14 @@ export class TablaMarcaComponent implements OnInit {
     }
     console.log(this.index2);
     this.getIndex(this.index2);
+  }
+
+  filtrar(busca:string){
+    if(busca!=''){
+      this.ListaMarca = this.ListaMarca.filter(item =>item.nombre.includes(busca))
+    }else{
+      this.listarMarcas();
+    }
+   
   }
 }

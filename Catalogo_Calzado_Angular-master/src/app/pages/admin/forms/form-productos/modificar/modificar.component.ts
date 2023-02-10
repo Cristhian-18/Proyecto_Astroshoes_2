@@ -3,7 +3,7 @@ import { ConexMarcaService,Marca } from 'src/app/services/conexiones/conex-marca
 import { ConexProductosService, Producto,Genero } from 'src/app/services/conexiones/conex-productos/conex-productos.service';
 import { ConexCategoriaService,categoria } from 'src/app/services/conexiones/conex-categoria/conex-categoria.service';
 import { Subscription } from 'rxjs';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-modificar',
   templateUrl: './modificar.component.html',
@@ -149,6 +149,47 @@ export class ModificarComponent implements OnInit {
     this.Producto.genero = valor;
     console.log(valor);
   }
+  /*
+  modificar(ind:number,codigo_producto:string,img:string,nombre_producto:string,descripcion:string,fk_marca:number,modelo:string,genero:string,
+    talla:string,costo:string,oferta:string,fk_id_categoria:number){
+    //Extrae text//
+    this.Producto.pk_id_producto = ind;
+    this.Producto.codigo_producto =codigo_producto;
+    this.Producto.img =img;
+    this.Producto.nombre_producto =nombre_producto;
+    this.Producto.descripcion =descripcion;
+    if(this.Producto.fk_marca == 0){
+      this.Producto.fk_marca = fk_marca;
+    }
+    this.Producto.modelo = modelo;
+    if(this.Producto.genero == ''){
+      this.Producto.genero =genero;
+    }
+   
+    this.Producto.talla = talla;
+    this.Producto.costo =costo;
+
+    if(this.isChecked == true){
+      this.Producto.oferta ='Oferta';
+    }else{
+      this.Producto.oferta ='No Oferta';
+    }
+
+    if(this.Producto.fk_id_categoria== 0){
+      this.Producto.fk_id_categoria =fk_id_categoria;
+    }
+    console.log(this.Producto);
+          
+    //Envia a la base de datos
+    this.ConexProductoService.editproducto(this.Producto.pk_id_producto,this.Producto).subscribe(
+       res=>{
+         console.log(res);       
+       },
+       err=>console.log(err)
+     ); 
+  }
+  */
+  
 
   modificar(ind:number,codigo_producto:string,img:string,nombre_producto:string,descripcion:string,fk_marca:number,modelo:string,genero:string,
     talla:string,costo:string,oferta:string,fk_id_categoria:number){
@@ -178,13 +219,51 @@ export class ModificarComponent implements OnInit {
     if(this.Producto.fk_id_categoria== 0){
       this.Producto.fk_id_categoria =fk_id_categoria;
     }
-    console.log(this.Producto);      
-    //Envia a la base de datos
-    this.ConexProductoService.editproducto(this.Producto.pk_id_producto,this.Producto).subscribe(
-       res=>{
-         console.log(res);       
-       },
-       err=>console.log(err)
-     ); 
+    console.log(this.Producto);
+    
+    swal.fire({
+      title: 'Seguro que quieres modificarlo?',
+      text: "Seguro que quieres hacer esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, modificarlo!'
+    }).then((result) => {
+      if (result.value) {         
+        try {   
+          if(this.Producto.pk_id_producto != 0 && this.Producto.codigo_producto !='' && this.Producto.img!='' && this.Producto.nombre_producto!=''
+         && this.Producto.descripcion!='' && this.Producto.fk_marca !=0 && this.Producto.modelo!='' && this.Producto.genero !='' && this.Producto.talla !=''
+         && this.Producto.costo !='' && this.Producto.oferta !='' && this.Producto.fk_id_categoria !=0){
+          this.ConexProductoService.editproducto(this.Producto.pk_id_producto,this.Producto).subscribe(
+              res=>{
+                console.log(res);       
+              },
+              err=>console.log(err)
+            );
+            
+            swal.fire({
+              icon: 'success',
+              title: 'Se modificó el registro de Producto Exitosamente',
+              text: 'Continuar'
+            });
+          }else{
+            swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Por Favor!! Ingrese todos los parámetros'
+            });
+          }
+        } catch (error) {
+          swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ingrese todos los parametros Por favor'
+          });
+        } 
+      }
+    })    
   }
+
+
 }

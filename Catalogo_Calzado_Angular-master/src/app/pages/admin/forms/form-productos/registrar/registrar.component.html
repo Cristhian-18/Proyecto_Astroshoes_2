@@ -8,7 +8,7 @@
             </div>
             <!--Formulario para registrar : producto--->
             <div class="modal-body">
-                <form>
+                <form #form="ngForm" class="needs-validation" novalidate>
                     <div class="card-body font-weight-bold">
                         <div class="row">
                             <div class="col-sm-6">
@@ -16,8 +16,12 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label alt="codigodelproducto">Código del producto</label>
-                                            <input [(ngModel)]="Producto.codigo_producto" type="text" class="form-control"
-                                                name="Código del producto" placeholder="Ingrese el Código del producto">
+                                            <input  [(ngModel)]="Producto.codigo_producto" 
+                                                    type="text" class="form-control"
+                                                    #campocodigo="ngModel" required
+                                                    name="Código del producto" 
+                                                    placeholder="Ingrese el Código del producto">
+                                            <small *ngIf="campocodigo.invalid && campocodigo.touched" class="text-danger">Ingrese el codigo del producto</small>
                                     </div>
                                 </div>
                             </div>
@@ -26,8 +30,12 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label alt="nombredelproducto">Nombre del producto</label>
-                                        <input [(ngModel)]="Producto.nombre_producto" type="text" class="form-control"
-                                            name="Nombre del producto" placeholder="Ingrese el nombre del producto">
+                                        <input  [(ngModel)]="Producto.nombre_producto" 
+                                                type="text" class="form-control"
+                                                #camponombre="ngModel" required
+                                                name="Nombre del producto" 
+                                                placeholder="Ingrese el nombre del producto">
+                                        <small *ngIf="camponombre.invalid && camponombre.touched" class="text-danger">Ingrese el nombre del producto</small>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +46,12 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label alt="modelo">Modelo</label>
-                                        <input [(ngModel)]="Producto.modelo" type="text" class="form-control" name="Modelo" placeholder="Ingrese el modelo del producto">
+                                        <input  [(ngModel)]="Producto.modelo" 
+                                                type="text" class="form-control"
+                                                #campomodelo="ngModel" required 
+                                                name="Modelo" 
+                                                placeholder="Ingrese el modelo del producto">
+                                        <small *ngIf="campomodelo.invalid && campomodelo.touched" class="text-danger">Ingrese el Modelo</small>
                                     </div>
                                 </div>
                             </div>
@@ -53,6 +66,7 @@
                                             <option *ngFor="let ListaMarca of ListaMarca"
                                                 value="{{ListaMarca.id_Marca}}">{{ListaMarca.nombre}}</option>
                                         </select>
+                                        <small *ngIf="validamarca()==false" class="text-danger">Selecione una Marca</small>
                                        
                                     </div>
                                 </div>
@@ -66,17 +80,23 @@
                                         <label>Tipo de persona</label>
                                         <select #comboBox2 class="custom-select form-control-border"
                                             (change)="obtenercGenero(comboBox2.value)">
-                                            <option >Seleccione Genero</option>
+                                            <option value="0" >Seleccione Genero</option>
                                             <option *ngFor="let ListaGenero of ListaGenero" value="{{ListaGenero.genero}}">{{ListaGenero.genero}}</option>
                                         </select>
+                                        <small *ngIf="validagenero()==false" class="text-danger">Selecione un Genero</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Talla</label>
-                                    <input [(ngModel)]="Producto.talla" type="text" class="form-control" name="Talla"
-                                        placeholder="Ingrese la talla del zapato">
+                                    <input  [(ngModel)]="Producto.talla" 
+                                            type="number" 
+                                            class="form-control" 
+                                            #campoTalla="ngModel" required 
+                                            name="Talla"
+                                            placeholder="Ingrese la talla del zapato">
+                                    <small *ngIf="campoTalla.invalid && campoTalla.touched" class="text-danger">Ingrese la Talla</small>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +109,18 @@
                                 <option alt="cargarcategoria" *ngFor="let ListaCategoria of ListaCategoria"
                                     value="{{ListaCategoria.pk_id_categoria}}">{{ListaCategoria.nombre_cat}}</option>
                             </select>
-                            <small *ngIf="validacategoria()==false" class="text-danger">Ingrese el nombre</small>
+                            <small *ngIf="validacategoria()==false" class="text-danger">Selecione una Categoria</small>
                         </div>
 
                         <div class="form-group">
                             <label>Descripción del producto</label>
-                            <textarea [(ngModel)]="Producto.descripcion" type="text" class="form-control" rows="3"
-                                placeholder="Descripción del producto" name="Descripción del producto"></textarea>
+                            <textarea   [(ngModel)]="Producto.descripcion" 
+                                        type="text" class="form-control" 
+                                        rows="3"
+                                        placeholder="Descripción del producto" 
+                                        #campodescipcion="ngModel" required
+                                        name="Descripción del producto"></textarea>
+                            <small *ngIf="campodescipcion.invalid && campodescipcion.touched" class="text-danger">Ingrese una descripcion</small>
                         </div>
 
                         <div class="row">
@@ -104,8 +129,13 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <i class="fa-solid fa-dollar-sign"></i><label>_Costo Unitario</label>
-                                        <input [(ngModel)]="Producto.costo" type="text" class="form-control" rows="1"
-                                            placeholder="Ingrese el Costo $" name="Costo">
+                                        <input  [(ngModel)]="Producto.costo" 
+                                                type="number" class="form-control" 
+                                                rows="1"
+                                                placeholder="Ingrese el Costo $" 
+                                                #campocosto="ngModel" required
+                                                name="Costo">
+                                        <small *ngIf="campocosto.invalid && campocosto.touched" class="text-danger">Ingrese un Costo Unitario</small>
                                     </div>
                                 </div>
                             </div>
@@ -124,14 +154,18 @@
 
                         <div class="form-group">
                             <label>Cargar Imagen</label>
-                            <textarea [(ngModel)]="Producto.img" type="text" class="form-control" rows="3"
-                                placeholder="Ingrese URL para cargar imagen" name="Cargar imagen"></textarea>
+                            <textarea   [(ngModel)]="Producto.img" 
+                                        type="text" class="form-control" rows="3"
+                                        placeholder="Ingrese URL para cargar imagen"
+                                        #campoimg="ngModel" required 
+                                        name="Cargar imagen"></textarea>
+                            <small *ngIf="campoimg.invalid && campoimg.touched" class="text-danger">Ingrese URL Imagen</small>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button (click)="agregarProducto()" type="button" class="btn btn-success" data-bs-dismiss="modal" >Registrar</button>
+                        <button (click)="agregarProducto()" type="button" class="btn btn-success"  [disabled]="form.invalid || validaTodo()==false" data-bs-dismiss="modal">Registrar</button>
                     </div>
 
                 </form>

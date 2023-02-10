@@ -16,8 +16,13 @@ export class RegistrarComponent implements OnInit {
   detalle:any={};
   modal_admin:boolean  = false;
   bandera:boolean  = false;
-  bandera2:boolean  = false;
+  bandera_categoria:boolean  = false;
+  bandera_marca:boolean  = false;
+  bandera_genero:boolean  = false;
+  bandera_total:boolean  = false;
   valicat:number  = 0;
+  valimarc:number  = 0;
+  valigen:number  = 0;
 
 
   Producto:Producto={
@@ -87,21 +92,43 @@ export class RegistrarComponent implements OnInit {
   validacategoria() { 
     
     if( this.valicat != 0 ){
-        this.bandera2 = true
+        this.bandera_categoria = true
     }else{
-      this.bandera2 = false;
+      this.bandera_categoria = false;
     }
-     return this.bandera2;
+     return this.bandera_categoria;
   }
 
   obtenerMarca(valor: string) {
     this.Producto.fk_marca = parseInt(valor); 
+    this.valimarc = parseInt(valor); 
+
     console.log(valor);
   }
+  validamarca() { 
+    
+    if( this.valimarc != 0 ){
+        this.bandera_marca = true
+    }else{
+      this.bandera_marca  = false;
+    }
+     return this.bandera_marca;
+  }
+  
 
   obtenercGenero(valor: string) {
     this.Producto.genero = valor;
+    this.valigen = parseInt(valor); 
     console.log(valor);
+  }
+  validagenero() { 
+    
+    if( this.valigen != 0 ){
+        this.bandera_genero = true
+    }else{
+      this.bandera_genero  = false;
+    }
+     return this.bandera_genero;
   }
   
   obtenerOferta(valor: boolean) {
@@ -113,6 +140,19 @@ export class RegistrarComponent implements OnInit {
       console.log('No Oferta');
     }
   }
+  validaTodo() { 
+    console.log(this.bandera_categoria)
+    console.log(this.bandera_marca)
+    console.log(this.bandera_genero)
+    if(this.bandera_categoria  != false && this.bandera_marca !=false && this.bandera_genero !=false){
+        this.bandera_total=true;
+        
+    }else{
+      this.bandera_total=false;
+    }
+     return this.bandera_total;
+  }
+
 /*
   agregarProducto(){
     this.Producto.pk_id_producto = (this.detalle)

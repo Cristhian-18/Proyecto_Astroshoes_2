@@ -8,7 +8,6 @@ import { API_URL } from '../../api';
 export class ConexUsuariosService {
 
   private url=API_URL+'usuario/';
-  
   constructor(private http:HttpClient) { }
 
   //getUsuarios
@@ -23,7 +22,15 @@ export class ConexUsuariosService {
 }
 
 console.log('Servicio en USO Usuarios')
-
+export interface Usuario{
+  id_usuario:number;
+  nombres: string  
+  apellidos:string; 
+  email:string; 
+  password:string;
+  created_at:string,
+  rol:string;
+};
 
 
 

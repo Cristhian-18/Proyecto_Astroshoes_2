@@ -3,6 +3,7 @@ import{HttpClient} from '@angular/common/http';
 import { API_URL } from '../../api';
 import { Subject } from 'rxjs';
 import{tap} from 'rxjs/operators'
+import { Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +57,9 @@ export class ConexProductosService {
   //Listas de Genero
   getGenero()
   {return this.Genero};
-  
+ 
+
+
   get refresh$(){
     return this._refresh$;
   }
@@ -66,7 +69,7 @@ console.log("Servicio en Uso PRODUCTO");
 
 export interface Producto{
   pk_id_producto:number;
-  codigo_producto:string; 
+  codigo_producto: string 
   img:string; 
   nombre_producto:string; 
   descripcion:string; 

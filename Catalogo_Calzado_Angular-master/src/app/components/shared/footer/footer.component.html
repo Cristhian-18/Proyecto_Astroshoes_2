@@ -2,16 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 pr-md-5">
-                <a href="#" class="footer-site-logo d-block mb-4">Sobre Nosotros</a>
+                <h2 class="footer-site-logo d-block mb-4">Nuestra empresa</h2>
                 <p>Empresa de zapatos, dedicada para dar el mejor servicio y calidad de calzado del mercado, con las
-                    marcas reconocidas.
+                    mejores marcas reconocidas.
                 </p>
             </div>
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
-                    <li>
-                        <h2 href="#">Navegación</h2>
-                    </li>
+                    <h2 class="footer-site-logo d-block mb-4">Navegación</h2>    
                     <li><a href="#">Inicio</a></li>
                     <li><a routerLinkActive="active"
                         [routerLink]="['/ultimas_novedades']">Ultimos Modelos</a></li>
@@ -24,34 +22,29 @@
 
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
-                    <li>
-                        <h2 href="#">Informacion</h2>
-                    </li>
-                    <li><a href="#">Sobre Nosotros</a></li>
+                    <h2 class="footer-site-logo d-block mb-4">Información</h2>
+                    <li><a [routerLink]="['/about-us']">Sobre Nosotros</a></li>
                     <li><a href="#">Politicas</a></li>
                     <li><a href="#">Marcas</a></li>
-                    <li><a href="#">Whatsapp</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="https://wa.me/5930963675860" target="_blank">Whatsapp</a></li>
                 </ul>
             </div>
 
             <div class="col-md text-md-center">
                 <ul class="social list-unstyled">
-                    <h2 href="#">Redes Sociales</h2>
+                    <h2 class="footer-site-logo d-block mb-4">Redes Sociales</h2>
                     <a href="#" class="fa fa-facebook"></a>
                     <a href="#" class="fa fa-instagram"></a>
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-youtube"></a>
+                    <a href="https://wa.me/5930963675860" target="_blank" class="fa fa-whatsapp"></a>
                 </ul>
-                <p class=""><button (click)="abrirmodal()" class="btn btn-tertiary" type="submit" data-toggle="modal" data-target="#modal2">Contactos</button></p>
+                <p class=""><button (click)="abrirmodal()" class="btn btn-tertiary" type="submit" data-toggle="modal" data-target="#modal2">Contáctanos</button></p>
             </div>
         </div>
 
         <div class="row ">
             <div class="col-12 text-center">
                 <div class="copyright mt-5 pt-5">
-
-                    <p><small>&copy; 2022-2023 Todos los derechos reservados.</small></p>
+                    <p><small>&copy; 2022-2023 Todos los derechos reservados ASTROSHOES</small></p>
                 </div>
             </div>
         </div>

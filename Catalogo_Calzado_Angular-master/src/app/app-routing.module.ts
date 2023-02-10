@@ -8,6 +8,7 @@ import { HombresComponent } from './pages/Catalogo/hombres/hombres.component';
 import { MujeresComponent } from './pages/Catalogo/mujeres/mujeres.component';
 import { NinosComponent } from './pages/Catalogo/ninos/ninos.component';
 import { FavoritosComponent } from './components/cartas-catalogo/favoritos/favoritos.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 //componentes de formularios de Administrador//
 import { AdminComponent } from './pages/admin/admin.component';
@@ -21,9 +22,10 @@ import { FormInicioComponent } from './pages/admin/forms/form-inicio/form-inicio
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 
-// Importe del Guard
+// Importe del Guard //
 import { AuthGuard } from './guards/auth/auth.guard';
 import { FormUsuariosComponent } from './pages/admin/forms/form-usuarios/form-usuarios.component';
+
 
 
 const routes: Routes = [
@@ -33,6 +35,7 @@ const routes: Routes = [
   {path:'mujeres', component:MujeresComponent},
   {path:'ninos', component:NinosComponent},
   {path:'favoritos', component:FavoritosComponent},
+  {path:'about-us', component:AboutUsComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   

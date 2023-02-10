@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ConexUsuariosService } from 'src/app/services/conexiones/conex-usuarios/conex-usuarios.service';
-import { ConexFavService } from 'src/app/services/conexiones/conex-fav/conex-fav.service';
+import { ConexUsuariosService, Usuario  } from 'src/app/services/conexiones/conex-usuarios/conex-usuarios.service';
+import { ConexFavService} from 'src/app/services/conexiones/conex-fav/conex-fav.service';
 import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-tabla-usuarios',
   templateUrl: './tabla-usuarios.component.html',
@@ -10,7 +11,7 @@ import swal from 'sweetalert2';
 export class TablaUsuariosComponent implements OnInit {
 
   p=1;
-  ListaUsuario:any=[];
+  ListaUsuario:Usuario[]=[];
   ListaFav:any=[];
 
   constructor(private ConexUsuarioService:ConexUsuariosService, private ConexFavService:ConexFavService) { }
@@ -25,7 +26,7 @@ export class TablaUsuariosComponent implements OnInit {
     this.ConexUsuarioService.getUsuario().subscribe(
       res => {
         console.log(res)
-        this.ListaUsuario = res;
+        this.ListaUsuario = <any>res;
       },
         err => console.log(this.ListaUsuario)
     );   
@@ -84,5 +85,13 @@ export class TablaUsuariosComponent implements OnInit {
         )
       }
     })   
+  }
+
+  filtrar(busca:string){
+    if(busca!=''){
+      this.ListaUsuario = this.ListaUsuario.filter(item =>item.nombres.includes(busca) || item.apellidos.includes(busca) || item.email.includes(busca))
+    }else{
+      this.listarUsuario()
+    }
   }
 }

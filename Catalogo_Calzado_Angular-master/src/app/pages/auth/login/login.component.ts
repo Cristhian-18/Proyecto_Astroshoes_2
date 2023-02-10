@@ -25,7 +25,6 @@ interface TokenPayload {
 
 
 export class LoginComponent {
-  //username: any;
 
   @ViewChild('password', { static: false }) password: ElementRef;
   isShowingPassword: boolean = false;
@@ -50,24 +49,10 @@ export class LoginComponent {
     }
 }
 
-
-
   loginClick(email: string, password: string) {
 
     if (this.intentos === 2) {
-
-      // swal.fire({
-      //   icon: 'error',
-      //   title: 'Error',
-      //   text: 'Ha alcanzado el límite de intentos. Por favor intente de nuevo en 10 segundos'
-      // });
-      // document.getElementById("btnLogin")!.setAttribute("disabled", "true");
-      // setTimeout(() => {
-      //   this.intentos = 0;
-      //   document.getElementById("btnLogin")!.removeAttribute("disabled");
-      // }, 10000);
-
-      this.segundosRestantes = 10;
+      this.segundosRestantes = 60;
       const interval = setInterval(() => {
         if (this.segundosRestantes === 0) {
           clearInterval(interval);
@@ -94,7 +79,7 @@ export class LoginComponent {
           this.cookieService.set('token', res.token);
           const tokenInfo = jwt_decode(res.token) as TokenPayload;
           if (tokenInfo.user.rol === 'admin') {
-            this.router.navigate(['/admin/form-marca']);
+            this.router.navigate(['/admin/form-inicio']);
           } else {
             this.router.navigate(['/home']);
           }
@@ -114,6 +99,5 @@ export class LoginComponent {
         }
       );
     } 
-
   }
 }

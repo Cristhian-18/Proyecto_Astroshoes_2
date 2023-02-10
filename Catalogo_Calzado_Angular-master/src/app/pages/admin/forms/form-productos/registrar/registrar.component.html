@@ -49,10 +49,11 @@
                                         <label alt="marcasproducto" class="font-weight-bold">Marcas</label>
                                         <select #comboBox1 class="custom-select form-control-border"
                                             (change)="obtenerMarca(comboBox1.value)">
-                                            <option >Seleccione una Marca</option>
+                                            <option value="0" >Seleccione una Marca</option>
                                             <option *ngFor="let ListaMarca of ListaMarca"
                                                 value="{{ListaMarca.id_Marca}}">{{ListaMarca.nombre}}</option>
                                         </select>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -84,10 +85,11 @@
                             <label>Categoría</label>
                             <select #comboBox3 class="custom-select form-control-border"
                                 (change)="obtenercategoria(comboBox3.value)">
-                                <option >Seleccione una Categoria</option>
+                                <option value="0">Seleccione una Categoria</option>
                                 <option alt="cargarcategoria" *ngFor="let ListaCategoria of ListaCategoria"
                                     value="{{ListaCategoria.pk_id_categoria}}">{{ListaCategoria.nombre_cat}}</option>
                             </select>
+                            <small *ngIf="validacategoria()==false" class="text-danger">Ingrese el nombre</small>
                         </div>
 
                         <div class="form-group">

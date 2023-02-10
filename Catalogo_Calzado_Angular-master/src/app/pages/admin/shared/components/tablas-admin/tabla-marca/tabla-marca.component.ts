@@ -18,13 +18,16 @@ export class TablaMarcaComponent implements OnInit {
   p = 1;
   index:number=0;
   index2:number=0;
+  sum:number=0;
 
   constructor(private ConexProductoService:ConexMarcaService) { }
   
   ngOnInit(): void { 
     this.listarMarcas();
+    
     this.subcription = this.ConexProductoService.refresh$.subscribe(()=>{
       this.listarMarcas();
+      
     });
   }
 
@@ -107,5 +110,9 @@ export class TablaMarcaComponent implements OnInit {
       this.listarMarcas();
     }
    
+  }
+  Contador(){
+    this.sum = this.ListaMarca.length;
+    return this.sum;
   }
 }

@@ -8,13 +8,19 @@
             </div>
             <!--Formulario para registrar : marcas--->
             <div class="modal-body">
-                <form>
+                <form #form="ngForm" class="needs-validation" novalidate>
                     <div class="card-body" >
                         <div class="form-group">
                             <div class="form-group">
-                                <label class="from-label">Nombre de la marca</label>
-                                <input [(ngModel)]="marca.nombre" type="text" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Ingrese nombre de marca" name="Nombre de la marca" >
+                                <label for="textField" class="from-label">Nombre de la marca</label>
+                                <input  [(ngModel)]="marca.nombre" type="text" class="form-control"
+                                        id="exampleInputEmail1"
+                                        #textField="ngModel" required
+                                        placeholder="Ingrese nombre de marca" 
+                                        name="Nombre de la marca" 
+                                        
+                                        >
+                                        <small *ngIf="textField.invalid && textField.touched" class="text-danger">Ingrese el nombre</small>
                                 
                             </div>
                         </div>

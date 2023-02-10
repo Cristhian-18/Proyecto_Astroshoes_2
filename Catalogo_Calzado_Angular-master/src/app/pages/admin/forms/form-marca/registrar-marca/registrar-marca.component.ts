@@ -18,7 +18,13 @@ export class RegistrarMarcaComponent implements OnInit {
       nombre:'',
       descripcion:''
   } 
- 
+  /*
+  marca:any={
+    id_Marca:[0,Validators.required],
+    nombre:['',Validators.required],
+    descripcion:['',Validators.required]
+} 
+ */
   constructor( private conexion:ConexMarcaService) {     
     this.ListaMarca =<any>  conexion.getMarcas();    
     this.conexion.disparadorMODIFICARMARCA.subscribe(data=>{

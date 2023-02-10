@@ -16,6 +16,8 @@ export class RegistrarComponent implements OnInit {
   detalle:any={};
   modal_admin:boolean  = false;
   bandera:boolean  = false;
+  bandera2:boolean  = false;
+  valicat:number  = 0;
 
 
   Producto:Producto={
@@ -78,7 +80,18 @@ export class RegistrarComponent implements OnInit {
 
   obtenercategoria(valor: string) {
     this.Producto.fk_id_categoria = parseInt(valor); 
+    this.valicat = parseInt(valor); 
+    
     console.log(valor);
+  }
+  validacategoria() { 
+    
+    if( this.valicat != 0 ){
+        this.bandera2 = true
+    }else{
+      this.bandera2 = false;
+    }
+     return this.bandera2;
   }
 
   obtenerMarca(valor: string) {

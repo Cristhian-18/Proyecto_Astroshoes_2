@@ -8,26 +8,35 @@
             </div>
             <!--Formulario para registrar : categorias--->
             <div class="modal-body">
-                <form>
+                <form #form="ngForm" class="needs-validation" novalidate>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="form-group">
                                 <label class="from-label">Nombre de la Categoría</label>
-                                <input [(ngModel)]="categoria.nombre_cat" type="text" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Ingrese nombre de marca" name="Nombre de la marca">
+                                <input  [(ngModel)]="categoria.nombre_cat" 
+                                        type="text" class="form-control" 
+                                        #camponombre="ngModel" required
+                                        id="exampleInputEmail1"
+                                        placeholder="Ingrese nombre de marca" 
+                                        name="Nombre de la categoria">
+                                <small *ngIf="camponombre.invalid && camponombre.touched" class="text-danger">Ingrese el nombre de la categoria</small>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Descripción de la categoría</label>
-                            <textarea [(ngModel)]="categoria.descripcion" type="text" class="form-control" rows="3" placeholder="Ingrese la descripcion"
-                                name="Nombre de la marca"></textarea>
+                            <textarea   [(ngModel)]="categoria.descripcion" 
+                                        type="text" class="form-control" rows="3" 
+                                        #campodescripcion="ngModel" required
+                                        placeholder="Ingrese la descripcion"
+                                        name="Descripción"></textarea>
+                            <small *ngIf="campodescripcion.invalid && campodescripcion.touched" class="text-danger">Ingrese una descripcion</small>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button  (click)="agregarCategoria()" type="button" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
+                        <button  (click)="agregarCategoria()" type="button" class="btn btn-success" [disabled]="form.invalid" data-bs-dismiss="modal">Registrar</button>
                     </div>
                 </form>
             </div>

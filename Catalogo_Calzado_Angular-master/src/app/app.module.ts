@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 import { HombresComponent } from './pages/Catalogo/hombres/hombres.component';
 import { MujeresComponent } from './pages/Catalogo/mujeres/mujeres.component';
 import { NinosComponent } from './pages/Catalogo/ninos/ninos.component';
@@ -22,7 +22,7 @@ import { UltimasNovedadesComponent } from './pages/Catalogo/ultimas-novedades/ul
 import { CardComponent } from './components/card/card.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { SeccMarcasComponent } from './components/secc-marcas/secc-marcas.component';
-import { FiltroComponent } from './components/filtro/filtro.component';
+import { FiltroComponent } from './components/shared/filtro/filtro.component';
 import { InfoModalsComponent } from './components/info-modals/info-modals.component';
 
 // Componentes de Cartas para mostrar productos//
@@ -70,6 +70,8 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 // Guard
 import { AuthGuard } from './guards/auth/auth.guard';
 import { ContactoModalComponent } from './components/contacto-modal/contacto-modal.component';
+import { CardSeccionComponent } from './components/card-seccion/card-seccion.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +115,9 @@ import { ContactoModalComponent } from './components/contacto-modal/contacto-mod
     LoginComponent,
     RegisterComponent,
     FavoritosComponent,
-    ContactoModalComponent
+    ContactoModalComponent,
+    CardSeccionComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

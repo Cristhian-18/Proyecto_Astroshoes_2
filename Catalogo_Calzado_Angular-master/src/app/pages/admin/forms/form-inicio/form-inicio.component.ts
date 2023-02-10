@@ -12,4 +12,6 @@ export class FormInicioComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  
 }

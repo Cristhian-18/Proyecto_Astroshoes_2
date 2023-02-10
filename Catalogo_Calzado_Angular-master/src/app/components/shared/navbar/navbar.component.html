@@ -1,7 +1,7 @@
 <!----Navbar primario, aqui se visualiza el nombre del usuario--->
 <div class="superNav border-bottom py-2 bg-black navbar-dark">
     <div class="container">
-        <div class="row ">
+        <div class="row">
             <div *ngIf="isLoggedIn" class="col-lg-2 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
                 <span class="me-3 texto"><strong>{{nombreUsuario}}</strong></span>
             </div>
@@ -95,7 +95,7 @@
            <!----Identificar el boton si es administrador-->
            <ul class="navbar-nav ms-auto navbar-right ">
                 <li *ngIf="isLoggedIn && admin"><a class="animacion-caracter mx-2" routerLinkActive="active"
-                    [routerLink]="['/admin/form-marca']">Administrador</a></li>
+                    [routerLink]="['/admin/form-inicio']">Administrador</a></li>
                 <li *ngIf="isLoggedIn" (click)="logout()"><a class="animacion-caracter mx-2">Cerrar Sesión</a></li>
             </ul>
         </div>

@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ConexMarcaService } from 'src/app/services/conexiones/conex-marca/conex-marca.service';
+import { ConexMarcaService, Marca } from 'src/app/services/conexiones/conex-marca/conex-marca.service';
 import swal from 'sweetalert2';
-import { Marca } from '../../../../../../services/conexiones/conex-marca/conex-marca.service';
 
 @Component({
   selector: 'app-tabla-marca',
@@ -106,6 +105,5 @@ export class TablaMarcaComponent implements OnInit {
     }else{
       this.listarMarcas();
     }
-   
   }
 }

@@ -10,8 +10,13 @@
                 <div class="col-6">
                     <div class="container">
                         <div class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                            <input 
+                                class="form-control me-2" 
+                                type="search" 
+                                placeholder="Buscar" 
+                                aria-label="Search"
+                                #txtSearch
+                                (keyup)="filtrar(txtSearch.value)">
                         </div>
                     </div>
                 </div>
@@ -37,13 +42,12 @@
                         <td alt="nombres">{{ListaUsuario.nombres}}</td>
                         <td alt="apellidos">{{ListaUsuario.apellidos}}</td>
                         <td alt="email">{{ListaUsuario.email}}</td>
-                        <td alt="email">{{ListaUsuario.created_at}}</td>
+                        <td alt="date creacion">{{ListaUsuario.created_at}}</td>
                         <td>
                             <button (click)="eliminar(ListaUsuario.id_usuario)" class="btn btn-danger"><i
                                     class="fas fa-trash"></i></button>
                         </td>
-                    </tr>
-                    
+                    </tr>                    
                 </tbody>
             </table>
             <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -51,6 +51,27 @@ h4{
   font-size: 18px;
 }
 
+.titulos{
+  padding-top: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.texto{
+  background-image: linear-gradient(
+    -225deg,
+    #ffffff 67%,
+    #f5f5f5 29%,
+    #ffffff 67%,
+    #ffffff 100%
+  );
+  text-transform: uppercase;
+  color: white;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
 
 
 /********** animacion de caracteres 2.0 ******/
@@ -77,21 +98,7 @@ h4{
       font-size: 14px;
 }
 
-.texto{
-  background-image: linear-gradient(
-    -225deg,
-    #ffffff 67%,
-    #f5f5f5 29%,
-    #ffffff 67%,
-    #ffffff 100%
-  );
-  text-transform: uppercase;
-  color: white;
-  background-clip: text;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
 
-}
 
 @keyframes textclip {
   to {

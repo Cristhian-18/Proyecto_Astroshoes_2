@@ -18,12 +18,12 @@ export class TablaMarcaComponent implements OnInit {
   index:number=0;
   index2:number=0;
 
-  constructor(private ConexProductoService:ConexMarcaService) { }
+  constructor(private ConexMarcaService:ConexMarcaService) { }
   
   ngOnInit(): void { 
     this.listarMarcas();
     
-    this.subcription = this.ConexProductoService.refresh$.subscribe(()=>{
+    this.subcription = this.ConexMarcaService.refresh$.subscribe(()=>{
       this.listarMarcas();
       
     });
@@ -37,7 +37,7 @@ export class TablaMarcaComponent implements OnInit {
   listarMarcas(){
     console.log("---Listar marcas----");
     this.subcription.add(
-      this.ConexProductoService.getMarcas().subscribe(
+      this.ConexMarcaService.getMarcas().subscribe(
         res => {
           console.log(res)
           this.ListaMarca = <any> res;
@@ -59,7 +59,7 @@ export class TablaMarcaComponent implements OnInit {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.value) {
-        this.ConexProductoService.deletemarca(id).subscribe(
+        this.ConexMarcaService.deletemarca(id).subscribe(
           res => {
             swal.fire(
               'Eliminado!',
@@ -83,14 +83,14 @@ export class TablaMarcaComponent implements OnInit {
   getNombres(id:number){
     this.dataEntrante = id;
     console.log("ID: ",id);
-    this.ConexProductoService.disparadorMODIFICARMARCA.emit(this.dataEntrante)
+    this.ConexMarcaService.disparadorMODIFICARMARCA.emit(this.dataEntrante)
   } 
 
   getIndex(id2:number){
     this.index=id2;
     this.dataEntrante2 = id2;
     console.log("ID: ",id2);
-    this.ConexProductoService.disparadorMODIFICARMARCA.emit(this.dataEntrante2)
+    this.ConexMarcaService.disparadorMODIFICARMARCA.emit(this.dataEntrante2)
   }
 
   enviar(){

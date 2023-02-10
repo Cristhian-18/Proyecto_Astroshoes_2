@@ -10,12 +10,12 @@
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
                     <h2 class="footer-site-logo d-block mb-4">Navegación</h2>    
-                    <li><a href="#">Inicio</a></li>
+                    <li><a [routerLink]="['/home']" (click)="redirectAndScrollToTop('/home')">Inicio</a></li>
                     <li><a routerLinkActive="active"
-                        [routerLink]="['/ultimas_novedades']">Ultimos Modelos</a></li>
-                    <li><a routerLinkActive="active" [routerLink]="['/hombres']">Hombres</a></li>
-                    <li><a routerLinkActive="active" [routerLink]="['/mujeres']">Mujeres</a></li>
-                    <li><a routerLinkActive="active" [routerLink]="['/ninos']">Niños</a></li>
+                        [routerLink]="['/ultimas_novedades']" (click)="redirectAndScrollToTop('/ultimas_novedades')">Ultimos Modelos</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/hombres']" (click)="redirectAndScrollToTop('/hombres')">Hombres</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/mujeres']" (click)="redirectAndScrollToTop('/mujeres')">Mujeres</a></li>
+                    <li><a routerLinkActive="active" [routerLink]="['/ninos']" (click)="redirectAndScrollToTop('/ninos')">Niños</a></li>
                     <li><a href="#">Ofertas</a></li>
                 </ul>
             </div>

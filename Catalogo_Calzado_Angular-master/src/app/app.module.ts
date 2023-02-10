@@ -33,7 +33,6 @@ import { NovedadesComponent } from './components/cartas-catalogo/novedades/noved
 import { FavoritosComponent } from './components/cartas-catalogo/favoritos/favoritos.component';
 
 /********** COMPONENTES DEL ADMINISTRADOR ***********/
-import { AdminComponent } from './pages/admin/admin.component';
 import { NavbarAdminComponent } from './pages/admin/shared/components/navbar-admin/navbar-admin.component';
 import { SidebarAdminComponent } from './pages/admin/shared/components/sidebar-admin/sidebar-admin.component';
 // componentes de forms o paginas //
@@ -85,7 +84,6 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     CardComponent,
     UltimasNovedadesComponent,
     CarruselComponent,
-    AdminComponent,
     SeccMarcasComponent,
     FiltroComponent,
     InfoModalsComponent,

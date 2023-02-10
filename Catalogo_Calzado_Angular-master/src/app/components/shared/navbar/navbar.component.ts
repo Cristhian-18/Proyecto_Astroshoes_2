@@ -61,7 +61,7 @@ export class NavbarComponent {
       this.nombreUsuario = '';
     }
   }
-
+  
   ngOnInit(): void {
     this.listarProductos();
     
@@ -70,17 +70,24 @@ export class NavbarComponent {
     this.subcription.unsubscribe();
   }
 
+  //**** Método de redireccionamiento, donde le pasamos un parametro de tipo string la ruta inicial a donde queremos llegar****/
+  //** Funcional para direccionamiento entre componentes de las pages **//
+  redirectAndScrollToTop(route: string) {
+    this.router.navigate([route]).then(() => {
+      window.scrollTo(0, 0);
+    });
+  }
+
   getNombres() {
      this.canexproduc.disparadorDetalle.emit(this.dataEntrante);
   }
-
 
   renderSelectedValue(item: any) {
     console.log(item.pk_id_producto);
     this.dataEntrante = item.pk_id_producto;
   }
 
-
+  //** Listar los productos del servicio **//
   listarProductos() {
     console.log("Servicio ULTIMA NOVEDAD");
     this.subcription.add(
@@ -94,7 +101,8 @@ export class NavbarComponent {
     );
   }
 
-
+  //** Método que permite desloguearse de la cuenta, y envia un mensaje al usuario de ´Cierre de sesion exitoso´  **/// 
+  
   logout() {
     this.cookieService.delete('token');
     this.isLoggedIn = false;
@@ -106,6 +114,7 @@ export class NavbarComponent {
     });
     this.router.navigate(['/home']);
   }
+
 
   abrirmodal() {
     this.info_modal = true;

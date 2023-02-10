@@ -11,7 +11,6 @@ import { FavoritosComponent } from './components/cartas-catalogo/favoritos/favor
 import { AboutUsComponent } from './components/about-us/about-us.component';
 
 //componentes de formularios de Administrador//
-import { AdminComponent } from './pages/admin/admin.component';
 import { FormCategoriaComponent } from './pages/admin/forms/form-categoria/form-categoria.component';
 import { FormListarproductosComponent } from './pages/admin/forms/form-listarproductos/form-listarproductos.component';
 import { FormMarcaComponent } from './pages/admin/forms/form-marca/form-marca.component';
@@ -41,7 +40,6 @@ const routes: Routes = [
   
 
   //Administrador//
-  {path:'admin', component:AdminComponent, canActivate: [AuthGuard]},
   {path:'admin/form-inicio', component:FormInicioComponent, canActivate: [AuthGuard]},
   {path:'admin/form-categoria', component:FormCategoriaComponent, canActivate: [AuthGuard]},
   {path:'admin/form-listarproductos', component:FormListarproductosComponent, canActivate: [AuthGuard]},

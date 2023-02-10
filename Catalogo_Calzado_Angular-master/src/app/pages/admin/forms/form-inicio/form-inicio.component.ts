@@ -17,7 +17,7 @@ export class FormInicioComponent implements OnInit {
   ListaCategoria:categoria[]=[];
   ListaProducto:Producto[]=[];
   ListaUsuario:Usuario[]=[];
-  
+  public load: Boolean  = false;
   subcription: Subscription = new Subscription();
   sum_marc:number=0;
   sum_cat:number=0;
@@ -32,6 +32,9 @@ export class FormInicioComponent implements OnInit {
     this.listarCategoria();
     this.listarProductos();
     this.listarUsuario();
+    setTimeout(() => {
+      this.load = true;
+    }, 1000);
   }
 
   ngOnDestroy(): void {

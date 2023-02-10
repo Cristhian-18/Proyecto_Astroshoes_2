@@ -14,10 +14,10 @@
 <!----Navbar secundario, aqui se visualiza las secciones, la cuenta, buscador--->
 <nav class="navbar navbar-expand-lg bg-black navbar-dark sticky-top">
     <div class="container">
-        <img [routerLink]="['/home']"
+        <img [routerLink]="['/home']" (click)="redirectAndScrollToTop('/home')"
             src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea"
             width="80" height="70">
-        <a [routerLink]="['/home']" class="navbar-brand animacion-titulo-logo" href="#">AstroShoes</a>
+        <a class="navbar-brand animacion-titulo-logo" [routerLink]="['/home']" (click)="redirectAndScrollToTop('/home')">AstroShoes</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
             <ul class="navbar-nav ">
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" routerLinkActive="active"
-                        [routerLink]="['/home']">Inicio</a>
+                        [routerLink]="['/home']" (click)="redirectAndScrollToTop('/home')">Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
@@ -37,28 +37,28 @@
                     </a>
                     <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdownMenuLink">
                         <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/hombres']">Hombres</a>
+                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/hombres']" (click)="redirectAndScrollToTop('/hombres')">Hombres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/mujeres']">Mujeres</a>
+                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/mujeres']" (click)="redirectAndScrollToTop('/mujeres')">Mujeres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/ninos']">Niños</a>
+                            <a class="nav-link" routerLinkActive="active" [routerLink]="['/ninos']" (click)="redirectAndScrollToTop('/ninos')">Niños</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" routerLinkActive="active"
-                        [routerLink]="['/ultimas_novedades']">Ultimos Modelos</a>
+                        [routerLink]="['/ultimas_novedades']" (click)="redirectAndScrollToTop('/ultimas_novedades')">Ultimos Modelos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active"
-                        [routerLink]="['/ofertas']">Ofertas</a>
+                        [routerLink]="['/ofertas']" (click)="redirectAndScrollToTop('/ofertas')">Ofertas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active"
                         [routerLink]="['/favoritos']"
-                        *ngIf="isLoggedIn && userRole">Favoritos</a>
+                        *ngIf="isLoggedIn && userRole" (click)="redirectAndScrollToTop('/favoritos')">Favoritos</a>
                 </li>
             </ul>    
 

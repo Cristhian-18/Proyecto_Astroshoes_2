@@ -18,10 +18,10 @@
                         <img src="{{detalle.img}}" alt="imagenproducto" class="img-thumbnail">
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <p alt="precioproducto">Precio: <strong> {{detalle.costo}} </strong></p>
+                        <p alt="precioproducto">Precio: $<strong> {{detalle.costo}} </strong></p>
                         <p>
-                            <span class="badge badge-warning" alt="Categoria"> {{detalle.fk_nombre_categoria}} </span>
-                            <span class="badge badge-secondary" alt="Marca"> {{detalle.fk_marca}} </span>
+                            <span class="badge badge-primary" alt="Categoria"> Talla: {{detalle.talla}} </span>
+                            <span class="badge badge-success" alt="Marca"> Modelo: {{detalle.modelo}} </span>
                         </p>
                         <a class="btn btn-favoritos" (click)="addToFavorites(detalle.pk_id_producto)">
                           <i class="fas fa-heart"></i> Agregar a los deseos
@@ -43,7 +43,6 @@
             <!-- pie del modal-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Comprar</button>
             </div>
         </div>
         <!--Fin de contenido del Modal -->

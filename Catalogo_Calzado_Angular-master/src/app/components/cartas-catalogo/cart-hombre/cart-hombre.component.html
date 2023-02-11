@@ -17,7 +17,7 @@
                                 </option>
                             </select>
                             <select (change)="getSelectedTalla($event)" title="tallaa" name="talla" class="form-control custom-select">
-                                <option *ngFor="let talla of tallas" [value]="talla">Talla: {{talla}}</option>
+                                <option *ngFor="let ListaProducto of Listatalla " [value]="ListaProducto.talla">Talla: {{ListaProducto.talla}}</option>
                             </select>
                             
                            <div class="d-flex col-md-3">

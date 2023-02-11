@@ -18,12 +18,14 @@ export class CartHombreComponent implements OnInit {
   info_modal: boolean = false;
   ListaProducto: Producto[] = [];
   ListaHombre: Producto[] = [];
+  Listatalla: Producto[] = [];
   ListaMarca: Marca[] = [];
   subcription: Subscription = new Subscription();
 
   
   constructor(private conexproduc: ConexProductosService, private ConexMarca: ConexMarcaService) {
     this.listarMarcas();
+    this.listarTalla();
   }
 
   listarMarcas() {
@@ -58,6 +60,17 @@ export class CartHombreComponent implements OnInit {
         res => {
           this.ListaProducto = <any>res;
           this.ListaHombre = this.ListaProducto.filter(item => item.genero == 'Hombre')
+        },
+        err => console.log(err)
+      )
+    );
+  }
+  listarTalla() {
+    this.subcription.add(
+      this.conexproduc.getProdcuto().subscribe(
+        res => {
+          this.ListaProducto = <any>res;
+          this.Listatalla= this.ListaProducto.filter(item => item.genero == 'Hombre')
         },
         err => console.log(err)
       )

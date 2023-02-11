@@ -18,12 +18,14 @@ export class CartNinosComponent implements OnInit {
   ListaNino:Producto[]=[];
   info_modal:boolean=false;
   ListaMarca: Marca[] = [];
+  Listatalla: Producto[] = [];
   subcription: Subscription = new Subscription();
 
   constructor(private conexproduc:ConexProductosService, private ConexMarca: ConexMarcaService) { this.listarMarcas()}
 
   ngOnInit(): void {
     this.listarProductos();
+    this.listarTalla();
   }
   
   ngOnDestroy(): void {
@@ -51,26 +53,50 @@ export class CartNinosComponent implements OnInit {
       )
     );
   }
+  listarTalla() {
+    this.subcription.add(
+      this.conexproduc.getProdcuto().subscribe(
+        res => {
+          this.ListaProducto = <any>res;
+          this.Listatalla = this.ListaProducto.filter(item =>item.genero=='Niños')    
+           
+        },
+        err => console.log(err)
+      )
+    );
+  }
+
 
   getSelectedTalla(event: any) {
     const selectTalla = event.target as HTMLSelectElement;
     this.tallaSeleccionada = String(selectTalla.value);
     console.log(this.tallaSeleccionada);
-    this.listarProductosFiltro();
+    this.listarProductosFiltroTalla();
   }
   
   getSelectedMarca(event: any) {
     const selectMarca = event.target as HTMLSelectElement;
     this.marcaId = Number(selectMarca.value);
-    this.listarProductosFiltro();
+    this.listarProductosFiltroMarca();
   }
   
-  listarProductosFiltro() {
+  listarProductosFiltroTalla() {
     this.conexproduc.getProdcuto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;
-        this.ListaNino = this.ListaProducto.filter(item => item.genero === 'Niños' && item.fk_marca === Number(this.marcaId) || item.talla === this.tallaSeleccionada)
+        this.ListaNino = this.ListaProducto.filter(item => item.genero === 'Niños' && item.talla === this.tallaSeleccionada)
+      },
+      err => console.log(err)
+    );
+  }
+
+  listarProductosFiltroMarca() {
+    this.conexproduc.getProdcuto().subscribe(
+      res => {
+        console.log(res)
+        this.ListaProducto = <any>res;
+        this.ListaNino = this.ListaProducto.filter(item => item.genero === 'Niños' && item.fk_marca === Number(this.marcaId))
       },
       err => console.log(err)
     );

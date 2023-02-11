@@ -18,12 +18,14 @@ export class CartMujeresComponent implements OnInit {
   ListaProducto:Producto[]=[];
   ListaMujeres:Producto[]=[];
   ListaMarca: Marca[] = [];
+  Listatalla: Producto[] = [];
   subcription: Subscription = new Subscription();
 
   constructor(private conexproduc:ConexProductosService, private ConexMarca: ConexMarcaService) { this.listarMarcas();}
 
   ngOnInit(){
     this.listarProductos();
+    this.listarTalla();
   }
 
   ngOnDestroy(): void {
@@ -44,6 +46,18 @@ export class CartMujeresComponent implements OnInit {
           console.log(res)
           this.ListaProducto=<any>res;
           this.ListaMujeres = this.ListaProducto.filter(item =>item.genero=='Mujer')       
+        },
+        err => console.log(err)
+      )
+    );
+  }
+  listarTalla() {
+    this.subcription.add(
+      this.conexproduc.getProdcuto().subscribe(
+        res => {
+          this.ListaProducto = <any>res;
+          this.Listatalla = this.ListaProducto.filter(item =>item.genero=='Mujer') 
+           
         },
         err => console.log(err)
       )
@@ -71,21 +85,32 @@ export class CartMujeresComponent implements OnInit {
     const selectTalla = event.target as HTMLSelectElement;
     this.tallaSeleccionada = String(selectTalla.value);
     console.log(this.tallaSeleccionada);
-    this.listarProductosFiltro();
+    this.listarProductosFiltroTalla();
   }
 
   getSelectedMarca(event: any) {
     const selectMarca = event.target as HTMLSelectElement;
     this.marcaId = Number(selectMarca.value);
-    this.listarProductosFiltro();
+    this.listarProductosFiltroMarca();
   }
 
-  listarProductosFiltro() {
+  listarProductosFiltroTalla() {
     this.conexproduc.getProdcuto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;
-        this.ListaMujeres = this.ListaProducto.filter(item => item.genero === 'Mujer' && item.fk_marca === Number(this.marcaId) || item.talla === this.tallaSeleccionada)
+        this.ListaMujeres = this.ListaProducto.filter(item => item.genero === 'Mujer' && item.talla === this.tallaSeleccionada)
+      },
+      err => console.log(err)
+    );
+  }
+
+  listarProductosFiltroMarca() {
+    this.conexproduc.getProdcuto().subscribe(
+      res => {
+        console.log(res)
+        this.ListaProducto = <any>res;
+        this.ListaMujeres = this.ListaProducto.filter(item => item.genero === 'Mujer' && item.fk_marca === Number(this.marcaId))
       },
       err => console.log(err)
     );

@@ -12,6 +12,7 @@ export class CartOfertasComponent implements OnInit {
   p = 1;
   info_modal:boolean=false;
   ListaProducto:Producto[]=[];
+  Listaofertas:Producto[]=[];
   subcription: Subscription = new Subscription();
 
   constructor(private conexproduc:ConexProductosService) { }
@@ -37,12 +38,14 @@ export class CartOfertasComponent implements OnInit {
       this.conexproduc.getProdcuto().subscribe(
         res=>{
           console.log(res)
-          this.ListaProducto=<any>res;     
+          this.ListaProducto=<any>res;  
+          this.Listaofertas = this.ListaProducto.filter(item =>item.oferta=='Oferta')     
         },
         err => console.log(err) 
       )
     );
   }
+  
 
   abrirmodal(){
   this.info_modal = true;

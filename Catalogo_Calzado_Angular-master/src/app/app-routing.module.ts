@@ -8,6 +8,7 @@ import { HombresComponent } from './pages/Catalogo/hombres/hombres.component';
 import { MujeresComponent } from './pages/Catalogo/mujeres/mujeres.component';
 import { NinosComponent } from './pages/Catalogo/ninos/ninos.component';
 import { FavoritosComponent } from './components/cartas-catalogo/favoritos/favoritos.component';
+import { OfertasComponent } from './pages/Catalogo/ofertas/ofertas.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 
 //componentes de formularios de Administrador//
@@ -27,6 +28,8 @@ import { FormUsuariosComponent } from './pages/admin/forms/form-usuarios/form-us
 
 
 
+
+
 const routes: Routes = [
   {path:'home', component: HomeComponent},
   {path:'ultimas_novedades', component:UltimasNovedadesComponent},
@@ -34,9 +37,11 @@ const routes: Routes = [
   {path:'mujeres', component:MujeresComponent},
   {path:'ninos', component:NinosComponent},
   {path:'favoritos', component:FavoritosComponent},
+  {path:'ofertas', component:OfertasComponent},
   {path:'about-us', component:AboutUsComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
+
   
 
   //Administrador//

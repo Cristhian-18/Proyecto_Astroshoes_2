@@ -22,7 +22,6 @@ import { UltimasNovedadesComponent } from './pages/Catalogo/ultimas-novedades/ul
 import { CardComponent } from './components/card/card.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { SeccMarcasComponent } from './components/secc-marcas/secc-marcas.component';
-import { FiltroComponent } from './components/shared/filtro/filtro.component';
 import { InfoModalsComponent } from './components/info-modals/info-modals.component';
 
 // Componentes de Cartas para mostrar productos//
@@ -71,6 +70,9 @@ import { AuthGuard } from './guards/auth/auth.guard';
 import { ContactoModalComponent } from './components/contacto-modal/contacto-modal.component';
 import { CardSeccionComponent } from './components/card-seccion/card-seccion.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CartOfertasComponent } from './components/cartas-catalogo/cart-ofertas/cart-ofertas.component';
+import { OfertasComponent } from './pages/Catalogo/ofertas/ofertas.component';
+
 
 @NgModule({
   declarations: [
@@ -85,7 +87,6 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     UltimasNovedadesComponent,
     CarruselComponent,
     SeccMarcasComponent,
-    FiltroComponent,
     InfoModalsComponent,
     NovedadesComponent,
     CartHombreComponent,
@@ -115,7 +116,9 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     FavoritosComponent,
     ContactoModalComponent,
     CardSeccionComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    CartOfertasComponent,
+    OfertasComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,9 @@
                                 custom-select">
                                 <option *ngFor="let ListaProducto of Listatalla " [value]="ListaProducto.talla">Talla: {{ListaProducto.talla}}</option>
                             </select>
-                            <button (click)="listarProductos()">Limpiar</button>
+                            <div class="d-flex col-md-3">
+                                <button type="button" class="btn btn-sm" (click)="listarProductos()">Limpiar</button>
+                            </div>       
                         </div>
                     </div>
                 </div>

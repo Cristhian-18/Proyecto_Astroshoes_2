@@ -1,0 +1,49 @@
+<div class="bg-2 p-5">
+    <h1 class=" animated fadeIn t-stroke-shadow fs-1 fw-bolder text-center">Ofertas de ASTROSHOES</h1>
+</div>
+<!------------------------------------------------------
+-----------------------Titulo --------------------------
+-------------------------------------------------------->
+<div class="category-page">
+    <!-- Productos de hombres-->
+    <section class="products p-t-small">
+        <div class="container animated fadeIn">
+            <div class="my-5">
+                <div class="row ">
+                    <div class="col-lg-3 col-md-4 col-6" *ngFor="let ListaProducto of ListaProducto | paginate: { itemsPerPage: 4, currentPage: p }">
+                        <div class="item text-center ">
+                            <div class="card shadow-sm bg-image">
+                                <img src="{{ListaProducto.img}}" class="card-img-top img-fluid">
+                                <div class="card-body">
+                                    <div class="overlay p-0 d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled mb-0">
+                                            <button (click)="abrirmodal()" type="button" class="btn btn-lg px-4 mb-2" data-toggle="modal" data-target="#modal1" (click)="getNombres(ListaProducto.pk_id_producto)">Detalles</button>
+                                        </ul>
+                                    </div>
+                                    <div class="onsale position-absolute top-0 start-0">
+                                        <span class="badge rounded-8"><i class="fa-solid fa-cart-plus"></i> En oferta</span>
+                                    </div>
+                                    <div class="card-title">
+                                        <p class="generoproducto">{{ListaProducto.genero}}</p>
+                                        <h4 class="nombreproducto">{{ListaProducto.nombre_producto}}</h4>
+                                        <ul class="price list-inline">
+                                            <li class="list-inline-item"> <span class="price">${{ListaProducto.costo}}</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--Logica de abrir modal de informacion del producto-->
+<div *ngIf="info_modal==true">
+    <app-info-modals></app-info-modals>
+</div>

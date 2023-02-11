@@ -23,10 +23,8 @@
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
                     <h2 class="footer-site-logo d-block mb-4">Información</h2>
-                    <li><a [routerLink]="['/about-us']">Sobre Nosotros</a></li>
-                    <li><a href="#">Politicas</a></li>
-                    <li><a href="#">Marcas</a></li>
-                    <li><a href="https://wa.me/5930963675860" target="_blank">Whatsapp</a></li>
+                    <li><a [routerLink]="['/about-us']" (click)="redirectAndScrollToTop('/about-us')">Sobre Nosotros</a></li>
+                    <li><a href="https://wa.me/5930963675860" target="_blank">Preguntas en Whatsapp</a></li>
                 </ul>
             </div>
 

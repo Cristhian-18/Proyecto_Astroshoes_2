@@ -14,10 +14,10 @@
                                               index" value="{{ListaMarca.id_Marca}}">Marca:
                                               {{ListaMarca.nombre}}</option>
                       </select>
-                            <select (change)="getSelectedTalla($event)" title="Brandd" name="brand" class="form-control custom-select">
+                            <select (change)="getSelectedTalla($event)" title="tallaa" name="talla" class="form-control custom-select">
                         <option *ngFor="let talla of tallas" [value]="talla">Talla: {{talla}}</option>
                       </select>
-                            <button (click)="listarProductos()">Limpiar Filtros</button>
+                            <button (click)="listarProductos()">Limpiar</button>
                         </div>
                     </div>
                 </div>

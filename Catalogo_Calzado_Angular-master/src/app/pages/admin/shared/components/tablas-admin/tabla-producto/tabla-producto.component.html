@@ -1,4 +1,4 @@
-<div class="btn-group p-4" role="group">
+<div class="btn-group pb-3" role="group">
     <button (click)="enviar()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registro"><i
             class="fa-solid fa-square-up-right"></i> Insertar</button>
 </div>
@@ -7,7 +7,7 @@
     <div class="card" alt="contenedor de carta">
         <div class="card card-primary">
             <div class="card-header" id="titulo">
-                <h3 class="card-title">Lista de Zapatos</h3>
+                <h2 class="card-title">Lista de Zapatos</h2>
             </div>
         </div>
         <div class="card-header">
@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <!-- Registros de productos -->
-                <tbody alt="registros" *ngFor="let ListaProducto of ListaProducto | paginate: { itemsPerPage: 6, currentPage: p }">
+                <tbody alt="registros" *ngFor="let ListaProducto of ListaProducto | paginate: { itemsPerPage: 5, currentPage: p }">
                     <tr>
                         <td alt="codigo">{{ListaProducto.pk_id_producto}}</td>
                         <td alt="nombre">{{ListaProducto.nombre_producto}}</td>

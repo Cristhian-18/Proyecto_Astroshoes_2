@@ -11,14 +11,18 @@
                     <div class="col-md-6 filters d-flex justify-content-end">
                         <div class="select-container">
                             <select (change)="getSelectedMarca($event)" title="Brandd" name="brand" class="form-control custom-select">
-                            <option *ngFor="let ListaMarca of ListaMarca; let i=
-                                index" value="{{ListaMarca.id_Marca}}">Marca:
-                                {{ListaMarca.nombre}}</option>
-                        </select>
-                            <select (change)="getSelectedTalla($event)" title="Brandd" name="brand" class="form-control custom-select">
-                            <option *ngFor="let talla of tallas" [value]="talla">Talla: {{talla}}</option>
-                          </select>
-                            <button (click)="listarProductos()">Limpiar Filtros</button>
+                                <option *ngFor="let ListaMarca of ListaMarca; let i=
+                                    index" value="{{ListaMarca.id_Marca}}">Marca:
+                                    {{ListaMarca.nombre}}
+                                </option>
+                            </select>
+                            <select (change)="getSelectedTalla($event)" title="tallaa" name="talla" class="form-control custom-select">
+                                <option *ngFor="let talla of tallas" [value]="talla">Talla: {{talla}}</option>
+                            </select>
+                            
+                           <div class="d-flex col-md-3">
+                            <button type="button" class="btn btn-sm" (click)="listarProductos()">Limpiar</button>
+                           </div>                    
                         </div>
                     </div>
                 </div>

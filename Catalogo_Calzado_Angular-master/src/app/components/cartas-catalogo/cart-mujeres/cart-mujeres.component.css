@@ -23,10 +23,21 @@
 }
 
 select[name="brand"] {
-    min-width: 10em;
+    min-width: 10.9em;
 }
 
 select[name="brand"] option {
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+select[name="talla"] {
+    min-width: 6em;
+}
+
+select[name="talla"] option {
     width: auto;
     white-space: nowrap;
     overflow: hidden;

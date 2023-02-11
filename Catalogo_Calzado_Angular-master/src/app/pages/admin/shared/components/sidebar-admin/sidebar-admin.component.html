@@ -3,7 +3,7 @@
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none ">
-                    <span class="fs-2 d-none d-sm-inline ">Administrador</span>
+                   
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
@@ -13,7 +13,7 @@
                     </li>
                     <li>
                         <a [routerLink]="['../form-usuarios']" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span> </a>
+                            <i class="fs-4 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span> </a>
                     </li>
                     <li>
                         <a [routerLink]="['../form-marca']" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -22,22 +22,23 @@
                     </li>
                     <li>
                         <a [routerLink]="['../form-categoria']" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Categorias</span>
+                            <i class="fs-4 bi-badge-cc"></i> <span class="ms-1 d-none d-sm-inline">Categorias</span>
                         </a>
                     </li>
                     <li>
                         <a [routerLink]="['../form-productos']" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Productos</span></a>
+                            <i class="fs-4 bi-bag-dash-fill"></i> <span class="ms-1 d-none d-sm-inline">Productos</span></a>
                     </li>
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <img src="https://cdn.icon-icons.com/icons2/11/PNG/256/customer_person_people_man_you_1625.png" 
+                        alt="hugenerd" width="30" height="30" class="rounded-circle">
                         <span class="d-none d-sm-inline mx-1">{{ nombreUsuario }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><button type="button" class="btn btn-primary btn-block" [routerLink]="['../home']">Ir a sitio web</button></li>           
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -46,8 +47,40 @@
                 </div>
             </div>
         </div>
+
         <div class="col py-3">
-            <ng-content></ng-content>
+            <nav class="navbar navbar-expand-lg bg-white navbar-light">
+                <div class="container">
+                    <h2 class="">Administración</h2>
+                    <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav ml-auto mb-2 mb-lg-0 ">
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['../form-inicio']">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['../form-usuarios']">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['../form-marca']">Marcas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['../form-categoria']">Categorias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['../form-productos']">Productos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div style="padding-top: 40px;">
+                <ng-content></ng-content>
+            </div>         
         </div>
     </div>
 </div>

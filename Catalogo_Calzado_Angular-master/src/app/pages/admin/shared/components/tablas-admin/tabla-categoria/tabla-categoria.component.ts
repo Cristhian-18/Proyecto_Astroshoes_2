@@ -10,14 +10,19 @@ import swal from 'sweetalert2';
   styleUrls: ['./tabla-categoria.component.css']
 })
 export class TablaCategoriaComponent implements OnInit {
-  @Input() dataEntrante:any;
-  @Input() dataEntrante2:any;
+  @Input() dataEntranteModificar:any;
+  @Input() dataEntranteInsertar:any;
   index:number=0;
   ListaCategoria:categoria[]=[];
   index2:number=0;
   p = 1;
   subcription: Subscription = new Subscription();
 
+ /**
+  * La función constructora es una función especial que se llama cuando se crea una nueva instancia de
+  * la clase.
+  * @param {ConexCategoriaService} Conexcategoria - Este es el nombre del servicio que desea inyectar.
+  */
   constructor(private Conexcategoria:ConexCategoriaService) {
   }
 
@@ -33,6 +38,10 @@ export class TablaCategoriaComponent implements OnInit {
     console.log('Observable cerrado')
   }
    
+  /**
+   * Es una función que llama a un servicio que devuelve un observable, al que luego se suscribe y el
+   * resultado se asigna a una variable.
+   */
   listarCategoria(){
     console.log("---Listar Categoria----");
     this.subcription.add(
@@ -46,6 +55,10 @@ export class TablaCategoriaComponent implements OnInit {
     );
   }   
   
+  /**
+   * Elimina una categoria de la base de datos.
+   * @param {number} id - número
+   */
   eliminar(id:number){
     swal.fire({
       title: 'Seguro que quieres borrarlo?',
@@ -78,19 +91,34 @@ export class TablaCategoriaComponent implements OnInit {
     })  
   }
   
-  getNombres(id:number){
-    this.dataEntrante = id;
+ /**
+  * "Cuando el usuario hace clic en una categoría, la identificación de la categoría se envía al
+  * servicio y luego el servicio envía la identificación al componente que muestra los productos".
+  * </código>
+  * @param {number} id - número
+  */
+  getIDCategoria(id:number){
+    this.dataEntranteModificar = id;
     console.log("ID: ",id);
-    this.Conexcategoria.disparadorDetalle.emit(this.dataEntrante)
+    this.Conexcategoria.disparadorCategoria.emit(this.dataEntranteModificar)
   } 
 
+  /**
+   * "Cuando el usuario hace clic en un botón, se llama a la función getIndex(), que emite el índice
+   * del botón en el que se hizo clic en el componente principal".
+   * </código>
+   * @param {number} id2 - número
+   */
   getIndex(id2:number){
     this.index=id2;
-    this.dataEntrante2 = id2;
+    this.dataEntranteInsertar = id2;
     console.log("ID: ",id2);
-    this.Conexcategoria.disparadorDetalle.emit(this.dataEntrante2)
+    this.Conexcategoria.disparadorCategoria.emit(this.dataEntranteInsertar)
   }
 
+  /**
+   * Recorre la matriz y luego asigna el valor del último elemento de la matriz a la variable index2.
+   */
   enviar(){
     for(let i=0;i<this.ListaCategoria.length;i++){
       this.index2 = this.ListaCategoria[i].pk_id_categoria+1;
@@ -99,6 +127,11 @@ export class TablaCategoriaComponent implements OnInit {
     this.getIndex(this.index2);
   }
 
+  /**
+   * Si el término de búsqueda no está vacío, filtre la lista de categorías por el término de búsqueda;
+   * de lo contrario, enumere todas las categorías.
+   * @param {string} busca - cadena
+   */
   filtrar(busca:string){
     if(busca!=''){
       this.ListaCategoria = this.ListaCategoria.filter(item =>item.nombre_cat.includes(busca))

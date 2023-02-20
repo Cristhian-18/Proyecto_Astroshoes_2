@@ -64,7 +64,7 @@
                                     <div class="form-group">
                                         <label>Tipo de persona</label>
                                         <select #comboBox2 class="custom-select form-control-border"
-                                            (change)="obtenercGenero(comboBox2.value)">
+                                            (change)="obtenerGenero(comboBox2.value)">
                                             <option *ngFor="let ListaGenero of LlenarcomboGenero" value="{{ListaGenero.genero}}">{{ListaGenero.genero}}</option>
                                         </select>
                                     </div>

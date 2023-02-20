@@ -14,13 +14,30 @@ export class TablaUsuariosComponent implements OnInit {
   ListaUsuario:Usuario[]=[];
   ListaFav:any=[];
 
+  /**
+   * La función constructora es una función predeterminada de la clase, que se llama cuando se crea una
+   * instancia de la clase.
+   * @param {ConexUsuariosService} ConexUsuarioService - Este es el servicio que se inyectará en el
+   * componente.
+   * @param {ConexFavService} ConexFavService - Este es el servicio que se utilizará para conectarse a
+   * la base de datos.
+   */
   constructor(private ConexUsuarioService:ConexUsuariosService, private ConexFavService:ConexFavService) { }
 
+  /**
+   * NgOnInit(): vacío {
+   *     this.listarUsuario();
+   *     esto.listarFav();
+   *   }
+   */
   ngOnInit(): void {
     this.listarUsuario();
-    this.listarFav();
+    this.listarFavoritos();
   }
 
+ /**
+  * Estoy tratando de obtener los datos de la base de datos y mostrarlos en una tabla.
+  */
   listarUsuario(){
     console.log("---Listar usuarios----");
     this.ConexUsuarioService.getUsuario().subscribe(
@@ -32,7 +49,13 @@ export class TablaUsuariosComponent implements OnInit {
     );   
   }
 
-  listarFav(){
+  /**
+   * "Esta función se llama cuando se carga la página y llama a la función getFavoritos() en el
+   * servicio ConexFavService, que devuelve una lista de favoritos de la base de datos, que luego se
+   * almacena en la variable ListaFav".
+   * </código>
+   */
+  listarFavoritos(){
     console.log("Servicio obtener FAVORITOS");
     this.ConexFavService.getFavoritos().subscribe(
       res=>{
@@ -43,6 +66,10 @@ export class TablaUsuariosComponent implements OnInit {
     );
   }  
 
+  /**
+   * Quiero eliminar un usuario y todos los favoritos asociados a ese usuario.
+   * @param {number} id - número
+   */
   eliminar(id:number){
     swal.fire({
       title: 'Seguro que quieres borrarlo?',
@@ -87,6 +114,11 @@ export class TablaUsuariosComponent implements OnInit {
     })   
   }
 
+  /**
+   * Si el término de búsqueda no está vacío, filtre la lista de usuarios por el término de búsqueda;
+   * de lo contrario, enumere todos los usuarios.
+   * @param {string} busca - cadena
+   */
   filtrar(busca:string){
     if(busca!=''){
       this.ListaUsuario = this.ListaUsuario.filter(item =>item.nombres.includes(busca) || item.apellidos.includes(busca) || item.email.includes(busca))

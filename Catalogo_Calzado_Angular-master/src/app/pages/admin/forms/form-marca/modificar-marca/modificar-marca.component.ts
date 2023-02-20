@@ -11,7 +11,10 @@ export class ModificarMarcaComponent implements OnInit {
 
   cargar:any=[];
   id_entrada:number=0;
+
   subcription: Subscription = new Subscription();
+
+  /* Una variable que se utiliza para almacenar los datos que se van a modificar. */
   marca:Marca={
     id_Marca:0,
     nombre:'',
@@ -19,14 +22,23 @@ export class ModificarMarcaComponent implements OnInit {
   } 
   
 
+ /**
+  * Es un constructor que toma un parámetro de tipo ConexMarcaService y lo asigna a una variable
+  * privada llamada conexión.
+  * @param {ConexMarcaService} conexion - es el nombre del servicio
+  */
   constructor( private conexion:ConexMarcaService) {
-    this.ListarCarga();
+    this.CargaMarca();
   }
 
-  ListarCarga(){
+  /**
+   * Se suscribe a un disparador, luego obtiene los datos del disparador y luego se suscribe a los
+   * datos de la variable "cargar".
+   */
+  CargaMarca(){
     this.subcription.add(
-      this.conexion.disparadorMODIFICARMARCA.subscribe(data=>{
-        this.conexion.getUnmARCA(data).subscribe(
+      this.conexion.disparadorMarca.subscribe(data=>{
+        this.conexion.getUnMarca(data).subscribe(
           res=>{
             console.log(res)         
             this.cargar=res;               
@@ -44,24 +56,15 @@ export class ModificarMarcaComponent implements OnInit {
     this.subcription.unsubscribe();
     console.log('Observable cerrado')
   }
-  /*
-  modificar(id:number,nombre:string,descripcion:string){
-    //Extrae text//
-    this.marca.id_Marca = id;
-    this.id_entrada =id;
-    this.marca.nombre = nombre;
-    this.marca.descripcion = descripcion;
   
-    //Envia a la base de datos//
-    this.conexion.editmarca(this.id_entrada,this.marca).subscribe(
-       res=>{
-         console.log(res);       
-       },
-       err=>console.log(err)
-    ); 
-  }
+ /**
+  * Quiero actualizar los datos en la base de datos, pero quiero actualizar solo los datos que no
+  * están vacíos, es decir, si el usuario no quiere cambiar los datos, no los actualiza. R: Puede usar
+  * el método para obtener las claves del objeto y luego iterar sobre ellas para verificar si el valor está vacío o no.
+  * @param {number} id - número,
+  * @param {string} nombre - cadena,
+  * @param {string} descripcion - cadena
   */
-   
   modificar(id:number,nombre:string,descripcion:string){
      //Extrae text//
      this.marca.id_Marca = id;
@@ -81,7 +84,7 @@ export class ModificarMarcaComponent implements OnInit {
       if (result.value) {         
         try {   
           if(this.marca.id_Marca !=0 && this.marca.nombre !='' && this.marca.descripcion!=''){
-            this.conexion.editmarca(this.id_entrada,this.marca).subscribe(
+            this.conexion.editMarca(this.id_entrada,this.marca).subscribe(
               res=>{
                 console.log(res);       
               },
@@ -110,8 +113,4 @@ export class ModificarMarcaComponent implements OnInit {
       }
     })    
   }
- 
-  
-
-
 }

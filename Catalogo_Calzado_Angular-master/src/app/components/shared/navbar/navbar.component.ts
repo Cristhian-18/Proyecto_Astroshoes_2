@@ -43,7 +43,13 @@ export class NavbarComponent {
   onChangeSearch(val: string) {
   }
   
-  constructor(private cookieService: CookieService, private router: Router, private canexproduc: ConexProductosService) {
+  /**
+   * Si el usuario ha iniciado sesión, se muestra el nombre del usuario; de lo contrario, no.
+   * @param {CookieService} cookieService - servicio de cookies,
+   * @param {Router} router - enrutador
+   * @param {ConexProductosService} conexionProducto - ConexProductosServicio
+   */
+  constructor(private cookieService: CookieService, private router: Router, private conexionProducto: ConexProductosService) {
     const token = cookieService.get('token');
     //this.userRole = this.verifyRole();
     if (token) {
@@ -78,10 +84,19 @@ export class NavbarComponent {
     });
   }
 
-  getNombres() {
-     this.canexproduc.disparadorDetalle.emit(this.dataEntrante);
+  /**
+   * "Cuando el usuario hace clic en el botón, se llama a la función getIDProducto(), que emite la
+   * variable dataEntrante al componente padre".
+   * </código>
+   */
+  getIDProducto() {
+     this.conexionProducto.disparadorDetalleProducto.emit(this.dataEntrante);
   }
 
+  /**
+   * Toma el valor del ítem seleccionado y lo asigna a la variable dataEntrante.
+   * @param {any} item - cualquiera =&gt; El elemento que se selecciona
+   */
   renderSelectedValue(item: any) {
     console.log(item.pk_id_producto);
     this.dataEntrante = item.pk_id_producto;
@@ -91,7 +106,7 @@ export class NavbarComponent {
   listarProductos() {
     console.log("Servicio ULTIMA NOVEDAD");
     this.subcription.add(
-    this.canexproduc.getProdcuto().subscribe(
+    this.conexionProducto.getProducto().subscribe(
       res => {
         console.log(res)
         this.data = <any>res;
@@ -116,6 +131,9 @@ export class NavbarComponent {
   }
 
 
+ /**
+  * Establece el valor de la variable info_modal en verdadero.
+  */
   abrirmodal() {
     this.info_modal = true;
   }

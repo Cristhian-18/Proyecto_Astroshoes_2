@@ -21,7 +21,12 @@ export class CartMujeresComponent implements OnInit {
   Listatalla: Producto[] = [];
   subcription: Subscription = new Subscription();
 
-  constructor(private conexproduc:ConexProductosService, private ConexMarca: ConexMarcaService) { this.listarMarcas();}
+  /**
+   * Esta función se llama cuando se crea el componente y llama a la función listarMarcas().
+   * @param {ConexProductosService} conexionProducto - ConexProductosServicio
+   * @param {ConexMarcaService} conexionMarca - ConexMarcaServicio
+   */
+  constructor(private conexionProducto:ConexProductosService, private conexionMarca: ConexMarcaService) { this.listarMarcas();}
 
   ngOnInit(){
     this.listarProductos();
@@ -32,16 +37,24 @@ export class CartMujeresComponent implements OnInit {
     this.subcription.unsubscribe();
   }
 
-  getNombres(nombre:number){
-    this.dataEntrante = nombre;
+ /**
+  * "Obtengo la identificación del producto y la envío al otro componente"
+  * </código>
+  * @param {number} id - número
+  */
+  getIDProducto(id:number){
+    this.dataEntrante = id;
     console.log(this.dataEntrante);
-    this.conexproduc.disparadorDetalle.emit(this.dataEntrante)
+    this.conexionProducto.disparadorDetalleProducto.emit(this.dataEntrante)
   }
 
+  /**
+   * Estoy tratando de filtrar los datos de la API y mostrarlos en la vista.
+   */
   listarProductos(){
     console.log("Servicio Carta Mujeres");
     this.subcription.add(
-      this.conexproduc.getProdcuto().subscribe(
+      this.conexionProducto.getProducto().subscribe(
         res=>{
           console.log(res)
           this.ListaProducto=<any>res;
@@ -51,9 +64,13 @@ export class CartMujeresComponent implements OnInit {
       )
     );
   }
+
+  /**
+   * Toma una matriz de objetos, la filtra según una condición y devuelve una nueva matriz de objetos.
+   */
   listarTalla() {
     this.subcription.add(
-      this.conexproduc.getProdcuto().subscribe(
+      this.conexionProducto.getProducto().subscribe(
         res => {
           this.ListaProducto = <any>res;
           this.Listatalla = this.ListaProducto.filter(item =>item.genero=='Mujer') 
@@ -64,8 +81,12 @@ export class CartMujeresComponent implements OnInit {
     );
   }
 
+  /**
+   * Es una función que llama a un servicio que realiza una solicitud a una API y devuelve una lista de
+   * objetos.
+   */
   listarMarcas() {
-    this.ConexMarca.getMarcas().subscribe(
+    this.conexionMarca.getMarcas().subscribe(
       (res: any) => {
         if (res.length === 0) {
           this.ListaMarca = [];
@@ -77,10 +98,18 @@ export class CartMujeresComponent implements OnInit {
     );
   }
 
+  /**
+   * Abre un modal.
+   */
   abrirmodal(){
   this.info_modal = true;
   }
 
+ /**
+  * Toma el valor de la opción seleccionada en el desplegable y se lo asigna a la variable
+  * tallaSeleccionada.
+  * @param {any} event - cualquier
+  */
   getSelectedTalla(event: any) {
     const selectTalla = event.target as HTMLSelectElement;
     this.tallaSeleccionada = String(selectTalla.value);
@@ -88,14 +117,22 @@ export class CartMujeresComponent implements OnInit {
     this.listarProductosFiltroTalla();
   }
 
+  /**
+   * Obtiene el valor seleccionado del desplegable y lo asigna a la variable marcaId.
+   * @param {any} event - cualquier
+   */
   getSelectedMarca(event: any) {
     const selectMarca = event.target as HTMLSelectElement;
     this.marcaId = Number(selectMarca.value);
     this.listarProductosFiltroMarca();
   }
 
+  /**
+   * Es una función que obtiene una lista de productos de una base de datos, los filtra por género y
+   * tamaño y luego los muestra en la página.
+   */
   listarProductosFiltroTalla() {
-    this.conexproduc.getProdcuto().subscribe(
+    this.conexionProducto.getProducto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;
@@ -105,8 +142,12 @@ export class CartMujeresComponent implements OnInit {
     );
   }
 
+  /**
+   * Es una función que obtiene una lista de productos de una base de datos, los filtra por género y
+   * marca y luego los muestra en la página.
+   */
   listarProductosFiltroMarca() {
-    this.conexproduc.getProdcuto().subscribe(
+    this.conexionProducto.getProducto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;

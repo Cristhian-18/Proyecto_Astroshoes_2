@@ -13,6 +13,7 @@ export class RegistrarMarcaComponent implements OnInit {
   ListaMarca:Marca[]=[];
   id:number=0;
 
+ /* Un cargar marca. */
   marca:Marca={
       id_Marca:0,
       nombre:'',
@@ -25,9 +26,15 @@ export class RegistrarMarcaComponent implements OnInit {
     descripcion:['',Validators.required]
 } 
  */
+
+  /**
+   * La función constructora se llama cuando se crea una instancia del componente, y es el lugar
+   * perfecto para colocar la lógica de inicialización.
+   * @param {ConexMarcaService} conexion - ConexMarcaServicio
+   */
   constructor( private conexion:ConexMarcaService) {     
     this.ListaMarca =<any>  conexion.getMarcas();    
-    this.conexion.disparadorMODIFICARMARCA.subscribe(data=>{
+    this.conexion.disparadorMarca.subscribe(data=>{
         this.detalle = data;
     })
   }
@@ -36,6 +43,9 @@ export class RegistrarMarcaComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  /**
+   * Toma los datos del formulario y los envía al backend para almacenarlos en la base de datos.
+   */
   agregarMarcas(){
     try {  
       this.marca.id_Marca = (this.detalle)
@@ -66,6 +76,9 @@ export class RegistrarMarcaComponent implements OnInit {
    
   }
 
+ /**
+  * Limpia los datos del formulario.
+  */
   Limpiar(){
     this.marca.id_Marca=0,
     this.marca.nombre='',

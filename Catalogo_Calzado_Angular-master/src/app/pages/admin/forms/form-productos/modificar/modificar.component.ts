@@ -27,6 +27,7 @@ export class ModificarComponent implements OnInit {
   id_entrada:number=0;//ID PARA EDITAR 
   subcription: Subscription = new Subscription();
 
+  /* Un modelo del producto. */
   Producto:Producto={
     pk_id_producto: 0,
     codigo_producto:'', 
@@ -42,8 +43,16 @@ export class ModificarComponent implements OnInit {
     fk_id_categoria:0
   };
 
+  /**
+   * Un constructor que se utiliza para inicializar la clase.
+   * @param {ConexProductosService} ConexProductoService - Este es el servicio que creé para conectarme
+   * a la API.
+   * @param {ConexMarcaService} ConexMarca - es el nombre del servicio que estoy usando para obtener
+   * los datos de la base de datos.
+   * @param {ConexCategoriaService} ConexCategoria - es el nombre del servicio
+   */
   constructor(private ConexProductoService:ConexProductosService, private ConexMarca:ConexMarcaService,private ConexCategoria:ConexCategoriaService) {
-    this.ListarCargaProducto();
+    this.CargarProducto();
   }
 
   ngOnInit(): void {
@@ -55,9 +64,15 @@ export class ModificarComponent implements OnInit {
     console.log('Observable cerrado')
   }
 
-  ListarCargaProducto(){
+  /**
+   * Se suscribe a un servicio que devuelve un producto, luego asigna el producto a una variable, luego
+   * asigna el producto a otra variable, luego recorre la segunda variable y asigna la marca, categoría
+   * y género del producto a las variables, luego llama a una función que devuelve la marca, la
+   * categoría y el género, luego verifica si el producto está en oferta.
+   */
+  CargarProducto(){
     this.subcription.add(
-      this.ConexProductoService.disparadorDetalle.subscribe(data=>{
+      this.ConexProductoService.disparadorDetalleProducto.subscribe(data=>{
         this.ConexProductoService.getUnProducto(data).subscribe(
         res=>{             
           this.cargar=res;  
@@ -125,6 +140,12 @@ export class ModificarComponent implements OnInit {
   } 
 
   //OFERTA CHECK
+  /**
+   * Si el valor es verdadero, establezca la propiedad isChecked en verdadero y registre "Oferta" en la
+   * consola. Si el valor es falso, establezca la propiedad isChecked en falso y registre "No Oferta"
+   * en la consola.
+   * @param {boolean} valor - booleano
+   */
   obtenerOferta(valor: boolean) {
     if(valor == true){
       this.isChecked = valor;
@@ -135,62 +156,60 @@ export class ModificarComponent implements OnInit {
     }
   }
 
+  /**
+   * Toma una cadena, la convierte en un número entero y la asigna a la propiedad fk_id_categoria del
+   * objeto Producto.
+   * </código>
+   * @param {string} valor - cadena
+   */
   obtenercategoria(valor: string) {
     this.Producto.fk_id_categoria= parseInt(valor); 
     console.log(valor);
   }
 
+ /**
+  * La función obtenerMarca() toma como parámetro una cadena y la asigna a la propiedad fk_marca del
+  * objeto Producto.
+  * </código>
+  * @param {string} valor - cadena
+  */
   obtenerMarca(valor: string) {
     this.Producto.fk_marca = parseInt(valor); 
     console.log(valor);
   }
 
-  obtenercGenero(valor: string) {
+  /**
+   * "La función obtenercGenero toma como argumento un string y lo asigna a la propiedad
+   * Producto.genero."
+   * </código>
+   * @param {string} valor - cadena
+   */
+  obtenerGenero(valor: string) {
     this.Producto.genero = valor;
     console.log(valor);
   }
-  /*
-  modificar(ind:number,codigo_producto:string,img:string,nombre_producto:string,descripcion:string,fk_marca:number,modelo:string,genero:string,
-    talla:string,costo:string,oferta:string,fk_id_categoria:number){
-    //Extrae text//
-    this.Producto.pk_id_producto = ind;
-    this.Producto.codigo_producto =codigo_producto;
-    this.Producto.img =img;
-    this.Producto.nombre_producto =nombre_producto;
-    this.Producto.descripcion =descripcion;
-    if(this.Producto.fk_marca == 0){
-      this.Producto.fk_marca = fk_marca;
-    }
-    this.Producto.modelo = modelo;
-    if(this.Producto.genero == ''){
-      this.Producto.genero =genero;
-    }
-   
-    this.Producto.talla = talla;
-    this.Producto.costo =costo;
-
-    if(this.isChecked == true){
-      this.Producto.oferta ='Oferta';
-    }else{
-      this.Producto.oferta ='No Oferta';
-    }
-
-    if(this.Producto.fk_id_categoria== 0){
-      this.Producto.fk_id_categoria =fk_id_categoria;
-    }
-    console.log(this.Producto);
-          
-    //Envia a la base de datos
-    this.ConexProductoService.editproducto(this.Producto.pk_id_producto,this.Producto).subscribe(
-       res=>{
-         console.log(res);       
-       },
-       err=>console.log(err)
-     ); 
-  }
-  */
   
+ 
 
+  /**
+   * Quiero actualizar los datos en la base de datos, pero quiero actualizar solo los datos que no
+   * están vacíos, es decir, si el usuario no quiere cambiar los datos, no los actualiza. R: Puede usar
+   * el método <code>Object.keys()</code> para obtener las claves del objeto y luego iterar sobre ellas
+   * para verificar si el valor está vacío o no. <code>Object.keys(this.Producto).forEach(key =&gt; {
+   * if (this.Producto[key] === &#39;&#39;) { delete this.Producto[key]; } });</code>
+   * @param {number} ind - número,
+   * @param {string} codigo_producto - cadena;
+   * @param {string} img - cadena,
+   * @param {string} nombre_producto - cadena;
+   * @param {string} descripcion - cadena,fk_marca: numero,modelo: cadena,genero: cadena,
+   * @param {number} fk_marca - número,
+   * @param {string} modelo - cadena,
+   * @param {string} genero - cadena;
+   * @param {string} talla - cadena,
+   * @param {string} costo - cadena;
+   * @param {string} oferta - cadena;
+   * @param {number} fk_id_categoria - número,
+   */
   modificar(ind:number,codigo_producto:string,img:string,nombre_producto:string,descripcion:string,fk_marca:number,modelo:string,genero:string,
     talla:string,costo:string,oferta:string,fk_id_categoria:number){
     //Extrae text//
@@ -235,7 +254,7 @@ export class ModificarComponent implements OnInit {
           if(this.Producto.pk_id_producto != 0 && this.Producto.codigo_producto !='' && this.Producto.img!='' && this.Producto.nombre_producto!=''
          && this.Producto.descripcion!='' && this.Producto.fk_marca !=0 && this.Producto.modelo!='' && this.Producto.genero !='' && this.Producto.talla !=''
          && this.Producto.costo !='' && this.Producto.oferta !='' && this.Producto.fk_id_categoria !=0){
-          this.ConexProductoService.editproducto(this.Producto.pk_id_producto,this.Producto).subscribe(
+          this.ConexProductoService.editProducto(this.Producto.pk_id_producto,this.Producto).subscribe(
               res=>{
                 console.log(res);       
               },
@@ -264,6 +283,4 @@ export class ModificarComponent implements OnInit {
       }
     })    
   }
-
-
 }

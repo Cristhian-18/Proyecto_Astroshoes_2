@@ -25,6 +25,11 @@ export class SidebarAdminComponent implements OnInit {
   isLoggedIn: boolean;
   decodedToken: any;
   nombreUsuario: string | undefined;
+  /**
+   * Si el usuario tiene un token, entonces el usuario está conectado
+   * @param {CookieService} cookieService - Este es el servicio que importamos de ngx-cookie-service.
+   * @param {Router} router - Enrutador: este es el servicio de enrutador angular.
+   */
   constructor(private cookieService: CookieService, private router: Router) {
     const token = cookieService.get('token');
     if (token) {
@@ -36,6 +41,9 @@ export class SidebarAdminComponent implements OnInit {
     }
   }
 
+  /**
+   * Elimina la cookie de token y luego navega a la página de inicio
+   */
   logout() {
     this.cookieService.delete('token');
     swal.fire({

@@ -14,10 +14,15 @@ export class InfoModalsComponent implements OnInit {
   cargar: any = [];
   subcription: Subscription = new Subscription();
   
-  constructor(private ConexProductoService: ConexProductosService, private ConexFavsService: ConexFavService) {
+  /**
+   * Estoy tratando de obtener los datos del servicio y luego enviarlos al componente.
+   * @param {ConexProductosService} conexionProducto - ConexProductosServicio
+   * @param {ConexFavService} conexionFavoritos - ConexFavServicio
+   */
+  constructor(private conexionProducto: ConexProductosService, private conexionFavoritos: ConexFavService) {
     this.subcription.add(
-      this.ConexProductoService.disparadorDetalle.subscribe(data => {
-        this.ConexProductoService.getUnProducto(data).subscribe(
+      this.conexionProducto.disparadorDetalleProducto.subscribe(data => {
+        this.conexionProducto.getUnProducto(data).subscribe(
           res => {
             console.log(res)
             this.cargar = res;
@@ -32,19 +37,28 @@ export class InfoModalsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Cuando se destruya el componente, anule la suscripción del observable.
+   */
   ngOnDestroy(): void {
     this.subcription.unsubscribe();
   }
 
+  /**
+   * Estoy tratando de obtener el correo electrónico del token y, si lo obtengo, lo usaré para llamar a
+   * un servicio que insertará la identificación del producto y el correo electrónico en una tabla.
+   * </código>
+   * @param {number} producid - numero = este.producto.id;
+   */
   addToFavorites(producid: number) {
     // Obtener el email del token
     let email: string | null = null;
     // Lógica para obtener el email del token
-    email = this.ConexFavsService.getEmailFromToken();
+    email = this.conexionFavoritos.getEmailFromToken();
     if (email !== null) {
       // Usar el email para hacer la llamada al servicio
       // Llamar a la función del servicio que inserta en la tabla favoritos
-      this.ConexFavsService.addFavorito(producid, email).subscribe(
+      this.conexionFavoritos.addFavorito(producid, email).subscribe(
         res => {
           console.log(res);
           swal.fire({

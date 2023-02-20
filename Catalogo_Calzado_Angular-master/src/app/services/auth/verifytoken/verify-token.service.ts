@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 import { API_URL } from '../../api';
 
+/* Una interfaz TypeScript que define la estructura del token. */
 interface TokenPayload {
   user: {
   id: number;
@@ -15,16 +16,21 @@ interface TokenPayload {
   },
   iat: number;
   exp: number;
-  }
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerifyTokenService {
+
   private url = API_URL+'verifyToken'; // URL de tu API para verificar el token
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
 
+/**
+ * Envía una solicitud a la API para verificar el token y, si el token no es válido, redirige al
+ * usuario a la página de inicio de sesión.
+ */
   verifyToken() {
     // Obtener el token de las cookies
     const token = this.cookieService.get('token');
@@ -48,6 +54,11 @@ export class VerifyTokenService {
     );
   }
 
+  /**
+   * Envía una solicitud al servidor con el token almacenado en la cookie y, si el token es válido,
+   * devuelve el rol del usuario; de lo contrario, redirige al usuario a la página de inicio.
+   * @returns Una promesa que se resuelve en una cadena.
+   */
   getRole(): Promise<string> {
     return new Promise((resolve, reject) => {
       const token = this.cookieService.get('token');

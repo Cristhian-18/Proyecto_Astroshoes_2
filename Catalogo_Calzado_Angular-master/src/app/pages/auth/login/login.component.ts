@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 
+/* Una interfaz que se utiliza para definir la estructura del token que devuelve el servidor. */
 interface TokenPayload {
   user: {
     id: number;
@@ -33,11 +34,26 @@ export class LoginComponent {
   segundosRestantes: number = 0;
   btnLogin: HTMLElement;
 
+  /**
+   * La función constructora es una función especial que se llama cuando se crea un objeto a partir de
+   * una clase.
+   * @param {LoginService} loginService - LoginService: este es el servicio que se utilizará para
+   * llamar a la API de inicio de sesión
+   * @param {Router} router - Enrutador: este es el servicio de enrutador angular.
+   * @param {CookieService} cookieService - CookieService: este es el servicio que se utilizará para
+   * establecer la cookie.
+   * @param {ElementRef} elementRef - ElementRef: esta es la clase Angular ElementRef. Se utiliza para
+   * obtener una referencia al elemento DOM.
+   */
   constructor(private loginService: LoginService, private router: Router, private cookieService: CookieService, private elementRef: ElementRef) {
     this.btnLogin = document.getElementById('btnLogin')!;
     this.password = this.elementRef.nativeElement.querySelector('#password');
   }
 
+  /**
+   * Si el tipo de entrada es contraseña, cámbielo a texto y establezca isShowingPassword en verdadero.
+   * De lo contrario, cámbielo a contraseña y establezca isShowingPassword en falso.
+   */
   togglePassword() {
     const inputType = this.password.nativeElement.type;
     if (inputType === 'password') {
@@ -47,8 +63,15 @@ export class LoginComponent {
         this.password.nativeElement.type = 'password';
         this.isShowingPassword = false;
     }
-}
+  }
 
+  /**
+   * Si el usuario ha intentado iniciar sesión 3 veces, deshabilite el botón de inicio de sesión
+   * durante 60 segundos; de lo contrario, si el usuario ha intentado iniciar sesión menos de 3 veces,
+   * inicie sesión.
+   * @param {string} email - cadena, contraseña: cadena
+   * @param {string} password - cadena
+   */
   loginClick(email: string, password: string) {
 
     if (this.intentos === 2) {

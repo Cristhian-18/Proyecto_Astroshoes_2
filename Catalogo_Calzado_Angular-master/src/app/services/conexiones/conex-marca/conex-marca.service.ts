@@ -8,23 +8,32 @@ import{tap} from 'rxjs/operators'
   providedIn: 'root'
 })
 export class ConexMarcaService {
-  @Output() disparadorMODIFICARMARCA: EventEmitter<any> = new EventEmitter();
+
+/* Un emisor de eventos que se utiliza para emitir un evento al componente principal. */
+  @Output() disparadorMarca: EventEmitter<any> = new EventEmitter();
+
+ /* Una variable que se utiliza para almacenar la URL de la API. */
   private url=API_URL+'marca/';
+
+/* Un Sujeto que se usa para emitir un evento al componente principal. */
   private _refresh$ = new Subject<void>();
   
   constructor(private http:HttpClient) { }
 
-  //getMarcas
+
+ /* Una función que devuelve los datos de la API. */
   getMarcas(){
     return this.http.get(this.url);
   };
 
- //get un Producto
-  getUnmARCA(id_Marca:number){
+
+ /* Una función que devuelve los datos de la API. */
+  getUnMarca(id_Marca:number){
     return this.http.get(this.url+id_Marca)
   };
 
-  ///Agregar///
+  
+ /* Una función que agrega una nueva marca a la base de datos. */
   addMarca(marca:Marca){
     return this.http.post(this.url,marca)
     .pipe(
@@ -34,13 +43,15 @@ export class ConexMarcaService {
     );
   };
 
-  //Eliminar//
-  deletemarca(id:number){
+
+  /* Eliminación de una marca de la base de datos. */
+  deleteMarca(id:number){
     return this.http.delete(this.url+id);
   };
 
-  //Editar//
-  editmarca(id:number, marca:Marca){
+ 
+  /* Una función que actualiza los datos en la base de datos. */
+  editMarca(id:number, marca:Marca){
     return this.http.put(this.url+id,marca)
     .pipe(
       tap(()=>{
@@ -50,13 +61,21 @@ export class ConexMarcaService {
   };
 
   //Refrescar tablas//
+
+  /**
+   * La función actualizar $ devuelve el valor de la variable privada _refresh $.
+   * @returns El observable que se devuelve es el que se crea en el constructor.
+   */
   get refresh$(){
     return this._refresh$;
   }
 
 }
 
-console.log("Servicio en Uso MARCAS");
+/* Es una declaración de depuración. */
+console.log("Conexion de Marcas!");
+
+/* Una declaración de depuración. */
 export interface Marca{
   id_Marca:number;
   nombre:string;

@@ -1,6 +1,11 @@
+
+/* Importación del módulo express. */
 const express = require('express');
+/* Un middleware que nos permite realizar peticiones desde el frontend al backend. */
 const cors = require('cors');
+/* Creación de una instancia de la aplicación express. */
 const app = express();
+/* Importación del archivo index.controllers.js. */
 const indexControllers = require('./controllers/index.controlles');
 
 // Politcas CORS
@@ -10,6 +15,7 @@ app.use(cors());
 //añadir nombre del puerto en este caso es el Fly ----- o el localthost
 require('dotenv').config();
 
+/* Obtener el puerto de la variable de entorno. */
 const port = process.env.PORT;
 
 //middlewars
@@ -46,6 +52,7 @@ app.use('/listarFavoritos', require('./routers/index'));
 
 
 //router
+/* Importando los enrutadores del archivo index.js en la carpeta de enrutadores. */
 app.use('/producto', require('./routers/index'));
 app.use('/marca', require('./routers/indexM'));
 app.use('/categoria', require('./routers/indexC'));
@@ -53,5 +60,6 @@ app.use('/usuario', require('./routers/indexU'));
 app.use('/favoritos', require('./routers/indexF'));
 app.use('/administracion', require('./routers/indexA'));
 
+/* Escuchando el puerto e imprimiendo un mensaje a la consola. */
 app.listen(port);
 console.log('INICIO DE SERVER EXITOSO', port, '!!');

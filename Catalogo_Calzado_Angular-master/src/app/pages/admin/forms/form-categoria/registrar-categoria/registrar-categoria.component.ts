@@ -13,15 +13,21 @@ export class RegistrarCategoriaComponent implements OnInit {
   ListaCategoria:categoria[]=[];
   id:string='';
 
+  /* Creando un objeto de tipo `categoria` y asignándolo a la variable `categoria`. */
   categoria:categoria={
     pk_id_categoria:0,
     nombre_cat:'',
     descripcion:''
   };
   
+ /**
+  * La función constructora se llama cuando se crea una instancia del componente, y es el lugar
+  * perfecto para colocar la lógica de inicialización.
+  * @param {ConexCategoriaService} conexion - ConexCategoríaServicio
+  */
   constructor( private conexion:ConexCategoriaService) {     
     this.ListaCategoria=<any>conexion.getCategoria();    
-    this.conexion.disparadorDetalle.subscribe(data=>{
+    this.conexion.disparadorCategoria.subscribe(data=>{
         this.detalle = data;
     });
   }
@@ -29,6 +35,9 @@ export class RegistrarCategoriaComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  /**
+   * Es una función que agrega una categoría a la base de datos.
+   */
   agregarCategoria(){
     try {
       this.categoria.pk_id_categoria= (this.detalle)
@@ -56,7 +65,10 @@ export class RegistrarCategoriaComponent implements OnInit {
       });
     } 
   }
-
+  
+  /**
+  * Limpia los datos del formulario.
+  */
   Limpiar(){
     this.categoria.pk_id_categoria=0,
     this.categoria.nombre_cat='',

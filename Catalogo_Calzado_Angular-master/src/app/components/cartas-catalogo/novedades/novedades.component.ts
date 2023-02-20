@@ -8,13 +8,18 @@ import { ConexProductosService,Producto } from 'src/app/services/conexiones/cone
 })
 
 export class NovedadesComponent implements OnInit {
-  @Input() dataEntrante:any;
+  @Input() dataEntranteDetalle:any;
   p = 1;
   info_modal:boolean=false;
   ListaProducto:Producto[]=[];
   subcription: Subscription = new Subscription();
 
-  constructor(private conexproduc:ConexProductosService) { }
+ /**
+  * La función constructora es una función especial que se llama cuando se crea una nueva instancia de
+  * la clase.
+  * @param {ConexProductosService} conexionProducto - Este es el nombre del parámetro.
+  */
+  constructor(private conexionProducto:ConexProductosService) { }
   
   ngOnInit(){
     this.listarProductos();
@@ -24,17 +29,27 @@ export class NovedadesComponent implements OnInit {
     this.subcription.unsubscribe();
   }
 
-  getNombres(nombre:number){
-    this.dataEntrante = nombre;
-    console.log(this.dataEntrante);
-    this.conexproduc.disparadorDetalle.emit(this.dataEntrante)
+  /**
+   * Estoy tratando de enviar un número de un componente a otro.
+   * </código>
+   * @param {number} nombre - número
+   */
+  getIDProducto(nombre:number){
+    this.dataEntranteDetalle = nombre;
+    console.log(this.dataEntranteDetalle);
+    this.conexionProducto.disparadorDetalleProducto.emit(this.dataEntranteDetalle)
   }
 
+  /**
+   * Estoy usando un servicio para obtener datos de una base de datos y luego estoy usando una
+   * suscripción para obtener los datos del servicio y luego estoy usando una variable para almacenar
+   * los datos de la suscripción
+   */
   listarProductos()
   {
     console.log("---Servicio Novedades---");
     this.subcription.add(
-      this.conexproduc.getProdcuto().subscribe(
+      this.conexionProducto.getProducto().subscribe(
         res=>{
           console.log(res)
           this.ListaProducto=<any>res;     
@@ -44,6 +59,9 @@ export class NovedadesComponent implements OnInit {
     );
   }
 
+ /**
+  * Establece el valor de la variable info_modal en verdadero.
+  */
   abrirmodal(){
   this.info_modal = true;
   }

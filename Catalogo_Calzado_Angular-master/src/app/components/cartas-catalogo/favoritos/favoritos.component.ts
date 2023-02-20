@@ -13,7 +13,12 @@ export class FavoritosComponent implements OnInit {
   allfavoritos: any = []; // Array para guardar los favoritos
   info_modal: boolean = false;
   subcription: Subscription = new Subscription();
-  constructor(private conexFavService: ConexFavService) { }
+ /**
+  * La función constructora es una función especial que se llama cuando se crea una nueva instancia de
+  * la clase.
+  * @param {ConexFavService} conexionFavoritos - ConexFavServicio
+  */
+  constructor(private conexionFavoritos: ConexFavService) { }
 
   ngOnInit() {
     this.favoritos();
@@ -28,9 +33,12 @@ export class FavoritosComponent implements OnInit {
     console.log('Observable cerrado');
   }
   
+  /**
+   * Es una función que obtiene todos los favoritos de la base de datos y los coloca en una matriz.
+   */
   favoritos(): void {
     this.subcription.add(
-    this.conexFavService
+    this.conexionFavoritos
       .listarFavoritos()
       .subscribe((response: any) => {
         if (response.success) {
@@ -45,10 +53,18 @@ export class FavoritosComponent implements OnInit {
     );
   }
 
+  /**
+   * Establece el valor de la variable info_modal en verdadero.
+   */
   abrirmodal() {
     this.info_modal = true;
   }
 
+  /**
+   * Estoy tratando de eliminar un favorito de una lista de favoritos.
+   * </código>
+   * @param {number} id - número
+   */
   deleteFavorito(id: number) {
     Swal.fire({
       title: 'Seguro que quieres borrarlo?',
@@ -60,7 +76,7 @@ export class FavoritosComponent implements OnInit {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.value) {
-        this.conexFavService.deletFavorito(id).subscribe(
+        this.conexionFavoritos.deletFavorito(id).subscribe(
           res => {
             Swal.fire(
               'Eliminado!',

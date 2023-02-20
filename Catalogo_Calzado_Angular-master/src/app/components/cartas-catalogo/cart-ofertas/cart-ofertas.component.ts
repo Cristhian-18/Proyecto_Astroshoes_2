@@ -8,14 +8,18 @@ import { ConexProductosService,Producto } from 'src/app/services/conexiones/cone
   styleUrls: ['./cart-ofertas.component.css']
 })
 export class CartOfertasComponent implements OnInit {
-  @Input() dataEntrante:any;
+  @Input() dataEntranteDetalle:any;
   p = 1;
   info_modal:boolean=false;
   ListaProducto:Producto[]=[];
   Listaofertas:Producto[]=[];
   subcription: Subscription = new Subscription();
 
-  constructor(private conexproduc:ConexProductosService) { }
+  /**
+   * El constructor es una función que se llama cuando se crea una nueva instancia de una clase
+   * @param {ConexProductosService} conexionProducto - Este es el nombre del parámetro.
+   */
+  constructor(private conexionProducto:ConexProductosService) { }
   
   ngOnInit(){
     this.listarProductos();
@@ -25,17 +29,26 @@ export class CartOfertasComponent implements OnInit {
     this.subcription.unsubscribe();
   }
 
-  getNombres(nombre:number){
-    this.dataEntrante = nombre;
-    console.log(this.dataEntrante);
-    this.conexproduc.disparadorDetalle.emit(this.dataEntrante)
+ /**
+  * Estoy tratando de enviar un número de un componente a otro.
+  * </código>
+  * @param {number} nombre - número
+  */
+  getIDProducto(nombre:number){
+    this.dataEntranteDetalle = nombre;
+    console.log(this.dataEntranteDetalle);
+    this.conexionProducto.disparadorDetalleProducto.emit(this.dataEntranteDetalle)
   }
 
+  /**
+   * Estoy usando un servicio para obtener una lista de productos de una base de datos, luego estoy
+   * filtrando la lista para obtener solo los productos que están en oferta
+   */
   listarProductos()
   {
     console.log("---Servicio Novedades---");
     this.subcription.add(
-      this.conexproduc.getProdcuto().subscribe(
+      this.conexionProducto.getProducto().subscribe(
         res=>{
           console.log(res)
           this.ListaProducto=<any>res;  
@@ -47,6 +60,9 @@ export class CartOfertasComponent implements OnInit {
   }
   
 
+ /**
+  * Establece el valor de la variable info_modal en verdadero.
+  */
   abrirmodal(){
   this.info_modal = true;
   }

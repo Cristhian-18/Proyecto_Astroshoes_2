@@ -13,7 +13,7 @@ export class CartNinosComponent implements OnInit {
   tallas = Array.from({length: 45 - 20 + 1}, (_, i) => i + 20);
   tallaSeleccionada = this.tallas[0].toString();
   marcaId: number =1;
-  @Input() dataEntrante:any;
+  @Input() dataEntranteDetalle:any;
   ListaProducto:Producto[]=[];
   ListaNino:Producto[]=[];
   info_modal:boolean=false;
@@ -21,7 +21,12 @@ export class CartNinosComponent implements OnInit {
   Listatalla: Producto[] = [];
   subcription: Subscription = new Subscription();
 
-  constructor(private conexproduc:ConexProductosService, private ConexMarca: ConexMarcaService) { this.listarMarcas()}
+  /**
+   * Esta función se llama cuando se crea el componente y llama a la función listarMarcas().
+   * @param {ConexProductosService} conexionProducto - ConexProductosServicio
+   * @param {ConexMarcaService} conexionMarca - ConexMarcaServicio
+   */
+  constructor(private conexionProducto:ConexProductosService, private conexionMarca: ConexMarcaService) { this.listarMarcas()}
 
   ngOnInit(): void {
     this.listarProductos();
@@ -32,16 +37,25 @@ export class CartNinosComponent implements OnInit {
     this.subcription.unsubscribe();
   }
 
-  getNombres(nombre:number){
-    this.dataEntrante = nombre;
-    console.log(this.dataEntrante);
-    this.conexproduc.disparadorDetalle.emit(this.dataEntrante)
+ /**
+  * Estoy tratando de enviar un número de un componente a otro.
+  * </código>
+  * @param {number} nombre - número
+  */
+  getIDProducto(nombre:number){
+    this.dataEntranteDetalle = nombre;
+    console.log(this.dataEntranteDetalle);
+    this.conexionProducto.disparadorDetalleProducto.emit(this.dataEntranteDetalle)
   }
 
+  /**
+   * Se suscribe a la función getMarcas(), que devuelve un observable, y luego asigna el resultado de
+   * ese observable a la variable ListaMarca.
+   */
   listarMarcas() {
     console.log("---Servicio Carta ninos---");
     this.subcription.add(
-      this.ConexMarca.getMarcas().subscribe(
+      this.conexionMarca.getMarcas().subscribe(
         (res: any) => { 
           if (res.length === 0) {
             this.ListaMarca = [];
@@ -53,9 +67,13 @@ export class CartNinosComponent implements OnInit {
       )
     );
   }
+  /**
+   * Toma una lista de productos, la filtra para incluir solo productos para niños y luego asigna el
+   * resultado a una variable llamada Listatalla.
+   */
   listarTalla() {
     this.subcription.add(
-      this.conexproduc.getProdcuto().subscribe(
+      this.conexionProducto.getProducto().subscribe(
         res => {
           this.ListaProducto = <any>res;
           this.Listatalla = this.ListaProducto.filter(item =>item.genero=='Niños')    
@@ -67,6 +85,11 @@ export class CartNinosComponent implements OnInit {
   }
 
 
+  /**
+   * Toma el valor de la opción seleccionada del desplegable y se lo asigna a la variable
+   * tallaSeleccionada.
+   * @param {any} event - cualquier
+   */
   getSelectedTalla(event: any) {
     const selectTalla = event.target as HTMLSelectElement;
     this.tallaSeleccionada = String(selectTalla.value);
@@ -74,14 +97,22 @@ export class CartNinosComponent implements OnInit {
     this.listarProductosFiltroTalla();
   }
   
+  /**
+   * Obtiene el valor seleccionado del desplegable y lo asigna a la variable marcaId.
+   * @param {any} event - cualquier
+   */
   getSelectedMarca(event: any) {
     const selectMarca = event.target as HTMLSelectElement;
     this.marcaId = Number(selectMarca.value);
     this.listarProductosFiltroMarca();
   }
   
+  /**
+   * Es una función que obtiene una lista de productos de una base de datos, los filtra por género y
+   * tamaño y luego los muestra en una lista.
+   */
   listarProductosFiltroTalla() {
-    this.conexproduc.getProdcuto().subscribe(
+    this.conexionProducto.getProducto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;
@@ -91,8 +122,12 @@ export class CartNinosComponent implements OnInit {
     );
   }
 
+  /**
+   * Es una función que obtiene una lista de productos de una base de datos, los filtra por género y
+   * marca y luego los muestra en la página.
+   */
   listarProductosFiltroMarca() {
-    this.conexproduc.getProdcuto().subscribe(
+    this.conexionProducto.getProducto().subscribe(
       res => {
         console.log(res)
         this.ListaProducto = <any>res;
@@ -102,10 +137,15 @@ export class CartNinosComponent implements OnInit {
     );
   }
 
+  /**
+   * Estoy usando un servicio para obtener una lista de productos de una base de datos, luego estoy
+   * filtrando la lista para obtener solo los productos que tienen el género "Niños" y luego estoy
+   * asignando la lista filtrada a una variable llamada ListaNino
+   */
   listarProductos()
   {
     this.subcription.add(
-      this.conexproduc.getProdcuto().subscribe(
+      this.conexionProducto.getProducto().subscribe(
         res=>{
           console.log(res)
           this.ListaProducto=<any>res;
@@ -116,6 +156,9 @@ export class CartNinosComponent implements OnInit {
     );
   }
 
+  /**
+   * Abre un modal.
+   */
   abrirmodal(){
   this.info_modal = true;
   }

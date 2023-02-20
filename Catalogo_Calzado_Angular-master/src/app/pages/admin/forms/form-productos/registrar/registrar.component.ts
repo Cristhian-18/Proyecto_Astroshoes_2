@@ -25,6 +25,7 @@ export class RegistrarComponent implements OnInit {
   valigen:number  = 0;
 
 
+  /* Creando un objeto de tipo Producto. */
   Producto:Producto={
     pk_id_producto: 0,
     codigo_producto:'', 
@@ -41,8 +42,16 @@ export class RegistrarComponent implements OnInit {
   };
   
  
+  /**
+   * Esta función se llama cuando se inicializa el componente.
+   * @param {ConexProductosService} ConexProductoService - Este es el servicio que se conecta a la API.
+   * @param {ConexMarcaService} ConexMarca - es un servicio que se conecta a la base de datos y
+   * recupera los datos de la marca.
+   * @param {ConexCategoriaService} ConexCategoria - Este es el servicio que se conecta a la base de
+   * datos y recupera los datos.
+   */
   constructor(private ConexProductoService:ConexProductosService, private ConexMarca:ConexMarcaService, private ConexCategoria:ConexCategoriaService) {
-    this.ConexProductoService.disparadorDetalle.subscribe(data=>{
+    this.ConexProductoService.disparadorDetalleProducto.subscribe(data=>{
       this.detalle = data;
       this.Producto.oferta = 'No Oferta';
     });
@@ -79,16 +88,32 @@ export class RegistrarComponent implements OnInit {
   } 
 
 
+ /**
+  * Una función que se llama cuando se carga la página, es una función que está en el servicio, que es
+  * una función que devuelve una lista de objetos.
+  */
   listarGenero(){
   this.ListaGenero= this.ConexProductoService.getGenero();
   } 
 
+  /**
+   * La función obtenercategoria() toma una cadena como argumento y la asigna a la variable valor. La
+   * función luego asigna el valor de valor a la variable Producto.fk_id_categoria ya la variable
+   * valicat. Luego, la función registra el valor de valor en la consola.
+   * @param {string} valor - cadena
+   */
   obtenercategoria(valor: string) {
     this.Producto.fk_id_categoria = parseInt(valor); 
     this.valicat = parseInt(valor); 
     
     console.log(valor);
   }
+  /**
+   * Si el valor de la variable validat no es igual a cero, establezca el valor de la variable
+   * bandera_categoria en verdadero. De lo contrario, establezca el valor de la variable
+   * bandera_categoria en falso.
+   * @returns El valor de la variable bandera_categoria.
+   */
   validacategoria() { 
     
     if( this.valicat != 0 ){
@@ -99,12 +124,25 @@ export class RegistrarComponent implements OnInit {
      return this.bandera_categoria;
   }
 
+ /**
+  * La función obtenerMarca() toma como parámetro una cadena y la asigna a la variable valor. Luego, la
+  * variable valor se analiza en un número entero y se asigna a la variable fk_marca. La variable
+  * valimarc también se analiza en un número entero y se asigna a la variable valimarc. Luego, la
+  * función registra el valor de valor en la consola.
+  * </código>
+  * @param {string} valor - cadena
+  */
   obtenerMarca(valor: string) {
     this.Producto.fk_marca = parseInt(valor); 
     this.valimarc = parseInt(valor); 
 
     console.log(valor);
   }
+ /**
+  * Si el valor de this.valimarc no es igual a cero, entonces establezca this.bandera_marca en
+  * verdadero, de lo contrario, configúrelo en falso.
+  * @returns El valor de la variable bandera_marca.
+  */
   validamarca() { 
     
     if( this.valimarc != 0 ){
@@ -116,11 +154,22 @@ export class RegistrarComponent implements OnInit {
   }
   
 
+/**
+ * Toma una cadena como argumento, la asigna a la propiedad Producto.genero, la convierte en un número
+ * y la asigna a la propiedad valigen, y luego registra la cadena en la consola.
+ * @param {string} valor - cadena
+ */
   obtenercGenero(valor: string) {
     this.Producto.genero = valor;
     this.valigen = parseInt(valor); 
     console.log(valor);
   }
+  /**
+   * Si el valor de la variable valigen no es igual a cero, entonces establezca el valor de la variable
+   * bandera_genero en verdadero, de lo contrario establezca el valor de la variable bandera_genero en
+   * falso.
+   * @returns El valor de la variable bandera_genero.
+   */
   validagenero() { 
     
     if( this.valigen != 0 ){
@@ -131,6 +180,11 @@ export class RegistrarComponent implements OnInit {
      return this.bandera_genero;
   }
   
+  /**
+   * Si el valor es verdadero, establezca la oferta del producto en "Oferta", de lo contrario,
+   * configúrelo en "Sin oferta".
+   * @param {boolean} valor - booleano
+   */
   obtenerOferta(valor: boolean) {
     if(valor == true){
       this.Producto.oferta = 'Oferta';
@@ -140,6 +194,11 @@ export class RegistrarComponent implements OnInit {
       console.log('No Oferta');
     }
   }
+  /**
+   * Si el valor de bandera_categoria no es falso, el valor de bandera_marca no es falso y el valor de
+   * bandera_genero no es falso, establezca el valor de bandera_total en verdadero; de lo contrario,
+   * establezca el valor de bandera_total en falso.
+   */
   validaTodo() { 
     console.log(this.bandera_categoria)
     console.log(this.bandera_marca)
@@ -153,14 +212,8 @@ export class RegistrarComponent implements OnInit {
      return this.bandera_total;
   }
 
-/*
-  agregarProducto(){
-    this.Producto.pk_id_producto = (this.detalle)
-    console.log(this.Producto);
-    this.ConexProductoService.addProdcuto(this.Producto).subscribe();  
-    this.Limpiar(); 
-  }
-  */
+
+  /* Añadir un producto a la base de datos. */
   agregarProducto(){
     try {  
       this.Producto.pk_id_producto = (this.detalle)
@@ -169,7 +222,7 @@ export class RegistrarComponent implements OnInit {
       if(this.Producto.pk_id_producto != 0 && this.Producto.codigo_producto !='' && this.Producto.img!='' && this.Producto.nombre_producto!=''
          && this.Producto.descripcion!='' && this.Producto.fk_marca !=0 && this.Producto.modelo!='' && this.Producto.genero !='' && this.Producto.talla !=''
          && this.Producto.costo !='' && this.Producto.oferta !='' && this.Producto.fk_id_categoria !=0){
-        this.ConexProductoService.addProdcuto(this.Producto).subscribe();
+        this.ConexProductoService.addProducto(this.Producto).subscribe();
         this.Limpiar();  
         swal.fire({
           icon: 'success',

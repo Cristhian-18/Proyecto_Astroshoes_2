@@ -69,7 +69,7 @@ export class FormInicioComponent implements OnInit {
       )
     );
   }   
-
+  ////Listar los usuarios para hacer el contador.////  
   listarUsuario(){
     console.log("---Listar usuarios----");
     this.ConexUsuarioService.getUsuario().subscribe(
@@ -80,11 +80,11 @@ export class FormInicioComponent implements OnInit {
         err => console.log(this.ListaUsuario)
     );   
   }
-
+  ////Listar los productos para hacer el contador.////
   listarProductos(){
     console.log("----Listar PRODUCTOS----");
     this.subcription.add(
-      this.ConexProductoService.getProdcuto().subscribe(
+      this.ConexProductoService.getProducto().subscribe(
         res=>{
           console.log(res)
           this.ListaProducto= <any> res;
@@ -94,21 +94,40 @@ export class FormInicioComponent implements OnInit {
     );
   }
 
+ /**
+  * Cuenta el número de categorías en la lista.
+  * @returns La longitud de la matriz.
+  */
   ContadorCategoria(){
     this.sum_cat = this.ListaCategoria.length;
     return this.sum_cat;
   }
 
+  
+ /**
+  * Cuenta el número de marcas en la lista.
+  * @returns La longitud de la matriz.
+  */
   ContadorMarcas(){
     this.sum_marc = this.ListaMarca.length;
     return this.sum_marc;
   }
 
+  
+ /**
+  * Cuenta el número de productos en la lista.
+  * @returns La longitud de la matriz.
+  */
   ContadorProductos(){
     this.sum_prod = this.ListaProducto.length;
     return this.sum_prod;
   }
 
+ 
+ /**
+  * Cuenta el número de usuarios en la lista.
+  * @returns La longitud de la matriz.
+  */
   ContadorUsuarios(){
     this.sum_user = this.ListaUsuario.length;
     return this.sum_user;

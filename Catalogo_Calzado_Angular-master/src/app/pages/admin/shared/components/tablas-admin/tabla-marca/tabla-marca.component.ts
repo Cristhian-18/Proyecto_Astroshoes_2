@@ -10,8 +10,8 @@ import swal from 'sweetalert2';
 })
 export class TablaMarcaComponent implements OnInit {
 
-  @Input() dataEntrante:any;
-  @Input() dataEntrante2:any;
+  @Input() dataEntranteModificar:any;
+  @Input() dataEntranteInsertar:any;
   subcription: Subscription = new Subscription();
   ListaMarca:Marca[]=[];
   p = 1;
@@ -34,6 +34,10 @@ export class TablaMarcaComponent implements OnInit {
     console.log('Observable cerrado')
   }
 
+  /**
+   * Es una función que obtiene una lista de marcas de un servicio y la asigna a una variable.
+   * </código>
+   */
   listarMarcas(){
     console.log("---Listar marcas----");
     this.subcription.add(
@@ -48,6 +52,10 @@ export class TablaMarcaComponent implements OnInit {
     );
   }
 
+  /**
+   * Elimina una marca de la base de datos.
+   * @param {number} id - número
+   */
   eliminar(id:number){    
     swal.fire({
       title: 'Seguro que quieres borrarlo?',
@@ -59,7 +67,7 @@ export class TablaMarcaComponent implements OnInit {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.value) {
-        this.ConexMarcaService.deletemarca(id).subscribe(
+        this.ConexMarcaService.deleteMarca(id).subscribe(
           res => {
             swal.fire(
               'Eliminado!',
@@ -80,19 +88,32 @@ export class TablaMarcaComponent implements OnInit {
     })  
   }
 
-  getNombres(id:number){
-    this.dataEntrante = id;
+/**
+ * Toma una identificación, la asigna a una variable, emite la variable y registra la identificación.
+ * @param {number} id - número
+ */
+  getIDMarca(id:number){
+    this.dataEntranteModificar = id;
     console.log("ID: ",id);
-    this.ConexMarcaService.disparadorMODIFICARMARCA.emit(this.dataEntrante)
+    this.ConexMarcaService.disparadorMarca.emit(this.dataEntranteModificar)
   } 
 
+ /**
+  * "Cuando el usuario hace clic en un botón, se llama a la función getIndex(), que envía el índice del
+  * botón al servicio, que luego lo envía al componente que lo necesita".
+  * </código>
+  * @param {number} id2 - número
+  */
   getIndex(id2:number){
     this.index=id2;
-    this.dataEntrante2 = id2;
+    this.dataEntranteInsertar = id2;
     console.log("ID: ",id2);
-    this.ConexMarcaService.disparadorMODIFICARMARCA.emit(this.dataEntrante2)
+    this.ConexMarcaService.disparadorMarca.emit(this.dataEntranteInsertar)
   }
 
+  /**
+   * Recorre la matriz y luego asigna el valor del último elemento de la matriz a la variable index2.
+   */
   enviar(){
     for(let i=0;i<this.ListaMarca.length;i++){
       this.index2 = this.ListaMarca[i].id_Marca+1;
@@ -101,6 +122,11 @@ export class TablaMarcaComponent implements OnInit {
     this.getIndex(this.index2);
   }
 
+  /**
+   * Si el término de búsqueda no está vacío, filtre la lista de elementos solo a aquellos que
+   * contienen el término de búsqueda. De lo contrario, muestra la lista completa.
+   * @param {string} busca - cadena
+   */
   filtrar(busca:string){
     if(busca!=''){
       this.ListaMarca = this.ListaMarca.filter(item =>item.nombre.includes(busca))

@@ -1,7 +1,9 @@
 //--------------------------------------------------------CONEXION A POSTGRES--------------------------------------------------------------///
 const { Pool } = require('pg')
-// console.log(process.env)
+
+/* Cargando el archivo .env y almacenando los valores en el objeto process.env. */
 require('dotenv').config()
+/* El código anterior está creando un nuevo conjunto de conexiones a la base de datos. */
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -9,6 +11,7 @@ const pool = new Pool({
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT
 })
+/* El código anterior se está conectando a la base de datos. */
 pool.connect()
     .then(() => console.log("Conexion Exitosa!!"));
 //-----------------------------------------------------------SENTENCIAS DE TABLA PRODUCTOS-------------------------------------------------///
@@ -44,7 +47,16 @@ const verifyToken = (req, res, next) => {
 
 
 
+/* Lectura de la clave pública del sistema de archivos. */
 const publicKey = fs.readFileSync('./public.pem', 'utf8');
+
+/**
+ * Toma los datos del usuario del cuerpo de la solicitud, verifica si el correo electrónico ya está en
+ * uso y, si no lo está, crea un nuevo usuario en la base de datos y devuelve un token.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const setRegister = (req, res) => {
     const { nombres, apellidos, email, password } = req.body;
 
@@ -78,6 +90,14 @@ const setRegister = (req, res) => {
 
 
 
+/**
+ * Recibe un correo electrónico y una contraseña del cuerpo de la solicitud, luego consulta la base de
+ * datos para encontrar al usuario con ese correo electrónico, si existe, compara la contraseña con la
+ * de la base de datos, si coinciden, crea un token con el usuario. id, correo electrónico y rol, y lo
+ * envía de vuelta al cliente
+ * @param req - El objeto de la solicitud.
+ * @param res - El objeto de respuesta.
+ */
 const setLogin = (req, res) => {
     const { email, password } = req.body;
     pool.query('SELECT * FROM usuarios WHERE email = $1', [email], (error, results) => {
@@ -109,7 +129,13 @@ const setLogin = (req, res) => {
 
 
 //-------------------------SELECCIONAR PROUCTO----------------------------//
-const getProdcuto = async (req, res) => {
+/**
+ * Obtiene todos los productos de la base de datos y los devuelve en formato JSON
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
+const getProducto = async (req, res) => {
     try {
         const response = await pool.query('SELECT * FROM "Producto" ORDER BY pk_id_producto ASC;');
         res.status(200).json(response.rows);
@@ -122,7 +148,15 @@ const getProdcuto = async (req, res) => {
 
 };
 //------------------------SELECCIONAR POR ID DE PROUCTO----------------------------//
-const getProdcutoById = async (req, res) => {
+/**
+ * Es una función que recibe una solicitud y una respuesta, y devuelve un JSON con el producto que
+ * coincide con la identificación que se envió en la solicitud.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ * @returns El producto con el id que se pasa como parámetro.
+ */
+const getProductoById = async (req, res) => {
 
     try {
         const pk_id_producto = parseInt(req.params.id);
@@ -136,6 +170,12 @@ const getProdcutoById = async (req, res) => {
     }
 };
 //----------------------------CREAR PROUCTO----------------------------//
+/**
+ * Crea un nuevo producto en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const createProducto = async (req, res) => {
 
     try {
@@ -155,6 +195,12 @@ const createProducto = async (req, res) => {
     }
 };
 //----------------------------MODIFICAR PROUCTO----------------------------//
+/**
+ * Actualiza un producto en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const updateProducto = async (req, res) => {
 
     try {
@@ -184,6 +230,12 @@ const updateProducto = async (req, res) => {
 
 };
 //-------------------------------DELETE PROUCTO------------------------------//
+/**
+ * Elimina un producto de la base de datos.
+ * @param req - El objeto de solicitud representa la solicitud HTTP y tiene propiedades para la cadena
+ * de consulta de solicitud, parámetros, cuerpo, encabezados HTTP, etc.
+ * @param res - El objeto de respuesta.
+ */
 const deleteProducto = async (req, res) => {
 
     try {
@@ -202,6 +254,12 @@ const deleteProducto = async (req, res) => {
 
 //-----------------------------------------------------------SENTENCIAS DE TABLA MARCAS-------------------------------------------------///
 //-------------------------SELECCIONAR MARCAS----------------------------//
+/**
+ * Es una función que devuelve una promesa que se resuelve en una matriz de objetos.
+ * @param req - El objeto de la solicitud.
+ * @param res - El objeto de respuesta.
+ * @returns la lista de marcas en la base de datos.
+ */
 const getMarcas = async (req, res) => {
 
     try {
@@ -216,6 +274,13 @@ const getMarcas = async (req, res) => {
 
 };
 //------------------------SELECCIONAR POR ID DE MARCAS----------------------------//
+/**
+ * Es una función que recibe una solicitud y una respuesta, y devuelve los datos de una marca con el id
+ * que se envía en la solicitud
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const getMarcasById = async (req, res) => {
     try {
         const id_Marca = parseInt(req.params.id);
@@ -229,6 +294,19 @@ const getMarcasById = async (req, res) => {
     }
 };
 //----------------------------CREAR MARCAS----------------------------//
+/**
+ * Crea un nuevo Marca en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ * @returns const getMarca = asíncrono (req, res) => {
+ *     intentar {
+ *         const respuesta = espera pool.query('SELECT * FROM "Marca";');
+ *         res.json(respuesta.filas);
+ *     } atrapar (error) {
+ *         devuelve res.status(500).json({
+ *             mensaje: "Lo sentimos!!! :'v "
+ */
 const createMarca = async (req, res) => {
     try {
         const { id_Marca, nombre, descripcion } = req.body;
@@ -247,6 +325,12 @@ const createMarca = async (req, res) => {
     }
 };
 //----------------------------MODIFICAR MARCAS----------------------------//
+/**
+ * Actualiza una marca en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const updateMarca = async (req, res) => {
     try {
         const id_Marca = parseInt(req.params.id);
@@ -267,6 +351,12 @@ const updateMarca = async (req, res) => {
 
 };
 //-------------------------------DELETE MARCAS------------------------------//
+/**
+ * Elimina una marca de la base de datos.
+ * @param req - El objeto de solicitud representa la solicitud HTTP y tiene propiedades para la cadena
+ * de consulta de solicitud, parámetros, cuerpo, encabezados HTTP, etc.
+ * @param res - El objeto de respuesta.
+ */
 const deleteMarca = async (req, res) => {
 
     try {
@@ -285,6 +375,12 @@ const deleteMarca = async (req, res) => {
 };
 //------------------------------------------------------------SENTENCIAS DE TABLA CATEGORIAS-------------------------------------------------///
 //-------------------------SELECCIONAR CATEGORIA----------------------------//
+/**
+ * Consulta la base de datos para todas las categorías y las devuelve en formato JSON.
+ * @param req - El objeto de la solicitud.
+ * @param res - El objeto de respuesta.
+ * @returns la lista de categorías.
+ */
 const getCategoria = async (req, res) => {
     try {
         const response = await pool.query('SELECT * FROM "Categoria" ORDER BY "pk_id_categoria" ASC;');
@@ -297,6 +393,14 @@ const getCategoria = async (req, res) => {
     }
 };
 //------------------------SELECCIONAR POR NOMBRE DE CATEGORIA----------------------------//
+/**
+ * Es una función que recibe una solicitud y una respuesta, y devuelve un JSON con los datos de la
+ * categoría que coinciden con el id que se envió en la solicitud
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ * @returns la categoría por id.
+ */
 const getCategoriaById = async (req, res) => {
     try {
         const pk_id_categoria = parseInt(req.params.id);
@@ -310,6 +414,12 @@ const getCategoriaById = async (req, res) => {
     }
 };
 //----------------------------CREAR CATEGORIAS----------------------------//
+/**
+ * Crea una nueva categoría en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const createCategoria = async (req, res) => {
     try {
         const { pk_id_categoria, nombre_cat,  descripcion } = req.body;
@@ -328,6 +438,12 @@ const createCategoria = async (req, res) => {
     }
 };
 //----------------------------MODIFICAR CATEGORIAS----------------------------//
+/**
+ * Actualiza una categoría en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const updateCategoria = async (req, res) => {
     try {
         const pk_id_categoria = parseInt(req.params.id);
@@ -348,6 +464,12 @@ const updateCategoria = async (req, res) => {
 
 };
 //-------------------------------DELETE CATEGORIAS------------------------------//
+/**
+ * Elimina una categoría de la base de datos.
+ * @param req - El objeto de solicitud representa la solicitud HTTP y tiene propiedades para la cadena
+ * de consulta de solicitud, parámetros, cuerpo, encabezados HTTP, etc.
+ * @param res - El objeto de respuesta.
+ */
 const deleteCategoria = async (req, res) => {
 
     try {
@@ -366,6 +488,12 @@ const deleteCategoria = async (req, res) => {
 };
 //----------------------------------------------------------USUARIO---------------------------------------------------------------///
 //-------------------------SELECCIONAR USUARIO----------------------------//
+/**
+ * Consulta la base de datos para todos los usuarios y devuelve el resultado en formato JSON
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const getUsuario = async (req, res) => {
     try {
         const response = await pool.query('select *from "usuarios";');
@@ -378,6 +506,12 @@ const getUsuario = async (req, res) => {
     }
 };
 //------------------------SELECCIONAR POR ID DE USUARIO----------------------------//
+/**
+ * Es una función que recibe una petición y una respuesta, y devuelve un JSON con los datos del usuario
+ * @param req - El objeto de la solicitud.
+ * @param res - El objeto de respuesta.
+ * @returns el usuario con el id que se está pasando como parámetro.
+ */
 const getUsuarioById = async (req, res) => {
     try {
         const id_usuario = parseInt(req.params.id);
@@ -391,6 +525,12 @@ const getUsuarioById = async (req, res) => {
     }
 };
 //----------------------------CREAR UASUARIOS----------------------------//
+/**
+ * Crea un nuevo usuario en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const createUsuario = async (req, res) => {
     try {
         const { id_usuario, nombre, apellido, correo, contrasena } = req.body;
@@ -409,6 +549,13 @@ const createUsuario = async (req, res) => {
     }
 };
 //----------------------------MODIFICAR USUARIOS----------------------------//
+/**
+ * Toma la identificación del usuario para actualizarse, y los nuevos datos para actualizarse, y
+ * actualiza al usuario en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const updateUsuario = async (req, res) => {
     try {
         const id_usuario = parseInt(req.params.id);
@@ -431,6 +578,12 @@ const updateUsuario = async (req, res) => {
 
 };
 //-------------------------------DELETE USUARIOS------------------------------//
+/**
+ * Elimina un usuario de la base de datos.
+ * @param req - El objeto de solicitud representa la solicitud HTTP y tiene propiedades para la cadena
+ * de consulta de solicitud, parámetros, cuerpo, encabezados HTTP, etc.
+ * @param res - El objeto de respuesta.
+ */
 const deleteUsuario = async (req, res) => {
 
     try {
@@ -449,6 +602,14 @@ const deleteUsuario = async (req, res) => {
 };
 //----------------------------------------------------------FAVORITOS---------------------------------------------------------------///
 //-------------------------------------------------------SELECCIONAR FAVORITOS------------------------------------------------------//
+/**
+ * Recibe un correo electrónico, busca la identificación del usuario y luego devuelve los productos
+ * favoritos del usuario.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ * @returns los productos que el usuario ha marcado como favoritos.
+ */
 const listarFavoritos = async (req, res) => {
 
     try {
@@ -472,6 +633,17 @@ const listarFavoritos = async (req, res) => {
     }
 };
 //------------------------SELECCIONAR POR ID DE FAVORITOS----------------------------//
+/**
+ * Obtiene los favoritos de un usuario por su id
+ * @param req - El objeto de la solicitud.
+ * @param res - El objeto de respuesta.
+ * @returns const getFavoritesById = async(req, res) => {
+ *     intentar {
+ *         const user_id = parseInt(req.params.id);
+ *         const respuesta = espera pool.query('SELECCIONE * DE favoritos DONDE fk_user_id = ',
+ * [user_id]);
+ *         para (
+ */
 const getFavoritosById = async (req, res) => {
     try {
         const id_usuario = parseInt(req.params.id);
@@ -488,6 +660,12 @@ const getFavoritosById = async (req, res) => {
     }
 };
 
+/**
+ * Consulta en la base de datos todas las filas de la tabla 'favoritos' y las devuelve en formato JSON
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const getFavoritos = async (req, res) => {
     try
     {
@@ -503,6 +681,14 @@ const getFavoritos = async (req, res) => {
 };
 
 //----------------------------CREAR FAVORITOS----------------------------//
+/**
+ * Toma el correo electrónico y la identificación del producto del cuerpo de la solicitud, encuentra la
+ * identificación de usuario correspondiente al correo electrónico, verifica si el producto ya está en
+ * la lista de favoritos del usuario y, de no ser así, lo agrega a la lista de favoritos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const createFavorito = async (req, res) => {
     try {
         const email = req.body.email;
@@ -539,6 +725,12 @@ const createFavorito = async (req, res) => {
 
 
 //----------------------------MODIFICAR FAVORITOS----------------------------//
+/**
+ * Actualiza los datos de la tabla Favoritos en la base de datos
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const updateFavoritos = async (req, res) => {
     try {
         const pk_id_favorito = parseInt(req.params.id);
@@ -559,6 +751,12 @@ const updateFavoritos = async (req, res) => {
 
 };
 //-------------------------------DELETE FAVORITOS------------------------------//
+/**
+ * Elimina un usuario de la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const deleteFavoritos = async (req, res) => {
 
     try {
@@ -576,6 +774,13 @@ const deleteFavoritos = async (req, res) => {
 };
 //----------------------------------------------------------ADMINISTRACION---------------------------------------------------------------///
 //-------------------------SELECCIONAR ADMINISTRACION----------------------------//
+/**
+ * Es una función asíncrona que usa la palabra clave await para esperar el resultado de una consulta a
+ * la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const getAdminstracion = async (req, res) => {
     try {
         const response = await pool.query('select *from "Administrador";');
@@ -588,6 +793,12 @@ const getAdminstracion = async (req, res) => {
     }
 };
 //------------------------SELECCIONAR POR ID DE ADMINISTRACION----------------------------//
+/**
+ * Obtiene el administrador por id.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const getAdminstracionById = async (req, res) => {
     try {
         const pk_id_administrador = parseInt(req.params.id);
@@ -601,6 +812,12 @@ const getAdminstracionById = async (req, res) => {
     }
 };
 //----------------------------CREAR ADMINISTRADOR----------------------------//
+/**
+ * Crea un nuevo administrador en la base de datos.
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const createAdminstracion = async (req, res) => {
     try {
         const { pk_id_administrador, cedula, nombre_admin, apellido_admin, usuario, contrasena, email } = req.body;
@@ -619,6 +836,12 @@ const createAdminstracion = async (req, res) => {
     }
 };
 //----------------------------MODIFICAR ADMINISTRACION----------------------------//
+/**
+ * Actualiza los datos del administrador con el id que se le pasa como parámetro
+ * @param req - El objeto de la solicitud. Contiene información sobre la solicitud HTTP que generó el
+ * evento.
+ * @param res - El objeto de respuesta.
+ */
 const updateAdministracion = async (req, res) => {
     try {
         const pk_id_administrador = parseInt(req.params.id);
@@ -643,6 +866,12 @@ const updateAdministracion = async (req, res) => {
 
 };
 //-------------------------------DELETE ADMINISTRACION------------------------------//
+/**
+ * Elimina un usuario de la base de datos.
+ * @param req - El objeto de solicitud representa la solicitud HTTP y tiene propiedades para la cadena
+ * de consulta de solicitud, parámetros, cuerpo, encabezados HTTP, etc.
+ * @param res - El objeto de respuesta.
+ */
 const deleteAdministracion = async (req, res) => {
 
     try {
@@ -660,12 +889,13 @@ const deleteAdministracion = async (req, res) => {
 };
 
 //----------------------------------------------------------COMUNICACION-------------------------------------------///
+/* El código anterior está exportando las funciones que se van a utilizar en las rutas. */
 module.exports = {
     verifyToken,
     setRegister,
     setLogin,
-    getProdcuto,
-    getProdcutoById,
+    getProdcuto: getProducto,
+    getProdcutoById: getProductoById,
     createProducto,
     updateProducto,
     deleteProducto,

@@ -15,7 +15,8 @@ export class ConexCategoriaService {
   /* Una variable privada que se utiliza para almacenar la URL de la API. */
   private url=API_URL+'categoria/';
 
-  /* Una variable privada que se utiliza para almacenar la URL de la API. */
+  
+  /* Un Sujeto que se usa para emitir un evento al componente principal. */
   private _refresh$ = new Subject<void>();
   constructor(private http:HttpClient) { }
   

@@ -1,4 +1,5 @@
 //--------------------------------------------------------CONEXION A POSTGRES--------------------------------------------------------------///
+/* Importando el objeto Pool desde el módulo pg. */
 const { Pool } = require('pg')
 
 /* Cargando el archivo .env y almacenando los valores en el objeto process.env. */
@@ -16,12 +17,22 @@ pool.connect()
     .then(() => console.log("Conexion Exitosa!!"));
 //-----------------------------------------------------------SENTENCIAS DE TABLA PRODUCTOS-------------------------------------------------///
 
+/* El código anterior requiere el módulo jsonwebtoken. */
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 // Leer llave privada
 const privateKey = fs.readFileSync('./private.pem', 'utf8');
 
 // Verificar token
+/**
+ * Comprueba si hay un token en las cookies, si lo hay, lo verifica y agrega el usuario decodificado a
+ * la solicitud.
+ * @param req - El objeto de la solicitud.
+ * @param res - El objeto de respuesta.
+ * @param next - Esta es una función de devolución de llamada que se llamará cuando se complete el
+ * middleware.
+ * @returns Una función que verifica el token.
+ */
 const verifyToken = (req, res, next) => {
     // Obtener token de las cookies
     const token = req.cookies.token;

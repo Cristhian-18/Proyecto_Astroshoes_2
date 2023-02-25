@@ -13,7 +13,7 @@ export class ConexProductosService {
 
  /* Una variable a la que se le asigna un valor. */
   private url=API_URL+'producto/';
-  /* Una variable privada que se utiliza para emitir eventos. */
+  /* Un Sujeto que se usa para emitir un evento al componente principal. */
   private _refresh$ = new Subject<void>();
 
   constructor(private http:HttpClient) { }
@@ -39,15 +39,11 @@ export class ConexProductosService {
       })
     );
   };
-
-
- 
   /* Eliminación de un producto de la base de datos. */
   deletProducto(id:number){
     return this.http.delete(this.url+id);
 
   };
-  
   
 /* Una función que edita un producto en la base de datos. */
   editProducto(id:number, producto:Producto){
@@ -65,8 +61,6 @@ export class ConexProductosService {
  /* Devolviendo el valor de la variable `Genero`. */
   getGenero()
   {return this.Genero};
- 
-
 
  /**
   * Esta función devuelve un observable que emite un valor cada vez que se establece la propiedad
@@ -80,8 +74,6 @@ export class ConexProductosService {
 }
 /* Es una declaración de depuración. */
 console.log("Conexion de Producto!");
-
-
 
 /* Definición de una interfaz para Producto */
 export interface Producto{

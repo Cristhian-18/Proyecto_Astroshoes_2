@@ -20,18 +20,15 @@ export class ConexMarcaService {
   
   constructor(private http:HttpClient) { }
 
-
  /* Una función que devuelve los datos de la API. */
   getMarcas(){
     return this.http.get(this.url);
   };
 
-
  /* Una función que devuelve los datos de la API. */
   getUnMarca(id_Marca:number){
     return this.http.get(this.url+id_Marca)
   };
-
   
  /* Una función que agrega una nueva marca a la base de datos. */
   addMarca(marca:Marca){
@@ -43,14 +40,12 @@ export class ConexMarcaService {
     );
   };
 
-
   /* Eliminación de una marca de la base de datos. */
   deleteMarca(id:number){
     return this.http.delete(this.url+id);
   };
 
- 
-  /* Una función que actualiza los datos en la base de datos. */
+   /* Una función que actualiza los datos en la base de datos. */
   editMarca(id:number, marca:Marca){
     return this.http.put(this.url+id,marca)
     .pipe(

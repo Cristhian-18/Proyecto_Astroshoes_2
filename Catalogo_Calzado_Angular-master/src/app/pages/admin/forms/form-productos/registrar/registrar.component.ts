@@ -274,12 +274,12 @@ export class RegistrarComponent implements OnInit {
     this.Producto.img='', 
     this.Producto.nombre_producto='',
     this.Producto.descripcion='',
-    this.Producto.fk_marca=0, 
+    //this.Producto.fk_marca=0, 
     this.Producto.modelo='',
-    this.Producto.genero='',
+    //this.Producto.genero='',
     this.Producto.talla='',
     this.Producto.costo='',
-    this.Producto.oferta='',
-    this.Producto.fk_id_categoria=0
+    this.Producto.oferta=''
+    //this.Producto.fk_id_categoria=0
   }
 }

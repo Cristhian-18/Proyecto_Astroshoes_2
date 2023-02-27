@@ -68,7 +68,6 @@ export class RegistrarComponent implements OnInit {
     console.log("--- Listar Categoria de productos --");
     this.ConexCategoria.getCategoria().subscribe(
       res=>{
-      // console.log(res)
         this.ListaCategoria=<any>res;         
       },
       err => console.log(err)   
@@ -80,7 +79,6 @@ export class RegistrarComponent implements OnInit {
     console.log("----Listar Marcas de productos----");
     this.ConexMarca.getMarcas().subscribe(
       res=>{
-      // console.log(res)
         this.ListaMarca=<any>res;       
       },
       err => console.log(err) 
@@ -264,7 +262,6 @@ export class RegistrarComponent implements OnInit {
            text: 'Por Favor!! Ingrese todos los parametros'
          });
      }
-    //return this.bandera;
   }
 
 
@@ -274,12 +271,9 @@ export class RegistrarComponent implements OnInit {
     this.Producto.img='', 
     this.Producto.nombre_producto='',
     this.Producto.descripcion='',
-    //this.Producto.fk_marca=0, 
     this.Producto.modelo='',
-    //this.Producto.genero='',
     this.Producto.talla='',
     this.Producto.costo='',
     this.Producto.oferta=''
-    //this.Producto.fk_id_categoria=0
   }
 }

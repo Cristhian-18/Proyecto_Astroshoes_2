@@ -42,7 +42,7 @@
                                 </div>
                                 <div *ngIf="segundosRestantes > 0">{{segundosRestantes}} segundos restantes</div>
                                 <p class="text-center mb-4">
-                                    No tienes una cuenta?<br><a [routerLink]="['/register']">Crea una cuenta aquí</a>.
+                                    No tienes una cuenta? Create una cuenta <a [routerLink]="['/register']">aquí</a>.
                                 </p>
                                 <button class="btn btn-primary btn-block mb-4" type="button" id="btnLogin" (click)="loginClick(correo.value,password.value)">Iniciar Sesión</button>
                             </form>
